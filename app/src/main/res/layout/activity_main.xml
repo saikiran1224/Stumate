@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/welcomeAppBar"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        app:elevation="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGrey">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/welcomeToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/welcomeBackButton"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    app:tint="@color/colorPrimary"
+                    android:contentDescription="@string/backbutton"
+                    android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_weight="1.9"
+                    android:gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/welcome_to_stumate"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/cabin"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/welcomeAppBar"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:padding="25dp"
+        android:background="@drawable/semi_circle"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/here_to_get_nwelcome"
+            android:textColor="@color/colorBlack"
+            android:textSize="28sp"
+            android:id="@+id/welcomeText"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Email ID"
+            app:endIconMode="clear_text"
+            android:id="@+id/edtEmailID"
+            android:background="@color/colorWhite"
+            android:layout_below="@id/welcomeText"
+            app:endIconTint="#000"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            app:hintTextColor="#000">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/editEmail"
+                android:inputType="text"
+                android:background="@color/colorWhite"
+                android:textColor="#000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password"
+            android:layout_below="@id/edtEmailID"
+            android:layout_marginTop="25dp"
+            android:id="@+id/edtPassword"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#000"
+            app:hintTextColor="#000"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:id="@+id/editPassword"
+                android:background="@color/colorWhite"
+                android:textColor="#000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtPassword"
+            android:text="\t\t\tSign in\t\t\t"
+            android:textSize="16sp"
+            android:id="@+id/btnSignIn"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or Sign in with"
+            android:textSize="16sp"
+            android:id="@+id/singInText"
+            android:layout_below="@id/btnSignIn"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="75dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/singInText"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="50dp"
+                android:background="@drawable/rounded_button"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/google" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_margin="5dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/facebook" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/twitter" />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Stumate</string>
+    <string name="backbutton">BackButton</string>
+    <string name="welcome_to_stumate">Stumate</string>
+    <string name="here_to_get_nwelcome">Here To Get\nWelcome!</string>
+</resources>
