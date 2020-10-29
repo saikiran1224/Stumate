@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        app:showAsAction="ifRoom"
+        android:title="Home" />
+    <item
+        android:id="@+id/notes"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_speaker_notes_24"
+        android:title="Notes" />
+
+    <item
+        android:id="@+id/reminders"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_notifications_active_24"
+        android:title="Reminders" />
+
+    <item
+        android:id="@+id/profile"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
+
+</menu>

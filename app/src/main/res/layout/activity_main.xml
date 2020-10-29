@@ -61,14 +61,14 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:id="@id/btnSignIn"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:background="@drawable/rounded_button"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:id="@+id/btnSignUp"
             android:textStyle="bold"
             android:textAllCaps="false"

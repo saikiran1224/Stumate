@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "143501247575",
+    "firebase_url": "https://stumate-107d1.firebaseio.com",
+    "project_id": "stumate-107d1",
+    "storage_bucket": "stumate-107d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143501247575:android:8e866fabba931ac2b04f12",
+        "android_client_info": {
+          "package_name": "com.umang.stumate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143501247575-hcvuvoh8gfcbiomfjcgfrlk7oo12g4fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umang.stumate",
+            "certificate_hash": "a367c9ac043b9d39c6d1aa60fe1fb68001de92d9"
+          }
+        },
+        {
+          "client_id": "143501247575-butpp0qd3uke3au6ef7jvp9n9s4vvorl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Za5jdB_aRmbiD-zJ2zcDjBsFlbmlyE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143501247575-butpp0qd3uke3au6ef7jvp9n9s4vvorl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

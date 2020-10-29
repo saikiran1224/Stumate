@@ -23,6 +23,8 @@ class SignInActivity : AppCompatActivity() {
 
         btnSignIn.setOnClickListener {
             Toast.makeText(this, "Successfully Signed In !!!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
