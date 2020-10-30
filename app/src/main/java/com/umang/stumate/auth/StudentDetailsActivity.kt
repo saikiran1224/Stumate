@@ -22,7 +22,8 @@ class StudentDetailsActivity : AppCompatActivity() {
         setUpCollegeList()
         setUpDepartmentList()
         setUpSectionList()
-
+        val intent=intent
+        val email=intent.getStringExtra("Email")
         database = Firebase.database.reference
 
 
@@ -33,6 +34,7 @@ class StudentDetailsActivity : AppCompatActivity() {
             val graduationYear = editGraduationYear.text
             val studentDept = deptSpinner.text
             val studentSection = sectionSpinner.text
+
 
             //TODO: Phone Number (Only 10 Digits length!=10) and Name (only Characters allowed) Validation
 
