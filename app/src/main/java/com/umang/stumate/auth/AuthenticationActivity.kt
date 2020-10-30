@@ -33,9 +33,8 @@ class AuthenticationActivity : AppCompatActivity() {
         editPasswordIn=findViewById(R.id.editPasswordIn)
         backButton=findViewById(R.id.welcomeBackButton)
         val email=editEmailIn.text.toString()
-        val intent=Intent(this,StudentDetailsActivity::class.java)
-        intent.putExtra("Email",email)
-        startActivity(intent)
+
+
        backButton.setOnClickListener{
             val intent = Intent(this, GettingStartedActivity::class.java)
             startActivity(intent)
@@ -74,52 +73,52 @@ class AuthenticationActivity : AppCompatActivity() {
         btnName.setOnClickListener {
             // Check Validation as written in StudentDetailsActivity.kt file from line 38
             if(isNullOrEmpty(editEmailIn.text)) {
-                editEmailIn.error = "Please enter Emailid"
+                edtEmailID.error = "Please enter Emailid"
             } else if(isNullOrEmpty(editPasswordIn.text)) {
-                editPasswordIn.error = null
-                edtPhone.error = "Please enter Password"
-            }
-            if(btnName.text.equals("\t\t\tSign in\t\t\t")) {
-                //Implement Sign in code here
-                auth.signInWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                           /* val user = auth.currentUser
-                            updateUI(user)*/
-                            startActivity(Intent(this,StudentDetailsActivity::class.java))
-                            finish()
+                edtEmailID.error = null
+                edtPassword.error = "Please enter Password"
+            } else {
+                if(btnName.text.equals("\t\t\tSign in\t\t\t")) {
+                    //Implement Sign in code here
+                    auth.signInWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                /* val user = auth.currentUser
+                                 updateUI(user)*/
+                                startActivity(Intent(this,HomeActivity::class.java))
+                                finish()
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(this, "Invalid Credentials",
-                                Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(this, "Invalid Credentials",
+                                    Toast.LENGTH_SHORT).show()
+                                //updateUI(null)
+                                // ...
+                            }
                             // ...
                         }
-                        // ...
-                    }
-                Toast.makeText(this, "User clicked on Sign in Button, Want to login", Toast.LENGTH_SHORT).show()
-                // Send intent to Home Activity (Bottom Navigation Activity)
-            } else {
-                // Implement Sign up code Here
-                auth.createUserWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            startActivity(Intent(this,StudentDetailsActivity::class.java))
-                            finish()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
+                    // Send intent to Home Activity (Bottom Navigation Activity)
+                } else {
+                    // Implement Sign up code Here
+                    auth.createUserWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                startActivity(Intent(this,StudentDetailsActivity::class.java))
+                                finish()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show()
+                                //updateUI(null)
+                            }
+                            // ...
                         }
-                        // ...
-                    }
-                Toast.makeText(this, "User clicked on Sign up Button", Toast.LENGTH_SHORT).show()
-                // Send intent to Student Details Activity to collect Dept, Section
-                //TODO: Send EmailID though intent to StudentDetails Activity
+                    // Send intent to Student Details Activity to collect Dept, Section
+                    //TODO: Send EmailID though intent to StudentDetails Activity
+
+                }
 
             }
         }

@@ -14,8 +14,6 @@ class GettingStartedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_getting_started)
 
-
-
         btnGetStarted.setOnClickListener {
             val intent = Intent(this, AuthenticationActivity::class.java)
             startActivity(intent)
