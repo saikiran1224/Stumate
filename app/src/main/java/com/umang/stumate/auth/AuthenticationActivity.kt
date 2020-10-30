@@ -89,6 +89,7 @@ class AuthenticationActivity : AppCompatActivity() {
                             updateUI(user)*/
                             startActivity(Intent(this,StudentDetailsActivity::class.java))
                             finish()
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(this, "Invalid Credentials",
@@ -119,7 +120,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 Toast.makeText(this, "User clicked on Sign up Button", Toast.LENGTH_SHORT).show()
                 // Send intent to Student Details Activity to collect Dept, Section
                 //TODO: Send EmailID though intent to StudentDetails Activity
-                
+
             }
         }
     }
@@ -128,61 +129,4 @@ class AuthenticationActivity : AppCompatActivity() {
                 return false
             return true
         }
-/*
-    private fun doLogin() {
-        if(editEmailIn.text.toString().isNotEmpty() && editPasswordIn.text.toString().isNotEmpty()){
-            startActivity(Intent(this, AuthenticationActivity::class.java))
-            finish()
-        }
-        if(editEmailIn.text.toString().isEmpty()){
-            editEmailIn.error="Please Enter EmailId"
-            editEmailIn.requestFocus()
-            return
-        }
-        if(editPasswordIn.text.toString().isEmpty()){
-            editPasswordIn.error="Please Enter Password"
-            editPasswordIn.requestFocus()
-            return
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(editEmailIn.text.toString()).matches()){
-            editEmailIn.error="Please Enter Valid EmailId"
-            editEmailIn.requestFocus()
-            return
-        }
-        auth.signInWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Login failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                    // ...
-                }
-
-                // ...
-            }
-    }
-*/
-
-/*
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-*/
-
-/*
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if(currentUser!=null){
-            startActivity(Intent(this, StudentDetailsActivity::class.java))
-            finish()
-        }
-    }
-*/
 }
