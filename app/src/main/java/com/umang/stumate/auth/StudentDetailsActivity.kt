@@ -22,8 +22,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         setUpCollegeList()
         setUpDepartmentList()
         setUpSectionList()
-        val intent=intent
-        val email=intent.getStringExtra("Email")
+
         database = Firebase.database.reference
 
 
@@ -37,7 +36,6 @@ class StudentDetailsActivity : AppCompatActivity() {
 
 
             //TODO: Phone Number (Only 10 Digits length!=10) and Name (only Characters allowed) Validation
-
             if(isNullOrEmpty(studentName)) {
                 edtName.error = "Please enter Name"
             } else if(isNullOrEmpty(studentPhoneNumber)) {
@@ -57,24 +55,21 @@ class StudentDetailsActivity : AppCompatActivity() {
                 edtSection.error = "Please choose Section"
             } else {
                 edtSection.error = null
-
                 val userID = ""+collegeName+" "+"_"+graduationYear + "_"+ studentDept+"_"+studentSection
-
+                val intent=intent
+                val email=intent.getStringExtra("Email")
                 //TODO: Should send Email ID from Authentication Activity and pass Parameter to Database
-                writeNewUser(userID,studentName,"knvrssaikiran@gmail.com", studentPhoneNumber, collegeName,graduationYear,studentDept,studentSection)
+                writeNewUser(userID,studentName,email,studentPhoneNumber, collegeName,graduationYear,studentDept,studentSection)
 
             }
         }
     }
-
     private fun writeNewUser(userId: String, name: Editable?, email: String?,phone: Editable?, collegeName: Editable?, graduationYear: Editable?, studentDept: Editable?, studentSection: Editable? ) {
         val user = StudentData(userId,
             name.toString(),email.toString(),phone.toString(),collegeName.toString(), graduationYear.toString(),studentDept.toString(),studentSection.toString())
         database.child("students_data").child(userId).setValue(user)
         showToast("Details Submitted Successfully !")
     }
-
-
     private fun isNullOrEmpty(str: Editable?): Boolean {
         if (str != null && !str.trim().isEmpty())
             return false
@@ -105,5 +100,4 @@ class StudentDetailsActivity : AppCompatActivity() {
             R.layout.list_item, sectionNames)
         (sectionSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
-
 }
