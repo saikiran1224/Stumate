@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bottomnavigation.BottomNavigation"></activity>
+        <activity android:name=".ActivitySignUp"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".bottomnavigation.BottomNavigation" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

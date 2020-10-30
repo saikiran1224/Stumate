@@ -97,7 +97,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/editEmail"
+                android:id="@+id/editEmailIn"
                 android:inputType="text"
                 android:background="@color/colorWhite"
                 android:textColor="#000" />
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:id="@+id/editPassword"
+                android:id="@+id/editPasswordIn"
                 android:background="@color/colorWhite"
                 android:textColor="#000" />
 
