@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrey"
-    tools:context=".MainActivity">
+    tools:context=".onboarding.GettingStartedActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/welcomeAppBar"
@@ -35,6 +39,7 @@
                     android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
+                    android:visibility="gone"
                     app:tint="@color/colorPrimary"
                     android:contentDescription="@string/backbutton"
                     android:src="@drawable/ic_baseline_keyboard_backspace_24" />
@@ -46,7 +51,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="5dp"
                     android:paddingEnd="0dp"
-                    android:text="@string/welcome_to_stumate"
+                    android:text="Excited to be a part of Stumate!"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:fontFamily="@font/cabin"
@@ -76,7 +81,7 @@
             android:id="@+id/welcomeText"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="15dp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,6 +95,7 @@
             android:layout_below="@id/welcomeText"
             app:endIconTint="#000"
             android:layout_marginTop="25dp"
+            app:errorEnabled="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             app:hintTextColor="#000">
@@ -134,7 +140,7 @@
             android:layout_below="@id/edtPassword"
             android:text="\t\t\tSign in\t\t\t"
             android:textSize="16sp"
-            android:id="@+id/btnSignIn"
+            android:id="@+id/btnName"
             android:textAllCaps="false"
             android:background="@drawable/rounded_button"
             android:textColor="@color/colorWhite"
@@ -148,10 +154,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Don't have an Account? Sign Up"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:textStyle="normal"
+            android:id="@+id/newUserText"
+            android:layout_below="@id/btnName"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="30dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Or Sign in with"
             android:textSize="16sp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:id="@+id/singInText"
-            android:layout_below="@id/btnSignIn"
+            android:layout_below="@id/newUserText"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="75dp" />
 
@@ -159,6 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/singInText"
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <ImageView
@@ -184,5 +207,7 @@
         </LinearLayout>
     </RelativeLayout>
 
+    </RelativeLayout>
 
-</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

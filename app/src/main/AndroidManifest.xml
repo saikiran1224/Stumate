@@ -11,19 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivitySignUp"></activity>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".bottomnavigation.BottomNavigation" />
+        <activity android:name=".auth.StudentDetailsActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".onboarding.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".auth.AuthenticationActivity" />
+        <activity android:name=".onboarding.GettingStartedActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,11 +1,10 @@
-package com.umang.stumate
+package com.umang.stumate.onboarding
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.widget.ImageView
-import android.widget.ProgressBar
+import com.umang.stumate.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun launchMainActivity() {
-        var intent = Intent(this, MainActivity::class.java)
+        var intent = Intent(this, GettingStartedActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         this.finish()
@@ -56,6 +55,7 @@ class SplashScreenActivity : AppCompatActivity() {
             }
 
             //splash_screen_progress_bar.setProgress(10)
+
 
             launchMainActivity()
 

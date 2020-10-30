@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SplashScreenActivity">
+    tools:context=".onboarding.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/logo"
