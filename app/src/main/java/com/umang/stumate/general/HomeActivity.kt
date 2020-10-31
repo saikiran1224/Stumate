@@ -1,5 +1,6 @@
 package com.umang.stumate.general
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import com.umang.stumate.adapters.DashboardIconsAdapter
 import com.umang.stumate.adapters.NewsAdapter
 import com.umang.stumate.modals.DashboardIconData
 import com.umang.stumate.modals.NewsData
+import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -16,9 +18,16 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var newsLayoutManager: LinearLayoutManager
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        AppPreferences.init(this)
+
+        if(AppPreferences.isLogin) {
+            studentName.text = "Hi " + AppPreferences.studentName
+        }
 
         uploadFilesButton.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))

@@ -44,7 +44,7 @@
                         android:contentDescription="@string/backbutton"
                         android:src="@drawable/ic_baseline_clear_24" />
 
-<!--
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="?attr/actionBarSize"
@@ -52,54 +52,11 @@
                         android:gravity="center_vertical"
                         android:paddingStart="18dp"
                         android:paddingEnd="0dp"
-                        android:text="Upload Class Notes"
+                        android:text="Upload Notes or Question Papers"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:fontFamily="@font/cabin"
                         android:textStyle="bold" />
--->
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_weight="1.9"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/txtUpcoming"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/rounded_button"
-                                android:gravity="center"
-                                android:text="Upload Notes"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/txtCompleted"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="Schedule Reminder"
-                                android:textColor="#000000"
-                                android:textSize="15sp" />
-
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
 
                 </LinearLayout>
 
@@ -147,28 +104,28 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Choose Related Subject"
-                app:endIconMode="clear_text"
+                app:endIconMode="dropdown_menu"
                 android:id="@+id/edtSubjectName"
                 android:background="@color/colorWhite"
                 app:endIconTint="#000"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/edtFileTitle"
                 app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 app:hintTextColor="#000">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/editSubjectName"
-                    android:inputType="text"
-                    android:background="@color/colorWhite"
-                    android:textColor="#000" />
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:id="@+id/subjectNameSpinner"
+                    android:backgroundTint="@color/colorWhite"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose Unit Number"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_below="@id/edtSubjectName"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -271,7 +228,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose File Type"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_below="@id/unitLayout"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -334,6 +291,7 @@
                     android:layout_gravity="right"
                     android:layout_centerInParent="true"
                     android:id="@+id/uploadFileButton"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
                     android:layout_weight="0.1"
                     android:layout_marginEnd="15dp"
@@ -346,10 +304,54 @@
                     android:drawableStart="@drawable/ic_baseline_upgrade_24"
                     android:text="upload file" />
 
+                <RelativeLayout
+                    android:layout_width="70dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/uploadFileButton"
+                    android:layout_height="70dp">
+                    <ProgressBar
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/customProgressBar"
+                        android:visibility="gone"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        style="@style/CircularDeterminateProgressBar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:id="@+id/txtProgress"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:layout_toRightOf="@id/customProgressBar" />
+
+                </RelativeLayout>
+
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/greenStatusIcon"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/uploadFileButton"
+                    app:tint="@android:color/holo_green_dark"
+                    android:src="@drawable/ic_baseline_check_circle_24" />
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:id="@+id/statusIcon"
+                    android:visibility="visible"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/uploadFileButton"
                     app:tint="@android:color/holo_red_dark"
@@ -359,20 +361,18 @@
             </RelativeLayout>
 
 
-
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fileTypeLayout"
                 android:text="\t\t\tPublish File\t\t\t"
                 android:textSize="16sp"
-                android:id="@+id/btnName"
+                android:id="@+id/publishFile"
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_button"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.umang.stumate.R
 import com.umang.stumate.auth.AuthenticationActivity
+import com.umang.stumate.auth.StudentDetailsActivity
 import kotlinx.android.synthetic.main.activity_getting_started.*
 
 class GettingStartedActivity : AppCompatActivity() {

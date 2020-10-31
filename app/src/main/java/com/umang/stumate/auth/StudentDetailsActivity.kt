@@ -1,5 +1,6 @@
 package com.umang.stumate.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,11 +11,32 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.umang.stumate.R
+import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.modals.StudentData
+import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_student_details.*
 
 class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
+
+    private lateinit var collegeID: String
+    private lateinit var deptID: String
+    private lateinit var yearID: String
+    private lateinit var sectionID: String
+
+    private var COLLEGE_NAME_GMRIT = Pair("GMR Institute of Technology","GMRIT")
+
+    private var CSE_DEPT = Pair("Computer Science Engineering","CSE")
+    private var IT_DEPT = Pair("Information Technology", "IT")
+
+    private var FIRST_YEAR = Pair("1st Year","1")
+    private var SECOND_YEAR = Pair("2nd Year","2")
+    private var THIRD_YEAR = Pair("3rd Year","3")
+    private var FOURTH_YEAR = Pair("4th Year","4")
+
+    private var A_SECTION = Pair("A Section", "A")
+    private var B_SECTION = Pair("B Section", "B")
+    private var C_SECTION = Pair("C Section", "C")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +44,17 @@ class StudentDetailsActivity : AppCompatActivity() {
         setUpCollegeList()
         setUpDepartmentList()
         setUpSectionList()
+        setUpYearList()
         database = Firebase.database.reference
+
+        AppPreferences.init(this)
 
 
         btnSubmit.setOnClickListener {
             val studentName = editName.text
             val studentPhoneNumber = editPhone.text
             val collegeName = collegeList.text
-            val graduationYear = editGraduationYear.text
+            val graduationYear = yearsList.text
             val studentDept = deptSpinner.text
             val studentSection = sectionSpinner.text
 
@@ -58,10 +83,50 @@ class StudentDetailsActivity : AppCompatActivity() {
                 val intent=intent
                 val email=intent.getStringExtra("Email")
 
-                val userID = ""+collegeName+" "+"_"+graduationYear + "_"+ studentDept+"_"+studentSection
+                val collegeID: String
+                var deptID: String
+                var yearID: String
+                var sectionID: String
+
+
+                if(studentDept.toString().equals("Computer Science Engineering")) {
+                    deptID = "CSE"
+
+                }
+                else {
+                    deptID = IT_DEPT.second
+
+                }
+
+                if(graduationYear.toString().equals("1st Year")){
+                    yearID = FIRST_YEAR.second
+                }
+                else if(graduationYear.toString().equals("2nd Year")){
+                    yearID = SECOND_YEAR.second
+                }
+                else if(graduationYear.toString().equals("3rd Year")){
+                    yearID = THIRD_YEAR.second
+                }
+                else {
+                    yearID = FOURTH_YEAR.second
+                }
+
+                if(studentSection.toString().equals("A Section")){
+                    sectionID = A_SECTION.second
+                }
+               else if(studentSection.toString().equals("B Section")){
+                    sectionID = B_SECTION.second
+                }
+                else {
+                    sectionID = C_SECTION.second
+                }
+
+                var userID = "GMRIT"+"_"+deptID + "_"+ yearID+"_"+sectionID
+                //showToast(userID + " " + email)
+
 
                 //TODO: Should send Email ID from Authentication Activity and pass Parameter to Database
-                writeNewUser(userID,studentName,email, studentPhoneNumber, collegeName,graduationYear,studentDept,studentSection)
+               writeNewUser(userID,studentName,email, studentPhoneNumber, collegeName,graduationYear,studentDept,studentSection)
 
             }
         }
@@ -70,7 +135,14 @@ class StudentDetailsActivity : AppCompatActivity() {
     private fun writeNewUser(userId: String, name: Editable?, email: String?,phone: Editable?, collegeName: Editable?, graduationYear: Editable?, studentDept: Editable?, studentSection: Editable? ) {
         val user = StudentData(userId,
             name.toString(),email.toString(),phone.toString(),collegeName.toString(), graduationYear.toString(),studentDept.toString(),studentSection.toString())
-        database.child("students_data").child(userId).setValue(user)
+        database.child("students_data").push().setValue(user)
+
+        AppPreferences.isLogin = true
+        AppPreferences.studentName = name.toString()
+        AppPreferences.studentID = userId.toString()
+
+        startActivity(Intent(this, HomeActivity::class.java))
+
         showToast("Details Submitted Successfully !")
     }
 
@@ -86,21 +158,29 @@ class StudentDetailsActivity : AppCompatActivity() {
     }
 
     private fun setUpCollegeList() {
-        val collegeNames = listOf("GMR Institute of Technology", "Lendi Institute of Technology", "Gayatri Vidya Parishad College ", "Raghu Institute of Technology")
+        val collegeNames = listOf(COLLEGE_NAME_GMRIT.first)
         val adapter = ArrayAdapter(this,
             R.layout.list_item, collegeNames)
         (collegeList as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
+    private fun setUpYearList() {
+        val yearNumbers = listOf(FIRST_YEAR.first,SECOND_YEAR.first,THIRD_YEAR.first,FOURTH_YEAR.first)
+        val adapter = ArrayAdapter(this,
+            R.layout.list_item, yearNumbers)
+        (yearsList as? AutoCompleteTextView)?.setAdapter(adapter)
+    }
+
+
     private fun setUpDepartmentList() {
-        val deptNames = listOf("Computer Science Engineering", "Information Technology", "Electrical and Communication Engineering", "Electrical and Electronics Engineering","Civil Engineering","Mechanical Engineering","Power Engineering","Chemical Engineering")
+        val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first)
         val adapter = ArrayAdapter(this,
             R.layout.list_item, deptNames)
         (deptSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun setUpSectionList() {
-        val sectionNames = listOf("A Section", "B Section", "C Section")
+        val sectionNames = listOf(A_SECTION.first, B_SECTION.first, C_SECTION.first)
         val adapter = ArrayAdapter(this,
             R.layout.list_item, sectionNames)
         (sectionSpinner as? AutoCompleteTextView)?.setAdapter(adapter)

@@ -11,9 +11,17 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.R
+import com.umang.stumate.modals.StudentData
+import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_authentication.*
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -26,6 +34,10 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
         auth= FirebaseAuth.getInstance()
+
+        //Initialising App Preferences Activity
+        AppPreferences.init(this)
+
         editEmailIn=findViewById(R.id.editEmailIn)
         editPasswordIn=findViewById(R.id.editPasswordIn)
         backButton=findViewById(R.id.welcomeBackButton)
@@ -83,8 +95,7 @@ class AuthenticationActivity : AppCompatActivity() {
                                 // Sign in success, update UI with the signed-in user's information
                                 /* val user = auth.currentUser
                                  updateUI(user)*/
-                                startActivity(Intent(this, HomeActivity::class.java))
-                                finish()
+                                retrieveStudentDetails(editEmailIn.text.toString())
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -102,7 +113,10 @@ class AuthenticationActivity : AppCompatActivity() {
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
-                                startActivity(Intent(this,StudentDetailsActivity::class.java))
+                                val intent = Intent(this,StudentDetailsActivity::class.java)
+                                intent.putExtra("Email",editEmailIn.text.toString() )
+                                startActivity(intent)
+
                                 finish()
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -120,6 +134,47 @@ class AuthenticationActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun retrieveStudentDetails(emailID: String) {
+
+        val myRef = FirebaseDatabase.getInstance().reference
+        val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(emailID)
+        val studentDataListener = object :ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    val studentData = ds.getValue(StudentData::class.java)
+                    if (studentData != null) {
+                        // Setting Shared Preferences of User
+                        AppPreferences.isLogin = true
+                        AppPreferences.studentName = studentData.studentName.toString()
+                        AppPreferences.studentID = studentData.studentID.toString()
+
+                        sendIntent()
+                    }
+
+                }
+
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    this@AuthenticationActivity,
+                    error.message,
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+        }
+        studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
+    }
+
+
+    private fun sendIntent() {
+
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
+    }
+
         private fun isNullOrEmpty(str: Editable?): Boolean {
             if (str != null && !str.trim().isEmpty())
                 return false

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.SignupActivity"
     android:background="@color/colorGrey">
 
     <RelativeLayout
@@ -152,7 +151,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Graduation Year"
@@ -160,13 +158,15 @@
                 android:layout_marginTop="25dp"
                 android:id="@+id/edtGraduationYear"
                 app:endIconTint="#000"
-                app:endIconMode="clear_text"
+                app:endIconMode="dropdown_menu"
                 app:helperTextTextColor="@color/colorPrimary"
                 app:hintTextColor="#000"
                 app:endIconCheckable="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true">
 
+<!--
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -175,6 +175,15 @@
                     android:id="@+id/editGraduationYear"
                     android:background="@color/colorWhite"
                     android:textColor="#000" />
+-->
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:id="@+id/yearsList"
+                    android:backgroundTint="@color/colorWhite"
+                    />
 
 
 

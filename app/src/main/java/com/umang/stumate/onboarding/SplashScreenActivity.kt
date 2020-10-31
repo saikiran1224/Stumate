@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.umang.stumate.R
+import com.umang.stumate.general.HomeActivity
+import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -17,6 +19,8 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        AppPreferences.init(this)
 
        /* progressBar: Prog = findViewById(R.id.progressBar)
         val logoImage: ImageView = findViewById(R.id.logo)
@@ -57,7 +61,13 @@ class SplashScreenActivity : AppCompatActivity() {
             //splash_screen_progress_bar.setProgress(10)
 
 
-            launchMainActivity()
+            if(AppPreferences.isLogin) {
+                // user is logged in
+                startActivity(Intent(this,HomeActivity::class.java))
+            } else {
+                launchMainActivity()
+
+            }
 
 
         }).start()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.umang.stumate">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".general.UploadFilesActivity"></activity>
+        <activity android:name=".general.UploadFilesActivity" />
         <activity android:name=".auth.StudentDetailsActivity" />
         <activity android:name=".general.HomeActivity" />
         <activity android:name=".onboarding.SplashScreenActivity">
