@@ -5,19 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.util.Patterns
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.umang.stumate.HomeActivity
+import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.R
 import kotlinx.android.synthetic.main.activity_authentication.*
-import kotlinx.android.synthetic.main.activity_student_details.*
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
@@ -86,7 +83,7 @@ class AuthenticationActivity : AppCompatActivity() {
                                 // Sign in success, update UI with the signed-in user's information
                                 /* val user = auth.currentUser
                                  updateUI(user)*/
-                                startActivity(Intent(this,HomeActivity::class.java))
+                                startActivity(Intent(this, HomeActivity::class.java))
                                 finish()
 
                             } else {
