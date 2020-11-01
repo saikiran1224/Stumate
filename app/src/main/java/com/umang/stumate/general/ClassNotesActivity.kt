@@ -1,5 +1,6 @@
 package com.umang.stumate.general
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -26,6 +27,10 @@ class ClassNotesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_class_notes)
 
         AppPreferences.init(this)
+
+        closeButton.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
+        }
 
         classNotesList = ArrayList<FileUploadData>()
 
@@ -54,7 +59,7 @@ class ClassNotesActivity : AppCompatActivity() {
                     }
                 }
 
-                val classNotesAdapter = ClassNotesAdapter(classNotesList)
+                val classNotesAdapter = ClassNotesAdapter(this@ClassNotesActivity,classNotesList)
                 classNotesRecycler.layoutManager = linearLayoutManager
                 classNotesRecycler.adapter = classNotesAdapter
             } override fun onCancelled(error: DatabaseError) {
