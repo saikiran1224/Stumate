@@ -10,6 +10,7 @@ import com.umang.stumate.adapters.DashboardIconsAdapter
 import com.umang.stumate.adapters.NewsAdapter
 import com.umang.stumate.modals.DashboardIconData
 import com.umang.stumate.modals.NewsData
+import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_home.*
 

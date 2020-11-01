@@ -1,5 +1,6 @@
 package com.umang.stumate.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.umang.stumate.R
 import com.umang.stumate.modals.DashboardIconData
+
 
 class DashboardIconsAdapter(private val iconsList: ArrayList<DashboardIconData>):
     RecyclerView.Adapter<DashboardIconsAdapter.ViewHolder>() {
@@ -20,13 +22,15 @@ class DashboardIconsAdapter(private val iconsList: ArrayList<DashboardIconData>)
 
     }
 
-    override fun onBindViewHolder(holder: DashboardIconsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(iconsList[position])
+
     }
 
     override fun getItemCount() = iconsList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bindItems(icon: DashboardIconData) {
             val textActionName = itemView.findViewById(R.id.actionName) as TextView
             val iconLogoDrawable  = itemView.findViewById(R.id.actionIcon) as ImageView

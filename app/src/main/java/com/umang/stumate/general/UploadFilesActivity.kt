@@ -19,6 +19,8 @@ import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_upload_files.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class UploadFilesActivity : AppCompatActivity() {
 
@@ -248,7 +250,7 @@ class UploadFilesActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun upload(fileName: String?, subjectName: String?, unitNumber: String?, fileType: String?) {
 
         var mReference = mStorage.child(fileName.toString())
@@ -290,7 +292,11 @@ class UploadFilesActivity : AppCompatActivity() {
                 publishFile.text = "Successfully Uploaded !"
                 publishFile.setBackgroundResource(R.drawable.green_rounded_button)
 
-                val fileData = FileUploadData(fileName,subjectName,unitNumber,fileType, downloadUri.toString())
+                val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
+                val currentDate = sdf.format(Date())
+
+
+                val fileData = FileUploadData(fileName,subjectName,unitNumber,fileType, downloadUri.toString(),AppPreferences.studentName,currentDate.toString())
                 database.child(AppPreferences.studentID).child("files_data").push().setValue(fileData)
 
                 var dialog = Dialog(this)
