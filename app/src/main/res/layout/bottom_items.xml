@@ -2,74 +2,118 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="450dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:behavior_peekHeight="0dp"
+    app:behavior_peekHeight="12dp"
     app:behavior_hideable="false"
-    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="40dp"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="25dp"
+    app:cardPreventCornerOverlap="true"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <LinearLayout
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:padding="0dp"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="0dp">
 
         <TextView
             android:id="@+id/classNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Class Notes"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/cabin"
+            android:drawableStart="@drawable/ic_baseline_menu_book_24"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/collegeMates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Class Mates"
+            android:layout_marginTop="5dp"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_baseline_supervisor_account_24"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorPrimary"/>
+
 
         <TextView
             android:id="@+id/remainders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remainders"
-            android:textSize="15sp"
+            android:text="Reminders"
+            android:layout_marginTop="5dp"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_baseline_notifications_active_24"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimary"/>
+
+
 
         <TextView
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Profile"
-            android:textSize="15sp"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:textSize="18sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:padding="15dp"
+            android:drawableTint="@color/colorPrimary"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorBlack"/>
-
-        <TextView
-            android:id="@+id/rateUs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rate us in playstore"
-            android:textSize="15sp"
-            android:padding="15dp"
-            android:fontFamily="@font/cabin"
-            android:drawablePadding="15dp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimary"/>
 
         <TextView
             android:id="@+id/logOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_baseline_login_24"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/rateUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate Us"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_baseline_rate_review_24"
+            android:drawableTint="@color/colorPrimary"
+            android:layout_marginBottom="15dp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorPrimary"/>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
