@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:behavior_peekHeight="0dp"
+    app:behavior_hideable="false"
+    app:cardCornerRadius="5dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/classNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Class Notes"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/remainders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remainders"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            android:id="@+id/rateUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate us in playstore"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:fontFamily="@font/cabin"
+            android:drawablePadding="15dp"
+            android:textColor="@color/colorBlack" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

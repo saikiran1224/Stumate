@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.umang.stumate.R
 import com.umang.stumate.adapters.DashboardIconsAdapter
 import com.umang.stumate.adapters.NewsAdapter
@@ -18,12 +20,12 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var newsLayoutManager: LinearLayoutManager
-
+    lateinit var bottomnav: BottomAppBar
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
+        bottomnav=findViewById(R.id.bottomnav)
         AppPreferences.init(this)
 
         if(AppPreferences.isLogin) {
@@ -64,7 +66,12 @@ class HomeActivity : AppCompatActivity() {
         newsRecycler.layoutManager = newsLayoutManager
         newsRecycler.adapter = newsAdapter
 
-
+        bottomnav.setOnClickListener {
+            val dialog= BottomSheetDialog(this)
+            val view=layoutInflater.inflate(R.layout.bottom_items,null)
+            dialog.setContentView(view)
+            dialog.show()
+        }
 
 
 
