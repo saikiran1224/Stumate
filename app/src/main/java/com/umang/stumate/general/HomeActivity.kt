@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.umang.stumate.R
 import com.umang.stumate.adapters.DashboardIconsAdapter
 import com.umang.stumate.adapters.NewsAdapter
+import com.umang.stumate.auth.StudentDetailsActivity
 import com.umang.stumate.modals.DashboardIconData
 import com.umang.stumate.modals.NewsData
 import com.umang.stumate.onboarding.GettingStartedActivity
@@ -69,12 +71,38 @@ class HomeActivity : AppCompatActivity() {
         bottomnav.setOnClickListener {
             val dialog= BottomSheetDialog(this)
             val view=layoutInflater.inflate(R.layout.bottom_items,null)
+            view.findViewById<TextView>(R.id.classNotes).setOnClickListener {
+                // view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(Color.parseColor("#721AFD"))
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(R.drawable.rounded_button)
+                view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorWhite))
+                startActivity(Intent(this, StudentDetailsActivity::class.java))
+            }
+            view.findViewById<TextView>(R.id.remainders).setOnClickListener {
+                // view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(Color.parseColor("#721AFD"))
+                view.findViewById<TextView>(R.id.remainders).setBackgroundColor(R.drawable.rounded_button)
+                view.findViewById<TextView>(R.id.remainders).setTextColor(resources.getColor(R.color.colorWhite))
+                startActivity(Intent(this, StudentDetailsActivity::class.java))
+            }
+            view.findViewById<TextView>(R.id.profile).setOnClickListener {
+                // view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(Color.parseColor("#721AFD"))
+                view.findViewById<TextView>(R.id.profile).setBackgroundColor(R.drawable.rounded_button)
+                view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorWhite))
+                startActivity(Intent(this, StudentDetailsActivity::class.java))
+            }
+            view.findViewById<TextView>(R.id.rateUs).setOnClickListener {
+                // view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(Color.parseColor("#721AFD"))
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundColor(R.drawable.rounded_button)
+                view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorWhite))
+                startActivity(Intent(this, StudentDetailsActivity::class.java))
+            }
+            view.findViewById<TextView>(R.id.logOut).setOnClickListener {
+                // view.findViewById<TextView>(R.id.classNotes).setBackgroundColor(Color.parseColor("#721AFD"))
+                view.findViewById<TextView>(R.id.logOut).setBackgroundColor(R.drawable.rounded_button)
+                view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorWhite))
+                startActivity(Intent(this, StudentDetailsActivity::class.java))
+            }
             dialog.setContentView(view)
             dialog.show()
         }
-
-
-
-
     }
 }
