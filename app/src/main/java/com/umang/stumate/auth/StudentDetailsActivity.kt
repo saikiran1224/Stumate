@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.R
 import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.modals.StudentData
@@ -136,6 +139,18 @@ class StudentDetailsActivity : AppCompatActivity() {
         val user = StudentData(userId,
             name.toString(),email.toString(),phone.toString(),collegeName.toString(), graduationYear.toString(),studentDept.toString(),studentSection.toString())
         database.child("students_data").push().setValue(user)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            
+            Toast.makeText(baseContext, token.toString(), Toast.LENGTH_SHORT).show()
+        })
 
         AppPreferences.isLogin = true
         AppPreferences.studentName = name.toString()

@@ -51,6 +51,11 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+
+
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries

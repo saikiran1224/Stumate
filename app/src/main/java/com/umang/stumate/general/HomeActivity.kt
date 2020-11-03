@@ -17,6 +17,7 @@ import com.google.firebase.database.collection.LLRBNode
 import com.umang.stumate.R
 import com.umang.stumate.adapters.DashboardIconsAdapter
 import com.umang.stumate.adapters.NewsAdapter
+import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.auth.StudentDetailsActivity
 import com.umang.stumate.modals.DashboardIconData
 import com.umang.stumate.modals.NewsData
@@ -105,30 +106,60 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorPrimary))
 
+
+
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+
+
                 startActivity(Intent(this, ClassNotesActivity::class.java))
-                dialog.dismissWithAnimation
 
             }
             view.findViewById<TextView>(R.id.remainders).setOnClickListener {
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.remainders).setTextColor(resources.getColor(R.color.colorPrimary))
                // startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+
+
             }
             view.findViewById<TextView>(R.id.profile).setOnClickListener {
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+
             }
             view.findViewById<TextView>(R.id.rateUs).setOnClickListener {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+
+
+
+
             }
             view.findViewById<TextView>(R.id.logOut).setOnClickListener {
 
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
-               // startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+                // Logout the user from session
+                AppPreferences.isLogin = false
+                AppPreferences.studentID = ""
+                AppPreferences.studentName = ""
+                startActivity(Intent(this, AuthenticationActivity::class.java))
             }
             view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
