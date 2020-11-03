@@ -3,4 +3,6 @@
     <string name="backbutton">BackButton</string>
     <string name="welcome_to_stumate">Stumate</string>
     <string name="here_to_get_nwelcome">Here To Get\nWelcome!</string>
+    <string name="default_notification_channel_id">admin_channel</string>
+
 </resources>

@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.R
@@ -148,6 +149,9 @@ class AuthenticationActivity : AppCompatActivity() {
                         AppPreferences.isLogin = true
                         AppPreferences.studentName = studentData.studentName.toString()
                         AppPreferences.studentID = studentData.studentID.toString()
+
+                        // Subscribing Student to his Class Topic
+                        FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
 
                         sendIntent()
                     }

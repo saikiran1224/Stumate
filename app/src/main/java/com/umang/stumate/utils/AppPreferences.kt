@@ -13,6 +13,9 @@ object AppPreferences {
     private val STUDENT_NAME = Pair("studentName", "")
     private val STUDENT_ID = Pair("studentID", "")
 
+    const val AUTH_KEY_FCM = "AAAAIWlXRFc:APA91bFT_EdHzyvFFQJeHteryMwFwK4KXZt42RCO4DyiLoQcphzYTGYCS65OD7fuMIFdS2O37ce7nXO_dUFF9zF1MmcE5HkNtzujuapt3QMn9UvBB8PxpoSOEeQ37jsmWZaqqM4iCUlT"
+
+
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
     }

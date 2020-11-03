@@ -31,6 +31,11 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDependency
@@ -54,6 +59,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
     implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+    implementation 'androidx.work:work-runtime:2.4.0'
+
 
 
 

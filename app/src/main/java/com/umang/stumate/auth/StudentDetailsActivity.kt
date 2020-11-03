@@ -1,13 +1,13 @@
 package com.umang.stumate.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -27,19 +27,27 @@ class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var yearID: String
     private lateinit var sectionID: String
 
-    private var COLLEGE_NAME_GMRIT = Pair("GMR Institute of Technology","GMRIT")
+    private var COLLEGE_NAME_GMRIT = Pair("GMR Institute of Technology", "GMRIT")
 
-    private var CSE_DEPT = Pair("Computer Science Engineering","CSE")
+    private var CSE_DEPT = Pair("Computer Science Engineering", "CSE")
     private var IT_DEPT = Pair("Information Technology", "IT")
 
-    private var FIRST_YEAR = Pair("1st Year","1")
-    private var SECOND_YEAR = Pair("2nd Year","2")
-    private var THIRD_YEAR = Pair("3rd Year","3")
-    private var FOURTH_YEAR = Pair("4th Year","4")
+    private var FIRST_YEAR = Pair("1st Year", "1")
+    private var SECOND_YEAR = Pair("2nd Year", "2")
+    private var THIRD_YEAR = Pair("3rd Year", "3")
+    private var FOURTH_YEAR = Pair("4th Year", "4")
 
     private var A_SECTION = Pair("A Section", "A")
     private var B_SECTION = Pair("B Section", "B")
     private var C_SECTION = Pair("C Section", "C")
+
+    private val TAG = "TOKENS_DATA"
+
+    private val FCM_API = "https://fcm.googleapis.com/fcm/send"
+    private val serverKey = "key=" + AppPreferences.AUTH_KEY_FCM
+    private val contentType = "application/json"
+    var TOPIC: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,37 +137,56 @@ class StudentDetailsActivity : AppCompatActivity() {
 
 
                 //TODO: Should send Email ID from Authentication Activity and pass Parameter to Database
-               writeNewUser(userID,studentName,email, studentPhoneNumber, collegeName,graduationYear,studentDept,studentSection)
+               writeNewUser(
+                   userID,
+                   studentName,
+                   email,
+                   studentPhoneNumber,
+                   collegeName,
+                   graduationYear,
+                   studentDept,
+                   studentSection
+               )
 
             }
         }
     }
 
-    private fun writeNewUser(userId: String, name: Editable?, email: String?,phone: Editable?, collegeName: Editable?, graduationYear: Editable?, studentDept: Editable?, studentSection: Editable? ) {
-        val user = StudentData(userId,
-            name.toString(),email.toString(),phone.toString(),collegeName.toString(), graduationYear.toString(),studentDept.toString(),studentSection.toString())
+    private fun writeNewUser(
+        userId: String,
+        name: Editable?,
+        email: String?,
+        phone: Editable?,
+        collegeName: Editable?,
+        graduationYear: Editable?,
+        studentDept: Editable?,
+        studentSection: Editable?
+    ) {
+        val user = StudentData(
+            userId,
+            name.toString(),
+            email.toString(),
+            phone.toString(),
+            collegeName.toString(),
+            graduationYear.toString(),
+            studentDept.toString(),
+            studentSection.toString()
+        )
         database.child("students_data").push().setValue(user)
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-            
-            Toast.makeText(baseContext, token.toString(), Toast.LENGTH_SHORT).show()
-        })
 
         AppPreferences.isLogin = true
         AppPreferences.studentName = name.toString()
         AppPreferences.studentID = userId.toString()
 
+        // subscribing the student to his class topic
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
+
         startActivity(Intent(this, HomeActivity::class.java))
 
         showToast("Details Submitted Successfully !")
     }
+
 
 
     private fun isNullOrEmpty(str: Editable?): Boolean {
@@ -169,35 +196,48 @@ class StudentDetailsActivity : AppCompatActivity() {
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setUpCollegeList() {
         val collegeNames = listOf(COLLEGE_NAME_GMRIT.first)
-        val adapter = ArrayAdapter(this,
-            R.layout.list_item, collegeNames)
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.list_item, collegeNames
+        )
         (collegeList as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun setUpYearList() {
-        val yearNumbers = listOf(FIRST_YEAR.first,SECOND_YEAR.first,THIRD_YEAR.first,FOURTH_YEAR.first)
-        val adapter = ArrayAdapter(this,
-            R.layout.list_item, yearNumbers)
+        val yearNumbers = listOf(
+            FIRST_YEAR.first,
+            SECOND_YEAR.first,
+            THIRD_YEAR.first,
+            FOURTH_YEAR.first
+        )
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.list_item, yearNumbers
+        )
         (yearsList as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
 
     private fun setUpDepartmentList() {
         val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first)
-        val adapter = ArrayAdapter(this,
-            R.layout.list_item, deptNames)
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.list_item, deptNames
+        )
         (deptSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun setUpSectionList() {
         val sectionNames = listOf(A_SECTION.first, B_SECTION.first, C_SECTION.first)
-        val adapter = ArrayAdapter(this,
-            R.layout.list_item, sectionNames)
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.list_item, sectionNames
+        )
         (sectionSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 

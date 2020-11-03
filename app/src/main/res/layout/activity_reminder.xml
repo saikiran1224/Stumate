@@ -1,9 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReminderActivity">
+    android:background="@color/colorGrey"
+    tools:context=".general.ReminderActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/welcomeAppBar"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            app:elevation="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/welcomeToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:id="@+id/welcomeBackButton"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:visibility="visible"
+                        app:tint="@color/colorPrimary"
+                        android:contentDescription="@string/backbutton"
+                        android:src="@drawable/ic_baseline_notifications_active_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_weight="1.9"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="0dp"
+                        android:text="Schedule Reminders"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/cabin"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/welcomeAppBar"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:padding="25dp"
+            android:background="@drawable/semi_circle"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't miss any \nAssignment"
+                android:textColor="@color/colorBlack"
+                android:textSize="28sp"
+                android:id="@+id/welcomeText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your Message"
+                app:endIconMode="clear_text"
+                android:id="@+id/edtMessage"
+                android:background="@color/colorWhite"
+                android:layout_below="@id/welcomeText"
+                app:endIconTint="#000"
+                android:layout_marginTop="25dp"
+                app:errorEnabled="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                app:hintTextColor="#000">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/editMessage"
+                    android:inputType="text"
+                    android:background="@color/colorWhite"
+                    android:textColor="#000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edtMessage"
+                android:text="\t\t\tSend Notification\t\t\t"
+                android:textSize="16sp"
+                android:id="@+id/btnName"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:padding="10dp"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.core.widget.NestedScrollView>
