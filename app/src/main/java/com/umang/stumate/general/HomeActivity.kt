@@ -165,7 +165,7 @@ class HomeActivity : AppCompatActivity() {
             view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.collegeMates).setTextColor(resources.getColor(R.color.colorPrimary))
-              //  startActivity(Intent(this, StudentDetailsActivity::class.java))
+              startActivity(Intent(this, ClassMatesActivity::class.java))
             }
 
 

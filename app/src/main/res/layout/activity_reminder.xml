@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:background="@color/colorGrey">
 
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/welcomeToolBar"
                 android:layout_width="match_parent"
@@ -88,9 +87,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your Message"
+                android:hint="Title of Message"
                 app:endIconMode="clear_text"
-                android:id="@+id/edtMessage"
+                android:id="@+id/edtTitleMessage"
                 android:background="@color/colorWhite"
                 android:layout_below="@id/welcomeText"
                 app:endIconTint="#000"
@@ -103,29 +102,83 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/editMessage"
+                    android:id="@+id/editTitleMessage"
                     android:inputType="text"
                     android:background="@color/colorWhite"
                     android:textColor="#000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edtMessage"
-                android:text="\t\t\tSend Notification\t\t\t"
-                android:textSize="16sp"
-                android:id="@+id/btnName"
-                android:textAllCaps="false"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold"
-                android:backgroundTint="@color/colorPrimary"
+                android:hint="Choose Relevant Type"
+                app:endIconMode="dropdown_menu"
+                android:id="@+id/edtType"
+                android:background="@color/colorWhite"
+                android:layout_below="@id/edtTitleMessage"
+                app:endIconTint="#000"
+                android:layout_marginTop="25dp"
+                app:errorEnabled="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp"
-                android:padding="10dp"
-                />
+                android:layout_alignParentEnd="true"
+                app:hintTextColor="#000">
+
+                <AutoCompleteTextView
+                    android:id="@+id/chooseType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:backgroundTint="@color/colorWhite"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your Description"
+                app:endIconMode="clear_text"
+                android:id="@+id/edtDescription"
+                android:background="@color/colorWhite"
+                android:layout_below="@id/edtType"
+                app:endIconTint="#000"
+                android:layout_marginTop="25dp"
+                app:errorEnabled="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                app:hintTextColor="#000">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editDescription"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:background="@color/colorWhite"
+                    android:textColor="#000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/edtDescription"
+                            android:text="\t\t\tSend Notification\t\t\t"
+                            android:textSize="16sp"
+                            android:id="@+id/btnName"
+                            android:textAllCaps="false"
+                            android:background="@drawable/rounded_button"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="30dp"
+                            android:padding="10dp"
+                            />
 
 
         </RelativeLayout>

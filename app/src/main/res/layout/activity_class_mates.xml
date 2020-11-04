@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    android:orientation="vertical"
+    tools:context=".general.ClassMatesActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/welcomeAppBar"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                app:elevation="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGrey">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/welcomeToolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/closeButton"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"
+                            android:visibility="visible"
+                            app:tint="@color/colorPrimary"
+                            android:contentDescription="@string/backbutton"
+                            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_weight="1.9"
+                            android:gravity="center_vertical"
+                            android:paddingStart="18dp"
+                            android:paddingEnd="0dp"
+                            android:text="Class Mates"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/cabin"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/welcomeAppBar"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:background="@drawable/semi_circle"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:padding="0dp"
+                    android:layout_alignParentTop="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/classMatesRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:itemCount="36" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:fabAnimationMode="scale"
+        app:hideOnScroll="true"
+        app:fabCradleMargin="8dp"
+        app:navigationIcon="@drawable/ic_baseline_menu_24"
+        app:fabAlignmentMode="end"
+        app:fabCradleRoundedCornerRadius="60dp"
+        app:navigationContentDescription="@string/app_name"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_anchorGravity="center"
+        app:tint="@color/colorAccent"
+        android:src="@drawable/ic_baseline_add_24"
+        app:borderWidth="0dp"
+        android:id="@+id/uploadFilesButton"
+        app:layout_anchor="@id/bottomnav"
+        android:contentDescription="@string/app_name" />
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

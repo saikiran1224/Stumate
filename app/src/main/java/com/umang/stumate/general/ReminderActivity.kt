@@ -3,6 +3,8 @@ package com.umang.stumate.general
 import android.R.attr.name
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
@@ -14,13 +16,13 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.R
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_reminder.*
+import kotlinx.android.synthetic.main.activity_student_details.*
 import org.json.JSONObject
 
 
 class ReminderActivity : AppCompatActivity() {
 
     private val TAG = "TOKENS_DATA"
-
     private val FCM_API = "https://fcm.googleapis.com/fcm/send"
     private val serverKey = "key=" + AppPreferences.AUTH_KEY_FCM
     private val contentType = "application/json"
@@ -30,6 +32,7 @@ class ReminderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder)
 
+        setUpTypeList()
         AppPreferences.init(this)
 
 
@@ -47,14 +50,16 @@ class ReminderActivity : AppCompatActivity() {
                 val queue = Volley.newRequestQueue(this)
                 val url = "https://fcm.googleapis.com/fcm/send"
 
-                val message = editMessage.text.toString()
+                val title = editTitleMessage.text.toString()
+                val type = chooseType.text.toString()
+                val description = editDescription.text.toString()
 
 
                 TOPIC = "/topics/"+AppPreferences.studentID
 
                 val data = JSONObject()
-                data.put("title", "Reminder for " + AppPreferences.studentName)
-                data.put("message", message)
+                data.put("title", title + " regarding " + type)
+                data.put("message", description + "\n Sent by " + AppPreferences.studentName)
                 Log.e(TAG, "" + data)
 
                 val notification_data = JSONObject()
@@ -91,4 +96,14 @@ class ReminderActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun setUpTypeList() {
+        val typeNames = listOf("Assignment","Lab Record","Exam","Others")
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.list_item, typeNames
+        )
+        (chooseType as? AutoCompleteTextView)?.setAdapter(adapter)
+    }
+
 }
