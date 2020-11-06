@@ -3,6 +3,7 @@ package com.umang.stumate.general
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Filter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
@@ -38,6 +39,16 @@ class ClassNotesActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         linearLayoutManager.reverseLayout = false
+
+
+        sortbyDate.setOnClickListener {
+
+            linearLayoutManager.reverseLayout = true
+        }
+
+        filterSubjects.setOnClickListener {
+            startActivity(Intent(this, FilterSubjectsActivity::class.java))
+        }
 
         // Retrieving Data from Firebase Realtime Database
         retriveClassNotesData()

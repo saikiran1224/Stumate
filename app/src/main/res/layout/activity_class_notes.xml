@@ -95,12 +95,14 @@
                         android:layout_margin="2dp"
                         android:paddingTop="3dp"
                         android:textSize="14sp"
+                        android:id="@+id/sortbyDate"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:drawableTint="@color/colorPrimary"
                         android:drawableStart="@drawable/ic_baseline_sort_24"
                         android:background="@drawable/rounded_button"
                         android:text="Sort by Date"
+                        android:backgroundTint="@color/colorLightPrimary"
                         />
 
                     <View
@@ -120,6 +122,7 @@
                         android:paddingStart="20dp"
                         android:paddingEnd="3dp"
                         android:paddingBottom="3dp"
+                        android:id="@+id/filterSubjects"
                         android:layout_margin="2dp"
                         android:paddingTop="3dp"
                         android:textStyle="bold"

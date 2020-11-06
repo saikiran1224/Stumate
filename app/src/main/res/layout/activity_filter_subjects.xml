@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    android:orientation="vertical"
+    tools:context=".general.FilterSubjectsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/welcomeAppBar"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                app:elevation="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGrey">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/welcomeToolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/closeButton"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"
+                            android:visibility="visible"
+                            app:tint="@color/colorPrimary"
+                            android:contentDescription="@string/backbutton"
+                            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_weight="1.9"
+                            android:gravity="center_vertical"
+                            android:paddingStart="18dp"
+                            android:paddingEnd="0dp"
+                            android:text="Filter Subjects"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/cabin"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/welcomeAppBar"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:background="@drawable/semi_circle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Subjects"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/chooseSubjects"
+                    android:paddingStart="15dp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/subjectsChipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_below="@id/chooseSubjects"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/PandS"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Probability and Statistics"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/ComputerNetworks"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        android:checked="false"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Computer Networks"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/ComputerOrganization"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Computer Organization"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/OperatingSystems"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Operating System"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/WebTechnologies"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Web Technologies"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/SoftwareEngineering"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Software Engineering"/>
+
+                    <!-- Chips can be declared here, or added dynamically. -->
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:id="@+id/subjectsDiv"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/subjectsChipGroup"
+                    android:background="@color/colorLightPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Unit Number"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_below="@id/subjectsDiv"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/chooseUnit"
+                    android:paddingStart="15dp" />
+
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/unitChip"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_below="@id/chooseUnit"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/unitOne"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Unit-1"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/unitTwo"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Unit-2"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/unitThree"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Unit-3"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/unitFour"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Unit-4"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/QuestionPapers"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        android:text="Question Papers"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/Others"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Others"/>
+
+                    <!-- Chips can be declared here, or added dynamically. -->
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:id="@+id/unitDiv"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/unitChip"
+                    android:background="@color/colorLightPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose File Type"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_below="@id/unitDiv"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/chooseFileType"
+                    android:paddingStart="15dp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/fileTypeChip"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_below="@id/chooseFileType"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/PDF"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="PDF Format"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/PPTformat"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="PPT Format"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/otherFiles"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:chipBackgroundColor="@color/colorLightPrimary"
+                        app:checkedIconTint="@color/colorPrimary"
+                        android:text="Other Files"/>
+
+
+                    <!-- Chips can be declared here, or added dynamically. -->
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:id="@+id/fileTypeDiv"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/fileTypeChip"
+                    android:background="@color/colorLightPrimary" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fileTypeDiv"
+                    android:text="\t\tApply Changes\t\t"
+                    android:textSize="15sp"
+                    android:id="@+id/btnApplyChanges"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:fabAnimationMode="scale"
+        app:hideOnScroll="true"
+        app:fabCradleMargin="8dp"
+        app:navigationIcon="@drawable/ic_baseline_menu_24"
+        app:fabAlignmentMode="end"
+        app:fabCradleRoundedCornerRadius="60dp"
+        app:navigationContentDescription="@string/app_name"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_anchorGravity="center"
+        app:tint="@color/colorAccent"
+        android:src="@drawable/ic_baseline_add_24"
+        app:borderWidth="0dp"
+        android:id="@+id/uploadFilesButton"
+        app:layout_anchor="@id/bottomnav"
+        android:contentDescription="@string/app_name" />
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
