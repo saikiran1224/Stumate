@@ -12,6 +12,7 @@ object AppPreferences {
     private val IS_LOGIN = Pair("is_login", false)
     private val STUDENT_NAME = Pair("studentName", "")
     private val STUDENT_ID = Pair("studentID", "")
+    private val STUDENT_EMAIL_ID = Pair("studentEmailID", "")
 
     const val AUTH_KEY_FCM = "AAAAIWlXRFc:APA91bFT_EdHzyvFFQJeHteryMwFwK4KXZt42RCO4DyiLoQcphzYTGYCS65OD7fuMIFdS2O37ce7nXO_dUFF9zF1MmcE5HkNtzujuapt3QMn9UvBB8PxpoSOEeQ37jsmWZaqqM4iCUlT"
 
@@ -45,5 +46,12 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putString(STUDENT_ID.first, value)
         }
+
+    var studentEmailID: String
+        get() = preferences.getString(STUDENT_EMAIL_ID.first, STUDENT_EMAIL_ID.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(STUDENT_EMAIL_ID.first, value)
+        }
+
 
 }

@@ -112,9 +112,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorPrimary))
 
-
                 startActivity(Intent(this, ClassNotesActivity::class.java))
-
 
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -122,14 +120,14 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-
-
+                dialog.dismiss()
 
             }
             view.findViewById<TextView>(R.id.remainders).setOnClickListener {
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.remainders).setTextColor(resources.getColor(R.color.colorPrimary))
-               startActivity(Intent(this, ReminderActivity::class.java))
+
+                startActivity(Intent(this, ReminderActivity::class.java))
 
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -137,13 +135,21 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-
-
+                dialog.dismiss()
             }
             view.findViewById<TextView>(R.id.profile).setOnClickListener {
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorPrimary))
-                //startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+                startActivity(Intent(this, StudentProfileActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                dialog.dismiss()
 
 
             }
@@ -152,10 +158,13 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
 
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-
-
-
+                dialog.dismiss()
             }
             view.findViewById<TextView>(R.id.logOut).setOnClickListener {
 
@@ -167,11 +176,28 @@ class HomeActivity : AppCompatActivity() {
                 AppPreferences.studentID = ""
                 AppPreferences.studentName = ""
                 startActivity(Intent(this, AuthenticationActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                dialog.dismiss()
+
             }
             view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.collegeMates).setTextColor(resources.getColor(R.color.colorPrimary))
               startActivity(Intent(this, ClassMatesActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                dialog.dismiss()
+
             }
 
 

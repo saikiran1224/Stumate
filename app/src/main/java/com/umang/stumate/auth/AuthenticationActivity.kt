@@ -163,6 +163,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         AppPreferences.isLogin = true
                         AppPreferences.studentName = studentData.studentName.toString()
                         AppPreferences.studentID = studentData.studentID.toString()
+                        AppPreferences.studentEmailID = studentData.emailID.toString()
 
                         // Subscribing Student to his Class Topic
                         FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
