@@ -61,9 +61,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Download\t"
             android:drawableTint="@color/colorWhite"
-            android:padding="5dp"
+            android:padding="8dp"
             android:id="@+id/btnDownload"
             android:textSize="16sp"
             android:backgroundTint="@color/colorPrimary"
@@ -73,7 +72,27 @@
             android:layout_centerHorizontal="true"
             android:drawableStart="@drawable/ic_baseline_arrow_downward_24"
             android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/btnShare"
+            android:layout_alignParentEnd="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:drawableTint="@color/colorWhite"
+            android:padding="8dp"
+            android:id="@+id/btnShare"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/rounded_button"
+            android:drawablePadding="3dp"
+            android:layout_centerHorizontal="true"
+            android:drawableStart="@drawable/ic_baseline_share_24"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
+
 
         <View
             android:layout_width="match_parent"

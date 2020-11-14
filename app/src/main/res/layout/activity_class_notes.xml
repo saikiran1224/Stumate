@@ -77,11 +77,36 @@
                 android:orientation="vertical">
 
 
+
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="0dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
                     android:id="@+id/prefsLayout" >
+
+                    <EditText
+                        android:id="@+id/searchEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/rounded_button"
+                        android:backgroundTint="@color/colorLightPrimary"
+                        android:drawableStart="@drawable/ic_baseline_search_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/colorPrimary"
+                        android:hint="Search by Subject, Unit, Author Names..."
+                        android:paddingStart="15dp"
+                        android:visibility="gone"
+                        android:paddingEnd="0dp"
+                        android:inputType="text" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_alignParentStart="true"
@@ -91,6 +116,7 @@
                         android:gravity="center"
                         android:paddingStart="20dp"
                         android:paddingEnd="3dp"
+                        android:visibility="visible"
                         android:paddingBottom="3dp"
                         android:layout_margin="2dp"
                         android:paddingTop="3dp"
@@ -109,6 +135,7 @@
                         android:layout_width="5dp"
                         android:id="@+id/divider"
                         android:layout_height="wrap_content"
+                        android:visibility="visible"
                         android:layout_centerInParent="true"
                         android:backgroundTint="@color/colorPrimary"
                         android:background="@color/colorPrimary" />
@@ -119,21 +146,22 @@
                         android:background="@drawable/rounded_button"
                         android:layout_alignParentEnd="true"
                         android:textSize="14sp"
+                        android:visibility="visible"
                         android:paddingStart="20dp"
                         android:paddingEnd="3dp"
                         android:paddingBottom="3dp"
-                        android:id="@+id/filterSubjects"
+                        android:id="@+id/searchFiles"
                         android:layout_margin="2dp"
                         android:paddingTop="3dp"
                         android:textStyle="bold"
                         android:drawableTint="@color/colorPrimary"
-                        android:drawableStart="@drawable/ic_baseline_filter_list_24"
+                        android:drawableStart="@drawable/ic_baseline_search_24"
                         android:layout_centerVertical="true"
                         android:backgroundTint="@color/colorLightPrimary"
                         android:textColor="@color/colorPrimary"
                         android:layout_toRightOf="@id/divider"
                         android:gravity="center"
-                        android:text="Filter Subjects"
+                        android:text="Search Notes"
                         />
                 </RelativeLayout>
 
@@ -143,7 +171,8 @@
                     android:orientation="vertical"
                     android:layout_marginTop="20dp"
                     android:padding="0dp"
-                    android:layout_below="@id/prefsLayout">
+                    android:layout_below="@id/prefsLayout"
+                    android:layout_alignParentStart="true">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/classNotesRecycler"

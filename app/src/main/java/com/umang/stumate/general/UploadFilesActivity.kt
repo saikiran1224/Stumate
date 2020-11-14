@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.View.*
-import android.widget.*
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -22,11 +23,12 @@ import kotlinx.android.synthetic.main.activity_upload_files.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class UploadFilesActivity : AppCompatActivity() {
 
     private lateinit var closeButton: ImageView
 
-    val PDF : Int = 0
+    val REQUEST_CODE_DOC : Int = 0
     private var fileDownloadUrl: String? = ""
     private var fileSelected: String? = "0"
 
@@ -44,17 +46,33 @@ class UploadFilesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_upload_files)
 
         AppPreferences.init(this)
-        setUpSubjectList()
+        //setUpSubjectList()
 
         database = FirebaseDatabase.getInstance().reference
 
         mStorage = FirebaseStorage.getInstance().getReference(AppPreferences.studentID.toString())
 
         uploadFileButton.setOnClickListener {
-                view: View? -> val intent = Intent()
-            intent.setType ("application/pdf")
-            intent.setAction(Intent.ACTION_GET_CONTENT)
-            startActivityForResult(Intent.createChooser(intent, "Select File to Upload"),PDF)
+
+            val mimeTypes = arrayOf(
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  // .doc & .docx
+                "application/vnd.ms-powerpoint",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation",  // .ppt & .pptx
+                "text/plain",
+                "application/pdf", // PDF
+                "application/zip"
+            )
+
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+
+            intent.type = if (mimeTypes.size == 1) mimeTypes[0] else "*/*"
+            if (mimeTypes.size > 0) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            }
+            startActivityForResult(Intent.createChooser(intent, "ChooseFile"), REQUEST_CODE_DOC)
+
         }
 
         oneUnit.setOnClickListener {
@@ -155,6 +173,9 @@ class UploadFilesActivity : AppCompatActivity() {
 
             pptFormat.setBackgroundResource(R.drawable.rounded_button)
             pptFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            docxFormat.setBackgroundResource(R.drawable.rounded_button)
+            docxFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
 
         }
 
@@ -164,6 +185,21 @@ class UploadFilesActivity : AppCompatActivity() {
 
             fileType = "PPT"
 
+            docxFormat.setBackgroundResource(R.drawable.rounded_button)
+            docxFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            pdfFormat.setBackgroundResource(R.drawable.rounded_button)
+            pdfFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
+        }
+
+        docxFormat.setOnClickListener {
+            docxFormat.setBackgroundResource(R.drawable.blue_rounded_button)
+            docxFormat.setTextColor(resources.getColor(R.color.colorWhite))
+
+            fileType = "DOC"
+
+            pptFormat.setBackgroundResource(R.drawable.rounded_button)
+            pptFormat.setTextColor(resources.getColor(R.color.colorPrimary))
             pdfFormat.setBackgroundResource(R.drawable.rounded_button)
             pdfFormat.setTextColor(resources.getColor(R.color.colorPrimary))
 
@@ -176,7 +212,7 @@ class UploadFilesActivity : AppCompatActivity() {
             val subjectName: String = subjectNameSpinner.text.toString()
 
             if(fileSelected.equals("0")) {
-                Toast.makeText(this, "Please select File",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please select File", Toast.LENGTH_LONG).show()
             } else if(isNullOrEmpty(fileName)) {
                 edtFileTitle.error = "Please enter Title for File"
             } else if(isNullOrEmpty(subjectName)) {
@@ -186,11 +222,11 @@ class UploadFilesActivity : AppCompatActivity() {
                 edtSubjectName.error = null
                 edtFileTitle.error = null
 
-                Toast.makeText(this, "Please choose Unit Number",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please choose Unit Number", Toast.LENGTH_LONG).show()
             } else if(fileType?.let { it1 -> isNullOrEmpty(it1) }!!){
                 edtSubjectName.error = null
                 edtFileTitle.error = null
-                Toast.makeText(this, "Please choose File Type",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please choose File Type", Toast.LENGTH_LONG).show()
             } else {
                 edtSubjectName.error = null
                 edtFileTitle.error = null
@@ -209,7 +245,7 @@ class UploadFilesActivity : AppCompatActivity() {
                 pptFormat.isEnabled = false
                 pdfFormat.isEnabled = false
 
-                upload(fileName,subjectName,unitNumber,fileType)
+                upload(fileName, subjectName, unitNumber, fileType)
 
             }
 
@@ -222,14 +258,14 @@ class UploadFilesActivity : AppCompatActivity() {
 
         deleteIcon.setOnClickListener {
 
+            fileSelected = "0"
+
             uploadFileButton.text = "Upload File"
             statusIcon.visibility = VISIBLE
             deleteIcon.visibility = GONE
             uploadFileButton.isEnabled = true
 
             greenStatusIcon.visibility = GONE
-
-
         }
     }
 
@@ -250,15 +286,25 @@ class UploadFilesActivity : AppCompatActivity() {
         }
     }
 
+    
+
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    private fun upload(fileName: String?, subjectName: String?, unitNumber: String?, fileType: String?) {
+    private fun upload(
+        fileName: String?,
+        subjectName: String?,
+        unitNumber: String?,
+        fileType: String?
+    ) {
 
         var mReference = mStorage.child(fileName.toString())
 
-        Toast.makeText(this, "Upload in Progress, Please don't close this Window",Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this,
+            "Upload in Progress, Please don't close this Window",
+            Toast.LENGTH_SHORT
+        ).show()
 
-        mReference.putFile(uri).addOnProgressListener {
-                (bytesTransferred, totalByteCount) ->
+        mReference.putFile(uri).addOnProgressListener { (bytesTransferred, totalByteCount) ->
 
             val progress = (100.0 * bytesTransferred) / totalByteCount
 
@@ -292,12 +338,22 @@ class UploadFilesActivity : AppCompatActivity() {
                 publishFile.text = "Successfully Uploaded !"
                 publishFile.setBackgroundResource(R.drawable.green_rounded_button)
 
-                val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                 val currentDate = sdf.format(Date())
 
 
-                val fileData = FileUploadData(fileName,subjectName,unitNumber,fileType, downloadUri.toString(),AppPreferences.studentName,currentDate.toString())
-                database.child(AppPreferences.studentID).child("files_data").push().setValue(fileData)
+                val fileData = FileUploadData(
+                    fileName,
+                    subjectName,
+                    unitNumber,
+                    fileType,
+                    downloadUri.toString(),
+                    AppPreferences.studentName,
+                    currentDate.toString()
+                )
+                database.child(AppPreferences.studentID).child("files_data").push().setValue(
+                    fileData
+                )
 
                 var dialog = Dialog(this)
                 dialog.setContentView(R.layout.upload_success_layout)
@@ -305,7 +361,7 @@ class UploadFilesActivity : AppCompatActivity() {
                 dialog.setCancelable(false)
                 dialog.findViewById<MaterialButton>(R.id.back_to_home).setOnClickListener {
                     dialog.dismiss()
-                    startActivity(Intent(this,HomeActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
                 dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
@@ -314,8 +370,8 @@ class UploadFilesActivity : AppCompatActivity() {
             } else {
                 // Handle failures
                 // ...
-                Toast.makeText(this,"Something Error Occurred !", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this,HomeActivity::class.java))
+                Toast.makeText(this, "Something Error Occurred !", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
 
             }
@@ -324,18 +380,21 @@ class UploadFilesActivity : AppCompatActivity() {
     }
 
 
+/*
     private fun setUpSubjectList() {
         val subjectNames = listOf("Probability and Statistics", "Web Technologies", "Computer Networks", "Operating Systems","Software Engineering","Computer Organization")
         val adapter = ArrayAdapter(this,
             R.layout.list_item, subjectNames)
         (subjectNameSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
+*/
 
     private fun isNullOrEmpty(str: String): Boolean {
         if (str != null && !str.trim().isEmpty())
             return false
         return true
     }
+
 
 
 }
@@ -349,3 +408,5 @@ private operator fun UploadTask.TaskSnapshot.component1(): Long {
 
     return bytesTransferred.toLong()
 }
+
+

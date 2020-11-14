@@ -104,30 +104,34 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Choose Related Subject"
-                app:endIconMode="dropdown_menu"
+                android:layout_below="@id/edtFileTitle"
+                android:hint="Enter Subject Name "
+                app:endIconMode="clear_text"
                 android:id="@+id/edtSubjectName"
                 android:background="@color/colorWhite"
                 app:endIconTint="#000"
-                android:layout_marginTop="15dp"
-                android:layout_below="@id/edtFileTitle"
+                android:layout_marginTop="25dp"
+                app:helperTextTextColor="@color/colorPrimary"
+                app:helperTextEnabled="false"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 app:hintTextColor="#000">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
+                    android:layout_height="match_parent"
                     android:id="@+id/subjectNameSpinner"
-                    android:backgroundTint="@color/colorWhite"
-                    />
+                    android:inputType="text"
+                    android:background="@color/colorWhite"
+                    android:textColor="#000" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
             <TextView
@@ -242,7 +246,10 @@
                 android:layout_below="@id/fileType"
                 android:id="@+id/fileTypeLayout"
                 android:layout_marginBottom="15dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
+                android:weightSum="3"
                 android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -251,6 +258,7 @@
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:layout_weight="1"
                 android:id="@+id/pdfFormat"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginStart="2dp"
@@ -258,11 +266,28 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/rounded_button" />
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="\t\t\DOC\t\t\t"
+                    android:id="@+id/docxFormat"
+                    android:textSize="18sp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/rounded_button" />
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="\t\t\tPPT\t\t\t\t"
                 android:id="@+id/pptFormat"
+                    android:layout_weight="1"
                 android:textSize="18sp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
@@ -272,6 +297,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:background="@drawable/rounded_button" />
+
             </LinearLayout>
 
 
