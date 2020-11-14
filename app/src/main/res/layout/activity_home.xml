@@ -51,12 +51,13 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/search"
+                    android:id="@+id/searchEditText"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_below="@id/happyText"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
+                    android:focusableInTouchMode="false"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="80dp"
@@ -64,11 +65,9 @@
                     android:backgroundTint="@android:color/background_light"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:drawablePadding="10dp"
-                    android:hint="Search for Anything here..."
+                    android:hint="Search Class Notes here..."
                     android:paddingStart="15dp"
-                    android:paddingEnd="0dp"
-                    android:autofillHints=""
-                    android:inputType="text" />
+                    android:paddingEnd="0dp" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

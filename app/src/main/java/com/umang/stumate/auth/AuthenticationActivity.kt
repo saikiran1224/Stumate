@@ -2,13 +2,12 @@ package com.umang.stumate.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,12 +23,15 @@ import com.umang.stumate.R
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_authentication.*
+import kotlinx.android.synthetic.main.progress_bar.*
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
     lateinit var editEmailIn:TextInputEditText
     lateinit var editPasswordIn:TextInputEditText
     lateinit var backButton: ImageView
+
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
         //Initialising App Preferences Activity
         AppPreferences.init(this)
+
 
         editEmailIn=findViewById(R.id.editEmailIn)
         editPasswordIn=findViewById(R.id.editPasswordIn)
@@ -82,6 +85,9 @@ class AuthenticationActivity : AppCompatActivity() {
         // When user clicks on Button, check the Text
         btnName.setOnClickListener {
             // Check Validation as written in StudentDetailsActivity.kt file from line 38
+
+            loadingProgress.visibility = View.VISIBLE
+
             if(isNullOrEmpty(editEmailIn.text)) {
                 edtEmailID.error = "Please enter Emailid"
             } else if(isNullOrEmpty(editPasswordIn.text)) {
@@ -89,6 +95,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 edtPassword.error = "Please enter Password"
             } else {
                 if(btnName.text.equals("\t\t\tSign in\t\t\t")) {
+
                     //Implement Sign in code here
                     auth.signInWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
                         .addOnCompleteListener(this) { task ->
@@ -118,12 +125,19 @@ class AuthenticationActivity : AppCompatActivity() {
                                 intent.putExtra("Email",editEmailIn.text.toString() )
                                 startActivity(intent)
 
+
+                                loadingProgress.visibility = View.GONE
+
+
                                 finish()
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()
                                 //updateUI(null)
+
+                                loadingProgress.visibility = View.GONE
+
                             }
                             // ...
                         }
@@ -154,11 +168,12 @@ class AuthenticationActivity : AppCompatActivity() {
                         FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
 
                         sendIntent()
+
+                        loadingProgress.visibility = View.GONE
+
                     }
 
                 }
-
-
             }
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(
@@ -166,6 +181,9 @@ class AuthenticationActivity : AppCompatActivity() {
                     error.message,
                     Toast.LENGTH_LONG
                 ).show()
+
+                loadingProgress.visibility = View.GONE
+
 
             }
         }

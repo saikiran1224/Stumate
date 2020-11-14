@@ -76,13 +76,24 @@
                 android:background="@drawable/semi_circle"
                 android:orientation="vertical">
 
-
-
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    app:lottie_url="https://assets4.lottiefiles.com/private_files/lf30_nIhxTu.json"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="0dp"
+                    android:visibility="visible"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
                     android:id="@+id/prefsLayout" >
@@ -171,6 +182,8 @@
                     android:orientation="vertical"
                     android:layout_marginTop="20dp"
                     android:padding="0dp"
+                    android:visibility="visible"
+                    android:id="@+id/recyclerLayout"
                     android:layout_below="@id/prefsLayout"
                     android:layout_alignParentStart="true">
 

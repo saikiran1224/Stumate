@@ -74,6 +74,12 @@ class HomeActivity : AppCompatActivity() {
         dashboardRecycler.layoutManager = linearLayoutManager
         dashboardRecycler.adapter = dashboardIconAdapter
 
+        searchEditText.setOnClickListener {
+            val intent = Intent(this,ClassNotesActivity::class.java)
+            intent.putExtra("navigatedFrom","HomeActivity")
+            startActivity(intent)
+        }
+
 
         // News Adapter
         newsLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

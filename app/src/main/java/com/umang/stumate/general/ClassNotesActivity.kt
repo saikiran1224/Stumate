@@ -48,6 +48,18 @@ class ClassNotesActivity : AppCompatActivity() {
             linearLayoutManager.reverseLayout = true
         }
 
+        val  intent = intent
+        if(intent.getStringExtra("navigatedFrom")!=null) {
+
+            sortbyDate.visibility = GONE
+            searchFiles.visibility = GONE
+            divider.visibility = GONE
+
+            // Showing Search Edit Text
+            searchEditText.visibility = VISIBLE
+
+        }
+
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
@@ -55,6 +67,10 @@ class ClassNotesActivity : AppCompatActivity() {
                 filter(s.toString())
             }
         })
+
+        animationView.visibility = VISIBLE
+        prefsLayout.visibility = GONE
+        recyclerLayout.visibility = GONE
 
 
 /*
@@ -83,27 +99,40 @@ class ClassNotesActivity : AppCompatActivity() {
         val classNotesListener = object :ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 classNotesList.clear()
-                for (ds in dataSnapshot.children) {
-                    val classNotesData = ds.getValue(FileUploadData::class.java)
 
-                    if (classNotesData != null) {
-                        classNotesList.add(classNotesData)
+                if(dataSnapshot.exists()) {
 
-                        classNotesAdapter = ClassNotesAdapter(
-                            this@ClassNotesActivity,
-                            classNotesList
-                        )
+                    animationView.visibility = GONE
+                    prefsLayout.visibility = VISIBLE
+                    recyclerLayout.visibility = VISIBLE
 
-                        classNotesRecycler.setHasFixedSize(true)
-                        linearLayoutManager.reverseLayout = false
-                        linearLayoutManager.stackFromEnd = true
-                        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+                    for (ds in dataSnapshot.children) {
 
-                        classNotesRecycler.layoutManager = linearLayoutManager
-                        classNotesRecycler.adapter = classNotesAdapter
-                        classNotesAdapter.notifyDataSetChanged()
+                        val classNotesData = ds.getValue(FileUploadData::class.java)
 
+                        if (classNotesData != null) {
+                            classNotesList.add(classNotesData)
+
+                            classNotesAdapter = ClassNotesAdapter(
+                                this@ClassNotesActivity,
+                                classNotesList
+                            )
+
+                            classNotesRecycler.setHasFixedSize(true)
+                            linearLayoutManager.reverseLayout = false
+                            linearLayoutManager.stackFromEnd = true
+                            linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+
+                            classNotesRecycler.layoutManager = linearLayoutManager
+                            classNotesRecycler.adapter = classNotesAdapter
+                            classNotesAdapter.notifyDataSetChanged()
+
+                        }
                     }
+
+
+                } else {
+                    Toast.makeText(baseContext,"No Data Found !!!",Toast.LENGTH_LONG).show()
                 }
 
 
