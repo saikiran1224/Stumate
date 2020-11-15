@@ -101,7 +101,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomnav"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
@@ -122,8 +122,8 @@
         app:tint="@color/colorAccent"
         android:src="@drawable/ic_baseline_add_24"
         app:borderWidth="0dp"
-        android:id="@+id/uploadFilesButton"
-        app:layout_anchor="@id/bottomnav"
+        android:id="@+id/uploadFilesButtonfab"
+        app:layout_anchor="@id/bottomNavigation"
         android:contentDescription="@string/app_name" />
 
 

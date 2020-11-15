@@ -6,18 +6,23 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.umang.stumate.R
 import com.umang.stumate.adapters.ClassNotesAdapter
+import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_class_notes.*
+import kotlinx.android.synthetic.main.activity_class_notes.searchEditText
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class ClassNotesActivity : AppCompatActivity() {
@@ -25,6 +30,7 @@ class ClassNotesActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var classNotesList: ArrayList<FileUploadData>
     private lateinit var classNotesAdapter: ClassNotesAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +63,6 @@ class ClassNotesActivity : AppCompatActivity() {
 
             // Showing Search Edit Text
             searchEditText.visibility = VISIBLE
-
         }
 
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -89,6 +94,117 @@ class ClassNotesActivity : AppCompatActivity() {
 
         // Retrieving Data from Firebase Realtime Database
         retriveClassNotesData()
+
+        classNotesFAB.setOnClickListener {
+            startActivity(Intent(this, UploadFilesActivity::class.java))
+        }
+
+
+        classNotesBottomNav.setOnClickListener {
+            val dialog= BottomSheetDialog(this,R.style.BottomSheetDialog)
+            val view=layoutInflater.inflate(R.layout.bottom_items, null)
+
+            view.findViewById<TextView>(R.id.classNotes).setOnClickListener {
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorPrimary))
+
+                startActivity(Intent(this, ClassNotesActivity::class.java))
+
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                //dialog.dismiss()
+
+            }
+            view.findViewById<TextView>(R.id.remainders).setOnClickListener {
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.remainders).setTextColor(resources.getColor(R.color.colorPrimary))
+
+                startActivity(Intent(this, ReminderActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                // dialog.dismiss()
+            }
+            view.findViewById<TextView>(R.id.profile).setOnClickListener {
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorPrimary))
+
+                startActivity(Intent(this, StudentProfileActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                //  dialog.dismiss()
+
+
+            }
+            view.findViewById<TextView>(R.id.rateUs).setOnClickListener {
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
+                //startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                //  dialog.dismiss()
+            }
+            view.findViewById<TextView>(R.id.logOut).setOnClickListener {
+
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
+
+                // Logout the user from session
+                AppPreferences.isLogin = false
+                AppPreferences.studentID = ""
+                AppPreferences.studentName = ""
+                startActivity(Intent(this, AuthenticationActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                //  dialog.dismiss()
+
+            }
+            view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
+                view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
+                view.findViewById<TextView>(R.id.collegeMates).setTextColor(resources.getColor(R.color.colorPrimary))
+                startActivity(Intent(this, ClassMatesActivity::class.java))
+
+                view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
+                view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
+
+                //  dialog.dismiss()
+
+            }
+
+
+            dialog.setContentView(view)
+            //dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+            dialog.show()
+
+
+
+        }
+
     }
 
     private fun retriveClassNotesData() {

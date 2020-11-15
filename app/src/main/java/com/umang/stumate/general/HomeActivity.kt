@@ -59,8 +59,8 @@ class HomeActivity : AppCompatActivity() {
         )
         dashboardIconsList.add(
             DashboardIconData(
-                "Question Papers",
-                R.drawable.ic_baseline_find_in_page_24
+                "Class Mates",
+                R.drawable.ic_baseline_supervisor_account_24
             )
         )
         dashboardIconsList.add(
@@ -69,6 +69,13 @@ class HomeActivity : AppCompatActivity() {
                 R.drawable.ic_baseline_notifications_active_24
             )
         )
+        dashboardIconsList.add(
+            DashboardIconData(
+                "Profile",
+                R.drawable.ic_baseline_person_24
+            )
+        )
+
 
         val dashboardIconAdapter = DashboardIconsAdapter(dashboardIconsList)
         dashboardRecycler.layoutManager = linearLayoutManager
@@ -120,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-                dialog.dismiss()
+                //dialog.dismiss()
 
             }
             view.findViewById<TextView>(R.id.remainders).setOnClickListener {
@@ -135,7 +142,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-                dialog.dismiss()
+               // dialog.dismiss()
             }
             view.findViewById<TextView>(R.id.profile).setOnClickListener {
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
@@ -149,7 +156,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-                dialog.dismiss()
+              //  dialog.dismiss()
 
 
             }
@@ -164,7 +171,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-                dialog.dismiss()
+              //  dialog.dismiss()
             }
             view.findViewById<TextView>(R.id.logOut).setOnClickListener {
 
@@ -182,7 +189,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
-                dialog.dismiss()
+              //  dialog.dismiss()
 
             }
             view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
@@ -196,7 +203,7 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(0)
 
-                dialog.dismiss()
+              //  dialog.dismiss()
 
             }
 

@@ -1,189 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrey"
+    android:orientation="vertical"
     tools:context=".general.ReminderActivity">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/welcomeAppBar"
-            android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="15dp"
-            app:elevation="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorGrey">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/welcomeToolBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:id="@+id/welcomeBackButton"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:visibility="visible"
-                        app:tint="@color/colorPrimary"
-                        android:contentDescription="@string/backbutton"
-                        android:src="@drawable/ic_baseline_notifications_active_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="?attr/actionBarSize"
-                        android:layout_weight="1.9"
-                        android:gravity="center_vertical"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="0dp"
-                        android:text="Schedule Reminders"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/cabin"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_below="@id/welcomeAppBar"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:padding="25dp"
-            android:background="@drawable/semi_circle"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't miss any \nAssignment"
-                android:textColor="@color/colorBlack"
-                android:textSize="28sp"
-                android:id="@+id/welcomeText"
-                android:layout_alignParentStart="true"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/welcomeAppBar"
+                android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="15dp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
+                app:elevation="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Title of Message"
-                app:endIconMode="clear_text"
-                android:id="@+id/edtTitleMessage"
-                android:background="@color/colorWhite"
-                android:layout_below="@id/welcomeText"
-                app:endIconTint="#000"
-                android:layout_marginTop="25dp"
-                app:errorEnabled="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                app:hintTextColor="#000">
+                android:background="@color/colorGrey">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/welcomeToolBar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/editTitleMessage"
-                    android:inputType="text"
-                    android:background="@color/colorWhite"
-                    android:textColor="#000" />
+                    android:layout_height="?attr/actionBarSize">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        <ImageView
+                            android:id="@+id/welcomeBackButton"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.1"
+                            android:visibility="visible"
+                            app:tint="@color/colorPrimary"
+                            android:contentDescription="@string/backbutton"
+                            android:src="@drawable/ic_baseline_notifications_active_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_weight="1.9"
+                            android:gravity="center_vertical"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="0dp"
+                            android:text="Schedule Reminders"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/cabin"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Choose Relevant Type"
-                app:endIconMode="dropdown_menu"
-                android:id="@+id/edtType"
-                android:background="@color/colorWhite"
-                android:layout_below="@id/edtTitleMessage"
-                app:endIconTint="#000"
-                android:layout_marginTop="25dp"
-                app:errorEnabled="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                app:hintTextColor="#000">
+                android:layout_below="@id/welcomeAppBar"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:padding="25dp"
+                android:background="@drawable/semi_circle"
+                android:orientation="vertical">
 
-                <AutoCompleteTextView
-                    android:id="@+id/chooseType"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't miss any \nAssignment"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="28sp"
+                    android:id="@+id/welcomeText"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:backgroundTint="@color/colorWhite"
+                    android:hint="Title of Message"
+                    app:endIconMode="clear_text"
+                    android:id="@+id/edtTitleMessage"
+                    android:background="@color/colorWhite"
+                    android:layout_below="@id/welcomeText"
+                    app:endIconTint="#000"
+                    android:layout_marginTop="25dp"
+                    app:errorEnabled="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    app:hintTextColor="#000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/editTitleMessage"
+                        android:inputType="text"
+                        android:background="@color/colorWhite"
+                        android:textColor="#000" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Choose Relevant Type"
+                    app:endIconMode="dropdown_menu"
+                    android:id="@+id/edtType"
+                    android:background="@color/colorWhite"
+                    android:layout_below="@id/edtTitleMessage"
+                    app:endIconTint="#000"
+                    android:layout_marginTop="25dp"
+                    app:errorEnabled="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    app:hintTextColor="#000">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/chooseType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:backgroundTint="@color/colorWhite"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your Description"
+                    app:endIconMode="clear_text"
+                    android:id="@+id/edtDescription"
+                    android:background="@color/colorWhite"
+                    android:layout_below="@id/edtType"
+                    app:endIconTint="#000"
+                    android:layout_marginTop="25dp"
+                    app:errorEnabled="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    app:hintTextColor="#000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editDescription"
+                        android:inputType="textMultiLine"
+                        android:lines="4"
+                        android:background="@color/colorWhite"
+                        android:textColor="#000" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edtDescription"
+                    android:text="\t\t\tSend Notification\t\t\t"
+                    android:textSize="16sp"
+                    android:id="@+id/btnName"
+                    android:textAllCaps="false"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="30dp"
+                    android:padding="10dp"
                     />
 
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your Description"
-                app:endIconMode="clear_text"
-                android:id="@+id/edtDescription"
-                android:background="@color/colorWhite"
-                android:layout_below="@id/edtType"
-                app:endIconTint="#000"
-                android:layout_marginTop="25dp"
-                app:errorEnabled="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                app:hintTextColor="#000">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editDescription"
-                    android:inputType="textMultiLine"
-                    android:lines="4"
-                    android:background="@color/colorWhite"
-                    android:textColor="#000" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/edtDescription"
-                            android:text="\t\t\tSend Notification\t\t\t"
-                            android:textSize="16sp"
-                            android:id="@+id/btnName"
-                            android:textAllCaps="false"
-                            android:background="@drawable/rounded_button"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"
-                            android:backgroundTint="@color/colorPrimary"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="30dp"
-                            android:padding="10dp"
-                            />
-
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/remainderBottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:fabAnimationMode="scale"
+        app:hideOnScroll="true"
+        app:fabCradleMargin="8dp"
+        app:navigationIcon="@drawable/ic_baseline_menu_24"
+        app:fabAlignmentMode="end"
+        app:fabCradleRoundedCornerRadius="60dp"
+        app:navigationContentDescription="@string/app_name"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_anchorGravity="center"
+        app:tint="@color/colorAccent"
+        android:src="@drawable/ic_baseline_add_24"
+        app:borderWidth="0dp"
+        android:id="@+id/remainderFAB"
+        app:layout_anchor="@id/remainderBottomNav"
+        android:contentDescription="@string/app_name" />
 
 
-</androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

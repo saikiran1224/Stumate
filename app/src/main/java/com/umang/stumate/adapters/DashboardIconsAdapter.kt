@@ -14,7 +14,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.umang.stumate.R
+import com.umang.stumate.general.ClassMatesActivity
 import com.umang.stumate.general.ClassNotesActivity
+import com.umang.stumate.general.ReminderActivity
+import com.umang.stumate.general.StudentProfileActivity
 import com.umang.stumate.modals.DashboardIconData
 import java.io.File
 import java.io.FileOutputStream
@@ -48,12 +51,34 @@ class DashboardIconsAdapter(private val iconsList: ArrayList<DashboardIconData>)
                     )
                 )
             }
-            if(holder.textActionName.text.equals("Question Papers")) {
-                Toast.makeText(holder.textActionName.context, "Question Papers", Toast.LENGTH_LONG).show()
+
+            if(holder.textActionName.text.equals("Class Mates")) {
+                holder.textActionName.context.startActivity(
+                    Intent(
+                        holder.textActionName.context,
+                        ClassMatesActivity::class.java
+                    )
+                )
             }
+
             if(holder.textActionName.text.equals("Reminders")) {
-                Toast.makeText(holder.textActionName.context, "Reminders", Toast.LENGTH_LONG).show()
+                holder.textActionName.context.startActivity(
+                    Intent(
+                        holder.textActionName.context,
+                        ReminderActivity::class.java
+                    )
+                )
             }
+
+            if(holder.textActionName.text.equals("Profile")) {
+                holder.textActionName.context.startActivity(
+                    Intent(
+                        holder.textActionName.context,
+                        StudentProfileActivity::class.java
+                    )
+                )
+            }
+
         }
 
     }
