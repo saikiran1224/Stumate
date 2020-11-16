@@ -14,6 +14,11 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
@@ -23,7 +28,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>, private var studentNamePrefs: String?):
+class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>, private var studentNamePrefs: String?, private var studentID: String?):
     RecyclerView.Adapter<ClassNotesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassNotesAdapter.ViewHolder {
@@ -72,16 +77,49 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
             deleteDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
             deleteDialog.findViewById<Button>(R.id.btnDelete).setOnClickListener {
-                classNotesList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position,classNotesList.size)
-               // holder.itemView.visibility = View.GONE
 
+                val myRef = FirebaseDatabase.getInstance().getReference(studentID.toString()).child("files_data")
+                val query = myRef.orderByChild("fileURL").equalTo(holder.fileURL.text.toString())
+                val deleteEventListener = object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
 
+                        for (ds in snapshot.children) {
+                            //removes data from Firebase
+                            ds.ref.removeValue()
+                        }
+
+                        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(holder.fileURL.text.toString())
+                        storageReference.delete().addOnSuccessListener {
+                            Toast.makeText(context,"File Deleted Successfully !",Toast.LENGTH_LONG).show()
+                        }.addOnFailureListener{
+                            Toast.makeText(context,"Some Error Occurred. Please try again!!!", Toast.LENGTH_LONG).show()
+                        }
+
+                        classNotesList.removeAt(holder.adapterPosition)
+                        notifyItemRemoved(holder.adapterPosition)
+                        notifyItemRangeChanged(holder.adapterPosition,classNotesList.size)
+                        holder.itemView.visibility = View.GONE
+                        deleteDialog.dismiss()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(context," "+ error.message.toString(),Toast.LENGTH_LONG).show()
+                    }
+                }
+                query.addListenerForSingleValueEvent(deleteEventListener)
+
+                if(holder.txtStudentName.equals(studentNamePrefs)) {
+                   holder.txtDeleteIcon.visibility = View.VISIBLE
+                    Toast.makeText(context,"Authorized to delete",Toast.LENGTH_LONG).show()
+
+                } else {
+                    holder.txtDeleteIcon.visibility = View.GONE
+                    Toast.makeText(context,"Not authorized to delete",Toast.LENGTH_LONG).show()
+
+                }
                 //  holder.bindItems(classNotesList[position], studentNamePrefs)
 
-                Toast.makeText(context,""+classNotesList.size.toString(),Toast.LENGTH_LONG).show()
-                deleteDialog.dismiss()
+                //Toast.makeText(context,""+classNotesList.size.toString(),Toast.LENGTH_LONG).show()
             }
 
             deleteDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
@@ -126,6 +164,8 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
 
             if(classNotes.studentName.toString().equals(studentNamePrefs.toString())) {
                 txtDeleteIcon.visibility= View.VISIBLE
+            } else {
+                txtDeleteIcon.visibility = View.GONE
             }
 
 

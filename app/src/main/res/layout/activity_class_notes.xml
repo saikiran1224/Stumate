@@ -210,7 +210,7 @@
         app:hideOnScroll="true"
         app:fabCradleMargin="8dp"
         app:navigationIcon="@drawable/ic_baseline_menu_24"
-        app:fabAlignmentMode="end"
+        app:fabAlignmentMode="center"
         app:fabCradleRoundedCornerRadius="60dp"
         app:navigationContentDescription="@string/app_name"
         />

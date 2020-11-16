@@ -228,11 +228,7 @@ class ClassNotesActivity : AppCompatActivity() {
                         if (classNotesData != null) {
                             classNotesList.add(classNotesData)
 
-                            classNotesAdapter = ClassNotesAdapter(
-                                this@ClassNotesActivity,
-                                classNotesList,
-                                AppPreferences.studentName.toString()
-                            )
+                            classNotesAdapter = ClassNotesAdapter(this@ClassNotesActivity, classNotesList, AppPreferences.studentName.toString(), AppPreferences.studentID.toString())
 
                             classNotesRecycler.setHasFixedSize(true)
                             linearLayoutManager.reverseLayout = false
