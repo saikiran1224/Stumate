@@ -11,12 +11,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.R
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_student_profile.*
 import kotlinx.android.synthetic.main.activity_student_profile.studentName
 import kotlinx.android.synthetic.main.progress_bar.*

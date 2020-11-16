@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View.*
 import android.widget.ImageView
@@ -61,7 +60,8 @@ class UploadFilesActivity : AppCompatActivity() {
                 "application/vnd.openxmlformats-officedocument.presentationml.presentation",  // .ppt & .pptx
                 "text/plain",
                 "application/pdf", // PDF
-                "application/zip"
+                "application/zip",
+                "image/*"// Image
             )
 
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -165,6 +165,23 @@ class UploadFilesActivity : AppCompatActivity() {
 
         }
 
+        imageFormat.setOnClickListener {
+            imageFormat.setBackgroundResource(R.drawable.blue_rounded_button)
+            imageFormat.setTextColor(resources.getColor(R.color.colorWhite))
+
+            fileType = "Image"
+
+            pdfFormat.setBackgroundResource(R.drawable.rounded_button)
+            pdfFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            pptFormat.setBackgroundResource(R.drawable.rounded_button)
+            pptFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            docxFormat.setBackgroundResource(R.drawable.rounded_button)
+            docxFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
+
+        }
+
+
         pdfFormat.setOnClickListener {
             pdfFormat.setBackgroundResource(R.drawable.blue_rounded_button)
             pdfFormat.setTextColor(resources.getColor(R.color.colorWhite))
@@ -175,6 +192,9 @@ class UploadFilesActivity : AppCompatActivity() {
             pptFormat.setTextColor(resources.getColor(R.color.colorPrimary))
             docxFormat.setBackgroundResource(R.drawable.rounded_button)
             docxFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            imageFormat.setBackgroundResource(R.drawable.rounded_button)
+            imageFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
 
 
         }
@@ -189,6 +209,9 @@ class UploadFilesActivity : AppCompatActivity() {
             docxFormat.setTextColor(resources.getColor(R.color.colorPrimary))
             pdfFormat.setBackgroundResource(R.drawable.rounded_button)
             pdfFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            imageFormat.setBackgroundResource(R.drawable.rounded_button)
+            imageFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
 
         }
 
@@ -202,6 +225,9 @@ class UploadFilesActivity : AppCompatActivity() {
             pptFormat.setTextColor(resources.getColor(R.color.colorPrimary))
             pdfFormat.setBackgroundResource(R.drawable.rounded_button)
             pdfFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+            imageFormat.setBackgroundResource(R.drawable.rounded_button)
+            imageFormat.setTextColor(resources.getColor(R.color.colorPrimary))
+
 
         }
 

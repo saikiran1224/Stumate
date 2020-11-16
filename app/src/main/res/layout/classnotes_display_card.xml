@@ -105,10 +105,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Posted by Saikiran Kopparthi"
+            android:text="Posted by Saikiran Kopparthi 5 minutes ago"
             android:layout_margin="10dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:id="@+id/studentName"
+            android:layout_toLeftOf="@id/deleteIcon"
             android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/horizontalDivider" />
@@ -116,10 +117,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1st Nov 2020, 8.00pm"
-            android:id="@+id/dateOfPublishing"
+            android:text="Delete File"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:drawableTint="@android:color/holo_red_dark"
+            android:drawableStart="@drawable/ic_baseline_delete_forever_24"
+            android:id="@+id/deleteIcon"
             android:layout_margin="10dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/horizontalDivider" />

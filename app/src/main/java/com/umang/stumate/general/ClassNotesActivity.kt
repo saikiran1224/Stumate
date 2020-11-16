@@ -22,7 +22,6 @@ import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_class_notes.*
 import kotlinx.android.synthetic.main.activity_class_notes.searchEditText
-import kotlinx.android.synthetic.main.activity_home.*
 
 
 class ClassNotesActivity : AppCompatActivity() {
@@ -231,7 +230,8 @@ class ClassNotesActivity : AppCompatActivity() {
 
                             classNotesAdapter = ClassNotesAdapter(
                                 this@ClassNotesActivity,
-                                classNotesList
+                                classNotesList,
+                                AppPreferences.studentName.toString()
                             )
 
                             classNotesRecycler.setHasFixedSize(true)

@@ -2,6 +2,7 @@ package com.umang.stumate.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.umang.stumate.adapters.ClassNotesAdapter
 
 object AppPreferences {
     private const val NAME = "Stumate"

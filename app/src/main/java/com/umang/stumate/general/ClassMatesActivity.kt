@@ -14,15 +14,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.umang.stumate.R
 import com.umang.stumate.adapters.ClassMatesAdapter
-import com.umang.stumate.adapters.ClassNotesAdapter
 import com.umang.stumate.auth.AuthenticationActivity
-import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_class_mates.*
-import kotlinx.android.synthetic.main.activity_class_notes.*
 import kotlinx.android.synthetic.main.activity_class_notes.closeButton
-import kotlinx.android.synthetic.main.activity_home.*
 
 class ClassMatesActivity : AppCompatActivity() {
 

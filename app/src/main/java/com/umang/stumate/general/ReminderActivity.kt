@@ -1,6 +1,5 @@
 package com.umang.stumate.general
 
-import android.R.attr.name
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,15 +12,11 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.R
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.utils.AppPreferences
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_reminder.*
-import kotlinx.android.synthetic.main.activity_student_details.*
 import org.json.JSONObject
 
 

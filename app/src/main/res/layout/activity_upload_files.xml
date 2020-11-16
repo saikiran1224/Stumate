@@ -249,12 +249,28 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
-                android:weightSum="3"
+                android:weightSum="4"
                 android:orientation="horizontal">
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="\tIMAGE\t"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/imageFormat"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/rounded_button" />
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="\t\t\tPDF\t\t\t"
+                android:text="\tPDF\t"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -269,7 +285,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="\t\t\DOC\t\t\t"
+                    android:text="\tDOC\t"
                     android:id="@+id/docxFormat"
                     android:textSize="18sp"
                     android:layout_marginStart="2dp"
@@ -285,7 +301,7 @@
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="\t\t\tPPT\t\t\t\t"
+                android:text="\tPPT\t"
                 android:id="@+id/pptFormat"
                     android:layout_weight="1"
                 android:textSize="18sp"

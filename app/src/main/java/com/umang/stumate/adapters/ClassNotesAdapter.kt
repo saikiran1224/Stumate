@@ -1,6 +1,7 @@
 package com.umang.stumate.adapters
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>):
+class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>, private var studentNamePrefs: String?):
     RecyclerView.Adapter<ClassNotesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassNotesAdapter.ViewHolder {
@@ -35,7 +37,7 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(classNotesList[position])
+        holder.bindItems(classNotesList[position], studentNamePrefs)
 
         holder.downloadButton.setOnClickListener {
            //downloadAndOpenPDF(holder.fileURL.text.toString())
@@ -61,6 +63,39 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
 
         }
 
+        holder.txtDeleteIcon.setOnClickListener{
+
+            val deleteDialog = Dialog(context)
+            deleteDialog.setContentView(R.layout.delete_file_dialog)
+            deleteDialog.setCancelable(false)
+            deleteDialog.setCanceledOnTouchOutside(false)
+            deleteDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+            deleteDialog.findViewById<Button>(R.id.btnDelete).setOnClickListener {
+                classNotesList.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position,classNotesList.size)
+               // holder.itemView.visibility = View.GONE
+
+
+                //  holder.bindItems(classNotesList[position], studentNamePrefs)
+
+                Toast.makeText(context,""+classNotesList.size.toString(),Toast.LENGTH_LONG).show()
+                deleteDialog.dismiss()
+            }
+
+            deleteDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                deleteDialog.dismiss()
+            }
+
+
+            deleteDialog.show()
+
+
+        }
+
+
+
 
 
     }
@@ -75,7 +110,7 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
         val txtSubjectName  = itemView.findViewById(R.id.subjectName) as TextView
         val txtUnitName  = itemView.findViewById(R.id.unitNumber) as TextView
         val txtStudentName  = itemView.findViewById(R.id.studentName) as TextView
-        val txtDateOfPublishing  = itemView.findViewById(R.id.dateOfPublishing) as TextView
+        val txtDeleteIcon  = itemView.findViewById(R.id.deleteIcon) as TextView
         val downloadButton = itemView.findViewById(R.id.btnDownload) as TextView
         val fileShareButton = itemView.findViewById(R.id.btnShare) as TextView
 
@@ -83,14 +118,22 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
         val fileURL = itemView.findViewById(R.id.txtInvisibleURL) as TextView
 
 
-        fun bindItems(classNotes: FileUploadData) {
+        fun bindItems(classNotes: FileUploadData, studentNamePrefs: String?) {
 
             @SuppressLint("SimpleDateFormat") val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+
+
+
+            if(classNotes.studentName.toString().equals(studentNamePrefs.toString())) {
+                txtDeleteIcon.visibility= View.VISIBLE
+            }
+
 
             try {
                 val date: Date = inputFormat.parse(classNotes.dateOfPublishing.toString())!!
                 val niceDateStr = DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS).toString()
-                txtDateOfPublishing.text = niceDateStr.toString()
+                txtStudentName.text = "Posted by " + classNotes.studentName.toString() + " " + niceDateStr.toString()
+
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
@@ -99,8 +142,6 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
             txtFileName.text = classNotes.fileName
             txtSubjectName.text = classNotes.subjectName
             txtUnitName.text = "Unit-" + classNotes.unitNumber.toString()
-            txtStudentName.text = "Posted by " + classNotes.studentName.toString()
-
             fileURL.text = classNotes.fileURL
         }
     }
@@ -110,6 +151,11 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
         notifyDataSetChanged()
     }
 
+
+
+}
+
+private fun AppPreferences.init(context: ClassNotesAdapter.ViewHolder) {
 
 
 }

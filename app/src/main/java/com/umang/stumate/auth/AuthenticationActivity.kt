@@ -2,7 +2,6 @@ package com.umang.stumate.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -14,8 +13,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.onboarding.GettingStartedActivity
@@ -86,7 +83,6 @@ class AuthenticationActivity : AppCompatActivity() {
         btnName.setOnClickListener {
             // Check Validation as written in StudentDetailsActivity.kt file from line 38
 
-            loadingProgress.visibility = View.VISIBLE
 
             if(isNullOrEmpty(editEmailIn.text)) {
                 edtEmailID.error = "Please enter Emailid"
@@ -94,6 +90,10 @@ class AuthenticationActivity : AppCompatActivity() {
                 edtEmailID.error = null
                 edtPassword.error = "Please enter Password"
             } else {
+
+                edtPassword.error = null
+                loadingProgress.visibility = View.VISIBLE
+
                 if(btnName.text.equals("\t\t\tSign in\t\t\t")) {
 
                     //Implement Sign in code here

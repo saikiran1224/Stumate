@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardPreventCornerOverlap="true"
+    android:foreground="@android:color/transparent"
+    android:background="@android:color/transparent"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+<!--
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:id="@+id/deleteIcon"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            app:tint="@android:color/holo_red_dark" />
+-->
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/deleteIcon"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_bgvy7afh.json"
+            app:lottie_autoPlay="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            app:lottie_loop="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/divider"
+            android:background="@color/colorGrey"
+            android:layout_below="@id/deleteIcon"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Are you sure you want to Delete File ?"
+            android:textSize="16sp"
+            android:id="@+id/txtDelete"
+            android:layout_below="@id/divider"
+            android:layout_margin="15dp"
+            android:textColor="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_below="@id/txtDelete">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCancel"
+                android:layout_below="@id/txtDelete"
+                android:layout_marginStart="20dp"
+                android:text="Cancel"
+                android:layout_weight="1"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDelete"
+                android:layout_below="@id/txtDelete"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:text="Delete" />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
