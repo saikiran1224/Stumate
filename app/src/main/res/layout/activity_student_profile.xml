@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorGrey"
     android:orientation="vertical"
     tools:context=".general.StudentProfileActivity">
@@ -90,34 +91,80 @@
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"/>
 
+                <TextView
+                    android:id="@+id/profileText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center"
+                    android:text="Pr"
+                    android:layout_marginLeft="10dp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Kuppili Prathyusha"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@id/profileText"
+                    />
+
+                <TextView
+                    android:id="@+id/profileEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="prathyusha.kuppili@gmail.com"
+                    android:layout_below="@id/profileName"
+                    android:layout_toRightOf="@id/profileText"
+                    android:layout_marginLeft="20dp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/profileDownArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/ic_extendarrow"
+                    android:padding="10dp" />
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:id="@+id/profileImage"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/profile_image_undraw"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_centerHorizontal="true"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="2dp" />
+                <TextView
+                    android:id="@+id/profileDownClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/profileDownArrow"
+                    android:drawableLeft="@drawable/ic_close"
+                    android:padding="10dp"
+                    android:visibility="gone"/>
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="|   Saikiran Kopparthi"
                     android:id="@+id/studentName"
-                    android:layout_below="@id/profileImage"
+                    android:layout_below="@id/profileEmail"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:background="@drawable/rounded_button"
                     android:padding="10dp"
                     android:drawableTint="@color/colorPrimary"
+                    android:drawableEnd="@drawable/ic_edit"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:textSize="18sp"
                     android:drawableStart="@drawable/ic_baseline_person_24"
                     android:drawablePadding="15dp" />
@@ -132,6 +179,7 @@
                     android:layout_below="@id/studentName"
                     android:background="@drawable/rounded_button"
                     android:padding="10dp"
+                    android:drawableEnd="@drawable/ic_edit"
                     android:drawableTint="@color/colorPrimary"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
@@ -161,7 +209,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="|   Information Technology A"
+                    android:text="|  Information Technology A"
                     android:id="@+id/departmentSection"
                     android:layout_below="@id/collegeName"
                     android:layout_alignParentStart="true"

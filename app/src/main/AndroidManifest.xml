@@ -23,13 +23,15 @@
         <activity android:name=".general.ClassNotesActivity" />
         <activity android:name=".general.UploadFilesActivity" />
         <activity android:name=".auth.StudentDetailsActivity" />
-        <activity android:name=".general.HomeActivity" />
-        <activity android:name=".onboarding.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".general.HomeActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".onboarding.SplashScreenActivity">
+
         </activity>
         <activity android:name=".auth.AuthenticationActivity" />
         <activity android:name=".onboarding.GettingStartedActivity" />

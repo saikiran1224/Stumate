@@ -30,7 +30,6 @@ class StudentProfileActivity : AppCompatActivity() {
 
         closeButton.setOnClickListener { startActivity(Intent(this,HomeActivity::class.java)) }
 
-        profileImage.visibility = View.GONE
         studentName.visibility = View.GONE
         phoneNumber.visibility = View.GONE
         collegeName.visibility = View.GONE
@@ -163,21 +162,41 @@ class StudentProfileActivity : AppCompatActivity() {
                     for (ds in dataSnapshot.children) {
                         val studentData = ds.getValue(StudentData::class.java)
                         if (studentData != null) {
+                            val test=studentData.studentName.toString()
+                            val s=test.substring(0,2)
+                            profileText.setText(s)
+                            profileName.setText(studentData.studentName.toString())
+                            profileEmail.setText(studentData.emailID.toString())
+                            profileDownClose.visibility=View.GONE
+                            profileDownArrow.setOnClickListener {
+                                studentName.setText("|   " + studentData.studentName.toString())
+                                studentName.visibility = View.VISIBLE
+                                phoneNumber.setText("|   +91 " + studentData.studentPhoneNumber.toString())
+                                phoneNumber.visibility = View.VISIBLE
+                                collegeName.setText("|   " + studentData.collegeName.toString())
+                                collegeName.visibility = View.VISIBLE
+                                departmentSection.setText("|   "+ studentData.studentDept.toString() + " " + studentData.studentSection.toString())
+                                departmentSection.visibility = View.VISIBLE
+                                graduationYear.setText("|   Studying "+studentData.graduationYear.toString())
+                                graduationYear.visibility = View.VISIBLE
+                                loadingAnimationView.visibility = View.GONE
+                                profileDownClose.visibility=View.VISIBLE
 
-                            profileImage.visibility = View.VISIBLE
-                            studentName.setText("|   " + studentData.studentName.toString())
-                            studentName.visibility = View.VISIBLE
-                            phoneNumber.setText("|   +91 " + studentData.studentPhoneNumber.toString())
-                            phoneNumber.visibility = View.VISIBLE
-                            collegeName.setText("|   " + studentData.collegeName.toString())
-                            collegeName.visibility = View.VISIBLE
-                            departmentSection.setText("|   "+ studentData.studentDept.toString() + " " + studentData.studentSection.toString())
-                            departmentSection.visibility = View.VISIBLE
-                            graduationYear.setText("|   Studying "+studentData.graduationYear.toString())
-                            graduationYear.visibility = View.VISIBLE
-
-                            loadingAnimationView.visibility = View.GONE
-
+                            }
+                            profileDownClose.setOnClickListener {
+                                //studentName.setText("|   " + studentData.studentName.toString())
+                                studentName.visibility = View.GONE
+                                //phoneNumber.setText("|   +91 " + studentData.studentPhoneNumber.toString())
+                                phoneNumber.visibility = View.GONE
+                                //collegeName.setText("|   " + studentData.collegeName.toString())
+                                collegeName.visibility = View.GONE
+                                //departmentSection.setText("|   "+ studentData.studentDept.toString() + " " + studentData.studentSection.toString())
+                                departmentSection.visibility = View.GONE
+                                //graduationYear.setText("|   Studying "+studentData.graduationYear.toString())
+                                graduationYear.visibility = View.GONE
+                                loadingAnimationView.visibility = View.VISIBLE
+                                profileDownClose.visibility=View.GONE
+                            }
                         }
 
                     }
