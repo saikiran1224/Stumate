@@ -124,7 +124,7 @@
                     android:background="@color/colorWhite"
                     android:layout_below="@id/edtTitleMessage"
                     app:endIconTint="#000"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="15dp"
                     app:errorEnabled="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
@@ -139,6 +139,9 @@
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"

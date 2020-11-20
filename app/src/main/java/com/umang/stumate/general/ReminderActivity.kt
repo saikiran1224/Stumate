@@ -1,8 +1,12 @@
 package com.umang.stumate.general
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
@@ -18,6 +22,8 @@ import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_reminder.*
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class ReminderActivity : AppCompatActivity() {
@@ -39,8 +45,12 @@ class ReminderActivity : AppCompatActivity() {
             startActivity(Intent(this, UploadFilesActivity::class.java))
         }
 
+
+
+
+
         remainderBottomNav.setOnClickListener {
-            val dialog= BottomSheetDialog(this,R.style.BottomSheetDialog)
+            val dialog= BottomSheetDialog(this, R.style.BottomSheetDialog)
             val view=layoutInflater.inflate(R.layout.bottom_items, null)
 
             view.findViewById<TextView>(R.id.classNotes).setOnClickListener {
@@ -177,8 +187,33 @@ class ReminderActivity : AppCompatActivity() {
                     TOPIC = "/topics/"+AppPreferences.studentID
 
                     val data = JSONObject()
-                    data.put("title", title + " regarding " + type)
-                    data.put("message", description + "\n Sent by " + AppPreferences.studentName)
+                    data.put("title",  title + " from "+AppPreferences.studentName )
+                    data.put("message", description + " Related to " + type)
+
+                    // Can be used for Scheduled Notifications
+/*
+                    if(isNullOrEmpty(date) and isNullOrEmpty(time)) {
+
+                      //  data.put("isScheduled", "false")
+
+                        Toast.makeText(this, "The message is not scheduled", Toast.LENGTH_LONG).show()
+                    } else {
+                        data.put("title", title + " regarding " + type)
+                        data.put(
+                            "message",
+                            description + "\n Sent by " + AppPreferences.studentName
+                        )
+                        data.put("isScheduled", "true")
+                        data.put("scheduledTime", date + " " + time)
+
+                        Toast.makeText(
+                            this,
+                            "Message is scheduled for " + date + " " + time + " " + description,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+*/
+
                     Log.e(TAG, "" + data)
 
                     val notification_data = JSONObject()
@@ -191,11 +226,19 @@ class ReminderActivity : AppCompatActivity() {
                             Response.Listener<JSONObject?> {
                             override fun onResponse(response: JSONObject?) {
 
-                                Toast.makeText(baseContext,"Notification sent Successfully to all the Class Mates!",Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    baseContext,
+                                    "Notification sent Successfully to all the Class Mates!",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }, object : Response.ErrorListener {
                             override fun onErrorResponse(error: VolleyError?) {
-                                Toast.makeText(baseContext,"Error   "+error.toString(),Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    baseContext,
+                                    "Error   " + error.toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
 
                             }
                         }) {
@@ -217,7 +260,7 @@ class ReminderActivity : AppCompatActivity() {
     }
 
     private fun setUpTypeList() {
-        val typeNames = listOf("Assignment","Lab Record","Exam","Others")
+        val typeNames = listOf("Assignment", "Lab Record", "Exam", "Others")
         val adapter = ArrayAdapter(
             this,
             R.layout.list_item, typeNames

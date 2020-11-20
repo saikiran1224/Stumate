@@ -41,6 +41,7 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
         return ClassNotesAdapter.ViewHolder(v)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(classNotesList[position], studentNamePrefs)
 

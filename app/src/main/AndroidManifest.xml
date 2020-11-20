@@ -24,13 +24,14 @@
         <activity android:name=".general.UploadFilesActivity" />
         <activity android:name=".auth.StudentDetailsActivity" />
         <activity android:name=".general.HomeActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity android:name=".onboarding.SplashScreenActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".auth.AuthenticationActivity" />
@@ -44,7 +45,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/stumate" />
+            android:resource="@drawable/logo" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
@@ -54,12 +55,16 @@
 
         <service
             android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="false"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+        
+        <receiver android:name=".firebase.NotificationBroadcastReceiver"
+            tools:ignore="Instantiatable" />
 
         <uses-library
             android:name="org.apache.http.legacy"
