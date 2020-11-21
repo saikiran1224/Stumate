@@ -78,6 +78,8 @@
                 android:background="@drawable/semi_circle"
                 android:orientation="vertical">
 
+
+<!--
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/loadingAnimationView"
                     android:layout_width="match_parent"
@@ -90,48 +92,64 @@
                     app:lottie_url="https://assets4.lottiefiles.com/private_files/lf30_nIhxTu.json"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"/>
+-->
 
-                <TextView
+
+                <include
+                    layout="@layout/custom_profile_text_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/profileText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_textview"
-                    android:gravity="center"
-                    android:text="Pr"
-                    android:layout_marginLeft="10dp"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/profileName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Kuppili Prathyusha"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:layout_toRightOf="@id/profileText"
-                    />
 
-                <TextView
-                    android:id="@+id/profileEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="prathyusha.kuppili@gmail.com"
-                    android:layout_below="@id/profileName"
-                    android:layout_toRightOf="@id/profileText"
-                    android:layout_marginLeft="20dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/divider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profileText"
+                    android:layout_marginTop="35dp" />
+
+
+                <!--Extendable Icon Layout-->
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
+                    android:layout_below="@id/divider"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profileNameLayout"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/profileDownArrow"
+                    <TextView
+                        android:id="@+id/txtProfileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Name of Student"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saikiran Kopparthi"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtProfileName"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                    android:id="@+id/nameProfileDownArrow"
                     android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_alignParentRight="true"
@@ -140,109 +158,386 @@
 
 
                 <TextView
-                    android:id="@+id/profileDownClose"
+                    android:id="@+id/nameProfileDownClose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/profileDownArrow"
+                    android:layout_toLeftOf="@id/nameProfileDownArrow"
                     android:drawableLeft="@drawable/ic_close"
                     android:padding="10dp"
                     android:visibility="gone"/>
 
                 </RelativeLayout>
 
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="|   Saikiran Kopparthi"
-                    android:id="@+id/studentName"
-                    android:layout_below="@id/profileEmail"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/rounded_button"
-                    android:padding="10dp"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawableEnd="@drawable/ic_edit"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="30dp"
-                    android:textSize="18sp"
-                    android:drawableStart="@drawable/ic_baseline_person_24"
-                    android:drawablePadding="15dp" />
+                    android:layout_height="1dp"
+                    android:id="@+id/emailDivider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profileNameLayout"
+                    />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="|   +91 93813 84234"
-                    android:id="@+id/phoneNumber"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/studentName"
-                    android:background="@drawable/rounded_button"
-                    android:padding="10dp"
-                    android:drawableEnd="@drawable/ic_edit"
-                    android:drawableTint="@color/colorPrimary"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+
+                <!--Extendable Icon Layout-->
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/emailDivider"
                     android:layout_marginTop="15dp"
-                    android:textSize="18sp"
-                    android:drawableStart="@drawable/ic_baseline_local_phone_24"
-                    android:drawablePadding="15dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profileEmailLayout"
                     android:layout_height="wrap_content"
-                    android:text="|   GMR Institute of Technology"
-                    android:id="@+id/collegeName"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/phoneNumber"
-                    android:background="@drawable/rounded_button"
-                    android:padding="10dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:drawableTint="@color/colorPrimary"
-                    android:layout_marginTop="15dp"
-                    android:textSize="18sp"
-                    android:drawableStart="@drawable/ic_baseline_account_balance_24"
-                    android:drawablePadding="15dp" />
+                    android:orientation="horizontal">
 
-                <TextView
+                    <TextView
+                        android:id="@+id/txtprofileEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Email ID"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profileEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="knvrssaikiran@gmail.com"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofileEmail"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/profileDownArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:padding="10dp" />
+
+
+                    <TextView
+                        android:id="@+id/profileDownClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/profileDownArrow"
+                        android:drawableLeft="@drawable/ic_close"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="|  Information Technology A"
-                    android:id="@+id/departmentSection"
-                    android:layout_below="@id/collegeName"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/rounded_button"
-                    android:padding="10dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:textSize="18sp"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawableStart="@drawable/ic_baseline_bookmark_24"
-                    android:drawablePadding="15dp" />
+                    android:layout_height="1dp"
+                    android:id="@+id/phoneNumberDivider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profileEmailLayout" />
 
-                <TextView
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/phoneNumberDivider"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profilePhoneLayout"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtprofilePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Phone Number"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profilePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 9381384234"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofilePhone"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/phoneNumProfileDownArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:padding="10dp" />
+
+
+                    <TextView
+                        android:id="@+id/phoneNumProfileDownClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/phoneNumProfileDownArrow"
+                        android:drawableLeft="@drawable/ic_close"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="|  Graduation Year 2022"
-                    android:id="@+id/graduationYear"
-                    android:layout_below="@id/departmentSection"
-                    android:background="@drawable/rounded_button"
-                    android:padding="10dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableTint="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="25dp"
-                    android:drawableStart="@drawable/ic_baseline_article_24"
-                    android:drawablePadding="15dp" />
+                    android:layout_height="1dp"
+                    android:id="@+id/collegeDivider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profilePhoneLayout" />
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/collegeDivider"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profileCollegeLayout"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtprofileCollege"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Name of College"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profileCollege"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GMR Institute of Technology"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofileCollege"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/collegeProfileDownArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:padding="10dp" />
+
+
+                    <TextView
+                        android:id="@+id/collegeProfileDownClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/collegeProfileDownArrow"
+                        android:drawableLeft="@drawable/ic_close"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/deptSectionDivider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profileCollegeLayout"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/deptSectionDivider"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profileDeptSectionLayout"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtprofileDeptSection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Current Year and Department"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profileDeptSection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3rd Year and Information Technology"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofileDeptSection"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/deptProfileDownArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:padding="10dp" />
+
+
+                    <TextView
+                        android:id="@+id/deptProfileDownClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/deptProfileDownArrow"
+                        android:drawableLeft="@drawable/ic_close"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/lastDivider"
+                    android:layout_marginBottom="30dp"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profileDeptSectionLayout"
+                    android:layout_marginTop="15dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="|   Saikiran Kopparthi"
+                     android:id="@+id/studentName"
+                     android:layout_below="@id/profileEmail"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentEnd="true"
+                     android:background="@drawable/rounded_button"
+                     android:padding="10dp"
+                     android:drawableTint="@color/colorPrimary"
+                     android:drawableEnd="@drawable/ic_edit"
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"
+                     android:layout_marginTop="30dp"
+                     android:textSize="18sp"
+                     android:drawableStart="@drawable/ic_baseline_person_24"
+                     android:drawablePadding="15dp" />
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="|   +91 93813 84234"
+                     android:id="@+id/phoneNumber"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentEnd="true"
+                     android:layout_below="@id/studentName"
+                     android:background="@drawable/rounded_button"
+                     android:padding="10dp"
+                     android:drawableEnd="@drawable/ic_edit"
+                     android:drawableTint="@color/colorPrimary"
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"
+                     android:layout_marginTop="15dp"
+                     android:textSize="18sp"
+                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
+                     android:drawablePadding="15dp" />
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="|   GMR Institute of Technology"
+                     android:id="@+id/collegeName"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentEnd="true"
+                     android:layout_below="@id/phoneNumber"
+                     android:background="@drawable/rounded_button"
+                     android:padding="10dp"
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"
+                     android:drawableTint="@color/colorPrimary"
+                     android:layout_marginTop="15dp"
+                     android:textSize="18sp"
+                     android:drawableStart="@drawable/ic_baseline_account_balance_24"
+                     android:drawablePadding="15dp" />
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="|  Information Technology A"
+                     android:id="@+id/departmentSection"
+                     android:layout_below="@id/collegeName"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentEnd="true"
+                     android:background="@drawable/rounded_button"
+                     android:padding="10dp"
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"
+                     android:layout_marginTop="15dp"
+                     android:textSize="18sp"
+                     android:drawableTint="@color/colorPrimary"
+                     android:drawableStart="@drawable/ic_baseline_bookmark_24"
+                     android:drawablePadding="15dp" />
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="|  Graduation Year 2022"
+                     android:id="@+id/graduationYear"
+                     android:layout_below="@id/departmentSection"
+                     android:background="@drawable/rounded_button"
+                     android:padding="10dp"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentEnd="true"
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"
+                     android:layout_marginTop="15dp"
+                     android:drawableTint="@color/colorPrimary"
+                     android:textSize="18sp"
+                     android:layout_marginBottom="25dp"
+                     android:drawableStart="@drawable/ic_baseline_article_24"
+                     android:drawablePadding="15dp" />
+ -->
             </RelativeLayout>
 
         </RelativeLayout>

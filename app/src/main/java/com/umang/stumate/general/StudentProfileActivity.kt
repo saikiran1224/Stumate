@@ -16,7 +16,6 @@ import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_student_profile.*
-import kotlinx.android.synthetic.main.activity_student_profile.studentName
 import kotlinx.android.synthetic.main.progress_bar.*
 
 class StudentProfileActivity : AppCompatActivity() {
@@ -26,17 +25,17 @@ class StudentProfileActivity : AppCompatActivity() {
 
         AppPreferences.init(this)
 
-        retrieveStudentDetails(AppPreferences.studentEmailID.toString())
+        //retrieveStudentDetails(AppPreferences.studentEmailID.toString())
 
         closeButton.setOnClickListener { startActivity(Intent(this,HomeActivity::class.java)) }
 
-        studentName.visibility = View.GONE
+       /* studentName.visibility = View.GONE
         phoneNumber.visibility = View.GONE
         collegeName.visibility = View.GONE
         departmentSection.visibility = View.GONE
-        graduationYear.visibility = View.GONE
+        graduationYear.visibility = View.GONE*/
 
-        loadingAnimationView.visibility = View.VISIBLE
+       // loadingAnimationView.visibility = View.GONE
 
         profileFAB.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))
@@ -151,6 +150,7 @@ class StudentProfileActivity : AppCompatActivity() {
 
     }
 
+/*
     private fun retrieveStudentDetails(emailID: String) {
 
         val myRef = FirebaseDatabase.getInstance().reference
@@ -219,5 +219,6 @@ class StudentProfileActivity : AppCompatActivity() {
         }
         studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
     }
+*/
 
 }

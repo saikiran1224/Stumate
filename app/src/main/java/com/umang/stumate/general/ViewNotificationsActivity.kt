@@ -42,8 +42,6 @@ class ViewNotificationsActivity : AppCompatActivity() {
         }
 
 
-
-
         retrieveNotificationData()
 
     }

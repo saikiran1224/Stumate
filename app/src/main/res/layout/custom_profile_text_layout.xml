@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout style="?attr/actionButtonStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:focusable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/profileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textview"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="KS"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/cart_badge"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right|end|bottom"
+        android:layout_marginEnd="-5dp"
+        android:drawableTint="@color/colorWhite"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="3dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/badge_background"
+        android:gravity="center"
+        android:padding="3dp"
+        android:paddingStart="6dp"
+        android:drawableStart="@drawable/ic_baseline_edit_24"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"/>
+
+</FrameLayout>
