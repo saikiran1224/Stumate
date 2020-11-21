@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_margin="2dp"
     android:foreground="@android:color/transparent"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true"
     android:background="@android:color/transparent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,22 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="20dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_baseline_check_circle_24"
-            app:tint="@color/colorGreen"
-            android:contentDescription="@string/app_name" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:lottie_url="https://assets10.lottiefiles.com/datafiles/OhIfcxnkLsj1Jxj/data.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/colorGreen"
-            android:text="File Published Successfully !"
+            android:textStyle="normal"
+            android:id="@+id/dialogText"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="File Published Successfully to your Class Group !"
             android:textSize="17sp"
             android:layout_margin="15dp" />
 
@@ -36,8 +44,9 @@
             android:layout_height="wrap_content"
             android:text="Back to Home"
             android:id="@+id/back_to_home"
+            android:layout_marginBottom="10dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:textColor="@color/colorGreen"
+            android:textColor="@color/colorPrimaryDark"
             />
 
 

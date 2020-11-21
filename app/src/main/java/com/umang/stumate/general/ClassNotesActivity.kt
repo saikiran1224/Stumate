@@ -240,7 +240,10 @@ class ClassNotesActivity : AppCompatActivity() {
                             classNotesAdapter.notifyDataSetChanged()
 
                         }
+
                     }
+
+
 
 
                 } else {

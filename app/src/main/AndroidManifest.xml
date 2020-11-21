@@ -16,23 +16,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".general.StudentProfileActivity"></activity>
+        <activity android:name=".general.ViewNotificationsActivity"></activity>
+        <activity android:name=".general.StudentProfileActivity" />
         <activity android:name=".general.FilterSubjectsActivity" />
         <activity android:name=".general.ClassMatesActivity" />
         <activity android:name=".general.ReminderActivity" />
         <activity android:name=".general.ClassNotesActivity" />
         <activity android:name=".general.UploadFilesActivity" />
         <activity android:name=".auth.StudentDetailsActivity" />
-        <activity android:name=".general.HomeActivity" >
-        </activity>
+        <activity android:name=".general.HomeActivity"></activity>
         <activity android:name=".onboarding.SplashScreenActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".auth.AuthenticationActivity" />
         <activity android:name=".onboarding.GettingStartedActivity" />
@@ -62,8 +60,9 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        
-        <receiver android:name=".firebase.NotificationBroadcastReceiver"
+
+        <receiver
+            android:name=".firebase.NotificationBroadcastReceiver"
             tools:ignore="Instantiatable" />
 
         <uses-library

@@ -36,7 +36,6 @@ import java.util.*
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val ADMIN_CHANNEL_ID = "admin_channel"
 
-
 /*
     override fun onNewToken(s: String) {
         super.onNewToken(s)

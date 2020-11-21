@@ -38,6 +38,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, UploadFilesActivity::class.java))
         }
 
+        notificationLayout.setOnClickListener {
+            startActivity(Intent(this,ViewNotificationsActivity::class.java))
+        }
+
         // DashboardIconsAdapter
         linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL

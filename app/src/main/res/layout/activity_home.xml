@@ -50,6 +50,16 @@
                     android:text="Happy to help you!"
                     android:textSize="14sp" />
 
+                <include
+                    layout="@layout/custom_notification_layout"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notificationLayout"
+                    android:layout_marginTop="25dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="25dp"
+                    android:layout_width="wrap_content" />
+
                 <EditText
                     android:id="@+id/searchEditText"
                     android:layout_width="match_parent"

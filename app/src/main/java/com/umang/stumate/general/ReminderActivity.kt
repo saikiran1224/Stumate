@@ -1,24 +1,24 @@
 package com.umang.stumate.general
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.database.FirebaseDatabase
 import com.umang.stumate.R
 import com.umang.stumate.auth.AuthenticationActivity
+import com.umang.stumate.modals.NotificationData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_reminder.*
 import org.json.JSONObject
@@ -226,11 +226,26 @@ class ReminderActivity : AppCompatActivity() {
                             Response.Listener<JSONObject?> {
                             override fun onResponse(response: JSONObject?) {
 
-                                Toast.makeText(
-                                    baseContext,
-                                    "Notification sent Successfully to all the Class Mates!",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                val myRef = FirebaseDatabase.getInstance().getReference(AppPreferences.studentID).child("notifications_data")
+                                myRef.push().setValue(NotificationData(title,description, AppPreferences.studentName))
+
+                                val successDialog = Dialog(this@ReminderActivity)
+                                successDialog.setContentView(R.layout.upload_success_layout)
+                                successDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+                                successDialog.findViewById<TextView>(R.id.dialogText).setText("Notification Sent Successfully to all the Class Mates!")
+                                successDialog.findViewById<Button>(R.id.back_to_home).setOnClickListener {
+                                    val intent = Intent(this@ReminderActivity,HomeActivity::class.java)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    startActivity(intent)
+                                    successDialog.dismiss()
+                                }
+                                successDialog.setCanceledOnTouchOutside(false)
+                                successDialog.setCancelable(false)
+                                successDialog.show()
+
+
+                               // Toast.makeText(baseContext, "Notification sent Successfully to all the Class Mates!", Toast.LENGTH_LONG).show()
                             }
                         }, object : Response.ErrorListener {
                             override fun onErrorResponse(error: VolleyError?) {
