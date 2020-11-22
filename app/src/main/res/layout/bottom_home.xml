@@ -29,12 +29,12 @@
             android:textSize="18sp"
             android:padding="15dp"
             android:layout_marginTop="10dp"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/cabin"
-            android:drawableStart="@drawable/ic_home"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:drawableTint="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_home_24" />
 
         <TextView
             android:id="@+id/classNotes"

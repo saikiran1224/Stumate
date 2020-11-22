@@ -38,15 +38,16 @@
                         android:weightSum="2">
 
                         <ImageView
-                            android:id="@+id/welcomeBackButton"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:id="@+id/closeButton"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
                             android:visibility="visible"
                             app:tint="@color/colorPrimary"
                             android:contentDescription="@string/backbutton"
-                            android:src="@drawable/ic_baseline_notifications_active_24" />
+                            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
 
                         <TextView
                             android:layout_width="wrap_content"

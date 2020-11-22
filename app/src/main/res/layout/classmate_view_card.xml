@@ -5,6 +5,9 @@
     app:cardCornerRadius="10dp"
     android:layout_margin="8dp"
     android:elevation="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_height="wrap_content">
 
     <RelativeLayout

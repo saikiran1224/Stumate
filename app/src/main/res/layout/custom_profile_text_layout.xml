@@ -25,7 +25,7 @@
 
 
     <TextView
-        android:id="@+id/cart_badge"
+        android:id="@+id/editProfile"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="right|end|bottom"
@@ -33,11 +33,14 @@
         android:drawableTint="@color/colorWhite"
         android:layout_marginRight="-5dp"
         android:layout_marginTop="3dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:backgroundTint="@color/colorPrimary"
         android:background="@drawable/badge_background"
         android:gravity="center"
         android:padding="3dp"
-        android:paddingStart="6dp"
+        android:paddingStart="5dp"
         android:drawableStart="@drawable/ic_baseline_edit_24"
         android:textColor="@android:color/white"
         android:textSize="10sp"/>

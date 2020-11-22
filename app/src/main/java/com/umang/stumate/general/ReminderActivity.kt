@@ -20,7 +20,9 @@ import com.umang.stumate.R
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.NotificationData
 import com.umang.stumate.utils.AppPreferences
+import kotlinx.android.synthetic.main.activity_class_notes.*
 import kotlinx.android.synthetic.main.activity_reminder.*
+import kotlinx.android.synthetic.main.activity_reminder.closeButton
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.HashMap
@@ -40,6 +42,11 @@ class ReminderActivity : AppCompatActivity() {
 
         setUpTypeList()
         AppPreferences.init(this)
+
+        closeButton.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
+        }
+
 
         remainderFAB.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))

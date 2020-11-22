@@ -40,6 +40,7 @@
                             android:id="@+id/closeButton"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
                             android:visibility="visible"

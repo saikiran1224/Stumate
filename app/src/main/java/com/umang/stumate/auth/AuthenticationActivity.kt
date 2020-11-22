@@ -107,6 +107,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
                             } else {
                                 // If sign in fails, display a message to the user.
+                                loadingProgress.visibility = View.GONE
                                 Toast.makeText(this, "Invalid Credentials",
                                     Toast.LENGTH_SHORT).show()
                                 //updateUI(null)

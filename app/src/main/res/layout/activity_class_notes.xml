@@ -41,6 +41,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:layout_weight="0.1"
                             android:visibility="visible"
                             app:tint="@color/colorPrimary"

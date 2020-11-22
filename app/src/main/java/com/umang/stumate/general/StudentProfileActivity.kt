@@ -178,6 +178,8 @@ class StudentProfileActivity : AppCompatActivity() {
         }
 
 
+
+
     }
 
     private fun retrieveStudentDetails(emailID: String) {
@@ -204,12 +206,14 @@ class StudentProfileActivity : AppCompatActivity() {
                     deptSectionDivider.visibility = View.VISIBLE
                     lastDivider.visibility = View.VISIBLE
 
+
                     profileTextLayout.visibility = View.VISIBLE
 
 
                     for (ds in dataSnapshot.children) {
 
                         val studentData = ds.getValue(StudentData::class.java)
+                        val key = ds.key.toString()
 
                         if (studentData != null) {
                             val studentName=studentData.studentName.toString()
@@ -224,12 +228,78 @@ class StudentProfileActivity : AppCompatActivity() {
                             } else {
                                 val index = studentName?.lastIndexOf(' ')
                                 val firstName = index?.let { it1 -> studentName?.substring(0, it1) }
-                                val lastName = index?.plus(1)?.let { it1 -> studentName?.substring(it1) }
+                                val lastName = index?.plus(1)?.let { it1 -> studentName?.substring(
+                                    it1
+                                ) }
 
                                 profileTextLayout.findViewById<TextView>(R.id.profileText).text = firstName?.toString()[0] + lastName[0]?.toString()
 
                             }
 
+
+                            profileTextLayout.findViewById<TextView>(R.id.editProfile).setOnClickListener {
+
+
+                                profileTextLayout.findViewById<TextView>(R.id.editProfile).visibility = View.GONE
+
+                                saveProfile.visibility = View.VISIBLE
+
+                                profileName.visibility = View.GONE
+                                txtProfileName.visibility = View.GONE
+                                profileIcon.visibility = View.GONE
+
+                                edtStudentName.visibility = View.VISIBLE
+                                editStudentName.setText(studentName.toString())
+
+                                txtprofilePhone.visibility = View.GONE
+                                profilePhone.visibility = View.GONE
+                                profilePhoneIcon.visibility = View.GONE
+
+                                edtPhoneNumber.visibility = View.VISIBLE
+                                editPhoneNumber.setText(studentData.studentPhoneNumber.toString())
+
+
+                            }
+
+                            saveProfile.setOnClickListener {
+
+
+
+                                val studentName = editStudentName.text!!.trim().toString()
+                                val phoneNumber = editPhoneNumber.text!!
+
+                                if(studentName.isEmpty()) {
+                                    edtStudentName.error = "Please enter Student Name"
+                                } else if(phoneNumber.isEmpty() and phoneNumber.length) {
+                                    edtStudentName.error = null
+                                    edtPhoneNumber.error = "Please enter Valid Phone Number"
+                                } else {
+                                    edtPhoneNumber.error = null
+
+                                    AppPreferences.studentName = studentName
+
+                                   val myRef = FirebaseDatabase.getInstance().getReference("students_data").ref.child(key)
+                                    myRef.setValue(StudentData(AppPreferences.studentID, studentName.toString(),studentData.emailID.toString(), phoneNumber.toString(), studentData.collegeName.toString(),studentData.graduationYear.toString(),studentData.studentDept.toString(),studentData.studentSection.toString()))
+
+                                    startActivity(
+                                        Intent(
+                                            this@StudentProfileActivity,
+                                            HomeActivity::class.java
+                                        )
+                                    )
+
+
+                                    Toast.makeText(
+                                        this@StudentProfileActivity,
+                                        "Profile Updated Successfully !",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+
+                                }
+
+
+                            }
 
 
                             profileName.text = studentName
@@ -237,39 +307,7 @@ class StudentProfileActivity : AppCompatActivity() {
                             profilePhone.text = "+91 " + studentData.studentPhoneNumber.toString()
                             profileCollege.text = studentData.collegeName.toString()
                             profileDeptSection.text =   studentData.graduationYear.toString() +" "+ studentData.studentDept.toString()
-/*
-                            profileDownArrow.setOnClickListener {
-                                studentName.setText("|   " + studentData.studentName.toString())
-                                studentName.visibility = View.VISIBLE
-                                phoneNumber.setText("|   +91 " + studentData.studentPhoneNumber.toString())
-                                phoneNumber.visibility = View.VISIBLE
-                                collegeName.setText("|   " + studentData.collegeName.toString())
-                                collegeName.visibility = View.VISIBLE
-                                departmentSection.setText("|   " + studentData.studentDept.toString() + " " + studentData.studentSection.toString())
-                                departmentSection.visibility = View.VISIBLE
-                                graduationYear.setText("|   Studying " + studentData.graduationYear.toString())
-                                graduationYear.visibility = View.VISIBLE
-                                loadingAnimationView.visibility = View.GONE
-                                profileDownClose.visibility=View.VISIBLE
 
-                            }
-*/
-/*
-                            profileDownClose.setOnClickListener {
-                                //studentName.setText("|   " + studentData.studentName.toString())
-                                studentName.visibility = View.GONE
-                                //phoneNumber.setText("|   +91 " + studentData.studentPhoneNumber.toString())
-                                phoneNumber.visibility = View.GONE
-                                //collegeName.setText("|   " + studentData.collegeName.toString())
-                                collegeName.visibility = View.GONE
-                                //departmentSection.setText("|   "+ studentData.studentDept.toString() + " " + studentData.studentSection.toString())
-                                departmentSection.visibility = View.GONE
-                                //graduationYear.setText("|   Studying "+studentData.graduationYear.toString())
-                                graduationYear.visibility = View.GONE
-                                loadingAnimationView.visibility = View.VISIBLE
-                                profileDownClose.visibility=View.GONE
-                            }
-*/
                         }
 
                     }
@@ -292,4 +330,8 @@ class StudentProfileActivity : AppCompatActivity() {
         }
         studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
     }
+}
+
+private infix fun Boolean.and(length: Int): Boolean {
+    return length != 10
 }

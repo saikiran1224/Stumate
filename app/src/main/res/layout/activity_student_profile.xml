@@ -42,6 +42,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:layout_weight="0.1"
                             android:visibility="visible"
                             app:tint="@color/colorPrimary"
@@ -94,22 +95,32 @@
                     app:lottie_loop="true"/>
 
 
-
                 <include
+                    android:id="@+id/profileTextLayout"
                     layout="@layout/custom_profile_text_layout"
                     android:layout_width="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/profileTextLayout"
-                    android:layout_marginTop="15dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/saveProfile"
+                    android:text="Save Details"
+                    android:visibility="gone"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="-15dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/profileTextLayout" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:id="@+id/divider"
                     android:background="@color/colorGrey"
-                    android:layout_below="@id/profileTextLayout"
+                    android:layout_below="@id/saveProfile"
                     android:layout_marginTop="35dp" />
 
 
@@ -129,6 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:visibility="visible"
                         android:text="Name of Student"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
@@ -141,16 +153,45 @@
                         android:layout_height="wrap_content"
                         android:text="Saikiran Kopparthi"
                         android:textSize="18sp"
+                        android:visibility="visible"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtProfileName"
                         android:layout_marginLeft="10dp"/>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name of Student"
+                        android:id="@+id/edtStudentName"
+                        android:background="@color/colorWhite"
+                        app:endIconTint="#000"
+                        android:layout_marginTop="0dp"
+                        android:visibility="gone"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_baseline_person_24"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        app:hintTextColor="#000">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/editStudentName"
+                            android:inputType="text"
+                            android:background="@color/colorGrey"
+                            android:textColor="#000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                     <TextView
-                    android:id="@+id/nameProfileDownArrow"
+                    android:id="@+id/profileIcon"
                     android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content"
+                        android:visibility="visible"
                     android:layout_marginRight="5dp"
                     android:layout_alignParentRight="true"
                         android:drawableTint="@color/colorPrimary"
@@ -158,14 +199,6 @@
                     android:padding="10dp" />
 
 
-                <TextView
-                    android:id="@+id/nameProfileDownClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/nameProfileDownArrow"
-                    android:drawableLeft="@drawable/ic_close"
-                    android:padding="10dp"
-                    android:visibility="gone"/>
 
                 </RelativeLayout>
 
@@ -180,9 +213,98 @@
 
                 <!--Extendable Icon Layout-->
 
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_below="@id/emailDivider"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/profilePhoneLayout"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtprofilePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="visible"
+                        android:text="Phone Number"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/profilePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 9381384234"
+                        android:visibility="visible"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofilePhone"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/profilePhoneIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:drawableTint="@color/colorPrimary"
+                        android:drawableRight="@drawable/ic_baseline_local_phone_24"
+                        android:padding="10dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number"
+                        android:id="@+id/edtPhoneNumber"
+                        android:background="@color/colorWhite"
+                        app:endIconTint="#000"
+                        android:layout_marginTop="0dp"
+                        app:prefixText="+91"
+                        app:errorEnabled="true"
+                        android:visibility="gone"
+                        app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        app:hintTextColor="#000">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/editPhoneNumber"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:background="@color/colorGrey"
+                            android:textColor="#000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/phoneNumberDivider"
+                    android:background="@color/colorGrey"
+                    android:layout_below="@id/profilePhoneLayout" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/phoneNumberDivider"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:id="@+id/profileEmailLayout"
@@ -235,75 +357,14 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:id="@+id/phoneNumberDivider"
-                    android:background="@color/colorGrey"
-                    android:layout_below="@id/profileEmailLayout" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_below="@id/phoneNumberDivider"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:id="@+id/profilePhoneLayout"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txtprofilePhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Phone Number"
-                        android:textAlignment="center"
-                        android:layout_alignParentStart="true"
-                        android:textColor="#000"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/profilePhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+91 9381384234"
-                        android:textSize="18sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@id/txtprofilePhone"
-                        android:layout_marginLeft="10dp"/>
-
-
-
-                    <TextView
-                        android:id="@+id/phoneNumProfileDownArrow"
-                        android:layout_width="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_alignParentRight="true"
-                        android:drawableTint="@color/colorPrimary"
-                        android:drawableRight="@drawable/ic_baseline_local_phone_24"
-                        android:padding="10dp" />
-
-
-                    <TextView
-                        android:id="@+id/phoneNumProfileDownClose"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/phoneNumProfileDownArrow"
-                        android:drawableLeft="@drawable/ic_close"
-                        android:padding="10dp"
-                        android:visibility="gone"/>
-
-                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:id="@+id/collegeDivider"
                     android:background="@color/colorGrey"
-                    android:layout_below="@id/profilePhoneLayout" />
+                    android:layout_below="@id/profileEmailLayout" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -437,111 +498,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="|   Saikiran Kopparthi"
-                     android:id="@+id/studentName"
-                     android:layout_below="@id/profileEmail"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentEnd="true"
-                     android:background="@drawable/rounded_button"
-                     android:padding="10dp"
-                     android:drawableTint="@color/colorPrimary"
-                     android:drawableEnd="@drawable/ic_edit"
-                     android:layout_marginStart="15dp"
-                     android:layout_marginEnd="15dp"
-                     android:layout_marginTop="30dp"
-                     android:textSize="18sp"
-                     android:drawableStart="@drawable/ic_baseline_person_24"
-                     android:drawablePadding="15dp" />
-
-                 <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="|   +91 93813 84234"
-                     android:id="@+id/phoneNumber"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentEnd="true"
-                     android:layout_below="@id/studentName"
-                     android:background="@drawable/rounded_button"
-                     android:padding="10dp"
-                     android:drawableEnd="@drawable/ic_edit"
-                     android:drawableTint="@color/colorPrimary"
-                     android:layout_marginStart="15dp"
-                     android:layout_marginEnd="15dp"
-                     android:layout_marginTop="15dp"
-                     android:textSize="18sp"
-                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
-                     android:drawablePadding="15dp" />
-
-                 <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="|   GMR Institute of Technology"
-                     android:id="@+id/collegeName"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentEnd="true"
-                     android:layout_below="@id/phoneNumber"
-                     android:background="@drawable/rounded_button"
-                     android:padding="10dp"
-                     android:layout_marginStart="15dp"
-                     android:layout_marginEnd="15dp"
-                     android:drawableTint="@color/colorPrimary"
-                     android:layout_marginTop="15dp"
-                     android:textSize="18sp"
-                     android:drawableStart="@drawable/ic_baseline_account_balance_24"
-                     android:drawablePadding="15dp" />
-
-                 <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="|  Information Technology A"
-                     android:id="@+id/departmentSection"
-                     android:layout_below="@id/collegeName"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentEnd="true"
-                     android:background="@drawable/rounded_button"
-                     android:padding="10dp"
-                     android:layout_marginStart="15dp"
-                     android:layout_marginEnd="15dp"
-                     android:layout_marginTop="15dp"
-                     android:textSize="18sp"
-                     android:drawableTint="@color/colorPrimary"
-                     android:drawableStart="@drawable/ic_baseline_bookmark_24"
-                     android:drawablePadding="15dp" />
-
-                 <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="|  Graduation Year 2022"
-                     android:id="@+id/graduationYear"
-                     android:layout_below="@id/departmentSection"
-                     android:background="@drawable/rounded_button"
-                     android:padding="10dp"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentEnd="true"
-                     android:layout_marginStart="15dp"
-                     android:layout_marginEnd="15dp"
-                     android:layout_marginTop="15dp"
-                     android:drawableTint="@color/colorPrimary"
-                     android:textSize="18sp"
-                     android:layout_marginBottom="25dp"
-                     android:drawableStart="@drawable/ic_baseline_article_24"
-                     android:drawablePadding="15dp" />
- -->
             </RelativeLayout>
 
         </RelativeLayout>
