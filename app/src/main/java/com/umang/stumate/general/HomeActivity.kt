@@ -3,8 +3,10 @@ package com.umang.stumate.general
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -90,9 +92,11 @@ class HomeActivity : AppCompatActivity() {
             val dialog= BottomSheetDialog(this,R.style.BottomSheetDialog)
             val view=layoutInflater.inflate(R.layout.bottom_items, null)
 
+
             view.findViewById<TextView>(R.id.classNotes).setOnClickListener {
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorPrimary))
+
 
                 startActivity(Intent(this, ClassNotesActivity::class.java))
 
@@ -111,6 +115,7 @@ class HomeActivity : AppCompatActivity() {
 
                 startActivity(Intent(this, ReminderActivity::class.java))
 
+
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
@@ -123,7 +128,6 @@ class HomeActivity : AppCompatActivity() {
 
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorPrimary))
-
                 startActivity(Intent(this, StudentProfileActivity::class.java))
 
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
@@ -185,8 +189,7 @@ class HomeActivity : AppCompatActivity() {
             //dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             dialog.show()
 
-
-
         }
+
     }
 }
