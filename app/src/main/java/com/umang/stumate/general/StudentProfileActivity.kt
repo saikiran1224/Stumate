@@ -1,11 +1,11 @@
 package com.umang.stumate.general
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,7 +16,6 @@ import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_student_profile.*
-import kotlinx.android.synthetic.main.progress_bar.*
 
 class StudentProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,17 +24,26 @@ class StudentProfileActivity : AppCompatActivity() {
 
         AppPreferences.init(this)
 
-        //retrieveStudentDetails(AppPreferences.studentEmailID.toString())
+        retrieveStudentDetails(AppPreferences.studentEmailID.toString())
 
-        closeButton.setOnClickListener { startActivity(Intent(this,HomeActivity::class.java)) }
+        closeButton.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
 
-       /* studentName.visibility = View.GONE
-        phoneNumber.visibility = View.GONE
-        collegeName.visibility = View.GONE
-        departmentSection.visibility = View.GONE
-        graduationYear.visibility = View.GONE*/
+        profileNameLayout.visibility = View.GONE
+        profileEmailLayout.visibility = View.GONE
+        profilePhoneLayout.visibility = View.GONE
+        profileCollegeLayout.visibility = View.GONE
+        profileDeptSectionLayout.visibility = View.GONE
 
-       // loadingAnimationView.visibility = View.GONE
+        divider.visibility = View.GONE
+        emailDivider.visibility = View.GONE
+        phoneNumberDivider.visibility = View.GONE
+        collegeDivider.visibility = View.GONE
+        deptSectionDivider.visibility = View.GONE
+        lastDivider.visibility =View.GONE
+
+        profileTextLayout.visibility = View.GONE
+
+       loadingAnimationView.visibility = View.VISIBLE
 
         profileFAB.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))
@@ -43,7 +51,7 @@ class StudentProfileActivity : AppCompatActivity() {
 
 
         profileBottomNav.setOnClickListener {
-            val dialog= BottomSheetDialog(this,R.style.BottomSheetDialog)
+            val dialog= BottomSheetDialog(this, R.style.BottomSheetDialog)
             val view=layoutInflater.inflate(R.layout.bottom_items, null)
 
             view.findViewById<TextView>(R.id.classNotes).setOnClickListener {
@@ -150,7 +158,6 @@ class StudentProfileActivity : AppCompatActivity() {
 
     }
 
-/*
     private fun retrieveStudentDetails(emailID: String) {
 
         val myRef = FirebaseDatabase.getInstance().reference
@@ -159,15 +166,56 @@ class StudentProfileActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if (dataSnapshot.exists()) {
+
+                    loadingAnimationView.visibility = View.GONE
+
+                    profileNameLayout.visibility = View.VISIBLE
+                    profileEmailLayout.visibility = View.VISIBLE
+                    profilePhoneLayout.visibility = View.VISIBLE
+                    profileCollegeLayout.visibility = View.VISIBLE
+                    profileDeptSectionLayout.visibility = View.VISIBLE
+
+                    divider.visibility = View.VISIBLE
+                    emailDivider.visibility = View.VISIBLE
+                    phoneNumberDivider.visibility = View.VISIBLE
+                    collegeDivider.visibility = View.VISIBLE
+                    deptSectionDivider.visibility = View.VISIBLE
+                    lastDivider.visibility = View.VISIBLE
+
+                    profileTextLayout.visibility = View.VISIBLE
+
+
                     for (ds in dataSnapshot.children) {
+
                         val studentData = ds.getValue(StudentData::class.java)
+
                         if (studentData != null) {
-                            val test=studentData.studentName.toString()
-                            val s=test.substring(0,2)
-                            profileText.setText(s)
-                            profileName.setText(studentData.studentName.toString())
-                            profileEmail.setText(studentData.emailID.toString())
-                            profileDownClose.visibility=View.GONE
+                            val studentName=studentData.studentName.toString()
+
+                            val count = studentName.split(" ").toTypedArray()
+
+                            if(count.size == 1) {
+
+                                profileTextLayout.findViewById<TextView>(R.id.profileText).text = studentName[0].toString()
+
+
+                            } else {
+                                val index = studentName?.lastIndexOf(' ')
+                                val firstName = index?.let { it1 -> studentName?.substring(0, it1) }
+                                val lastName = index?.plus(1)?.let { it1 -> studentName?.substring(it1) }
+
+                                profileTextLayout.findViewById<TextView>(R.id.profileText).text = firstName?.toString()[0] + lastName[0]?.toString()
+
+                            }
+
+
+
+                            profileName.text = studentName
+                            profileEmail.text = studentData.emailID.toString()
+                            profilePhone.text = "+91 " + studentData.studentPhoneNumber.toString()
+                            profileCollege.text = studentData.collegeName.toString()
+                            profileDeptSection.text =   studentData.graduationYear.toString() +" "+ studentData.studentDept.toString()
+/*
                             profileDownArrow.setOnClickListener {
                                 studentName.setText("|   " + studentData.studentName.toString())
                                 studentName.visibility = View.VISIBLE
@@ -175,14 +223,16 @@ class StudentProfileActivity : AppCompatActivity() {
                                 phoneNumber.visibility = View.VISIBLE
                                 collegeName.setText("|   " + studentData.collegeName.toString())
                                 collegeName.visibility = View.VISIBLE
-                                departmentSection.setText("|   "+ studentData.studentDept.toString() + " " + studentData.studentSection.toString())
+                                departmentSection.setText("|   " + studentData.studentDept.toString() + " " + studentData.studentSection.toString())
                                 departmentSection.visibility = View.VISIBLE
-                                graduationYear.setText("|   Studying "+studentData.graduationYear.toString())
+                                graduationYear.setText("|   Studying " + studentData.graduationYear.toString())
                                 graduationYear.visibility = View.VISIBLE
                                 loadingAnimationView.visibility = View.GONE
                                 profileDownClose.visibility=View.VISIBLE
 
                             }
+*/
+/*
                             profileDownClose.setOnClickListener {
                                 //studentName.setText("|   " + studentData.studentName.toString())
                                 studentName.visibility = View.GONE
@@ -197,12 +247,13 @@ class StudentProfileActivity : AppCompatActivity() {
                                 loadingAnimationView.visibility = View.VISIBLE
                                 profileDownClose.visibility=View.GONE
                             }
+*/
                         }
 
                     }
             } else {
 
-                    Toast.makeText(baseContext,"No Data Found!",Toast.LENGTH_LONG).show()
+                    Toast.makeText(baseContext, "No Data Found!", Toast.LENGTH_LONG).show()
                 }
 
             }
@@ -219,6 +270,4 @@ class StudentProfileActivity : AppCompatActivity() {
         }
         studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
     }
-*/
-
 }

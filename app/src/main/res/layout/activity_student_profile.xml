@@ -79,7 +79,7 @@
                 android:orientation="vertical">
 
 
-<!--
+
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/loadingAnimationView"
                     android:layout_width="match_parent"
@@ -92,14 +92,14 @@
                     app:lottie_url="https://assets4.lottiefiles.com/private_files/lf30_nIhxTu.json"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"/>
--->
+
 
 
                 <include
                     layout="@layout/custom_profile_text_layout"
                     android:layout_width="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/profileText"
+                    android:id="@+id/profileTextLayout"
                     android:layout_marginTop="15dp"
                     android:layout_height="wrap_content" />
 
@@ -109,7 +109,7 @@
                     android:layout_height="1dp"
                     android:id="@+id/divider"
                     android:background="@color/colorGrey"
-                    android:layout_below="@id/profileText"
+                    android:layout_below="@id/profileTextLayout"
                     android:layout_marginTop="35dp" />
 
 
@@ -153,7 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/ic_extendarrow"
+                        android:drawableTint="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_baseline_person_24"
                     android:padding="10dp" />
 
 
@@ -211,15 +212,15 @@
                         android:layout_marginLeft="10dp"/>
 
 
-
                     <TextView
                         android:id="@+id/profileDownArrow"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:drawableTint="@color/colorPrimary"
                         android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:drawableRight="@drawable/ic_baseline_mark_email_read_24"
                         android:padding="10dp" />
 
 
@@ -281,7 +282,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:drawableTint="@color/colorPrimary"
+                        android:drawableRight="@drawable/ic_baseline_local_phone_24"
                         android:padding="10dp" />
 
 
@@ -342,8 +344,9 @@
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:drawableTint="@color/colorPrimary"
                         android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:drawableRight="@drawable/ic_baseline_account_balance_24"
                         android:padding="10dp" />
 
 
@@ -404,9 +407,10 @@
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
+                        android:drawableTint="@color/colorPrimary"
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_extendarrow"
+                        android:drawableRight="@drawable/ic_baseline_bookmark_24"
                         android:padding="10dp" />
 
 

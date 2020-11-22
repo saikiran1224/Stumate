@@ -16,10 +16,13 @@
         android:layout_alignParentTop="true"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="KS"
+        android:text=""
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
+
+
+
 
     <TextView
         android:id="@+id/cart_badge"
