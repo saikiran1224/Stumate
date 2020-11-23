@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".general.ViewNotificationsActivity"></activity>
+        <activity android:name=".auth.GoogleActivity">
+        </activity>
+        <activity android:name=".general.ViewNotificationsActivity" />
         <activity android:name=".general.StudentProfileActivity" />
         <activity android:name=".general.FilterSubjectsActivity" />
         <activity android:name=".general.ClassMatesActivity" />
@@ -24,7 +26,7 @@
         <activity android:name=".general.ClassNotesActivity" />
         <activity android:name=".general.UploadFilesActivity" />
         <activity android:name=".auth.StudentDetailsActivity" />
-        <activity android:name=".general.HomeActivity"></activity>
+        <activity android:name=".general.HomeActivity" />
         <activity android:name=".onboarding.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -156,10 +156,17 @@
             android:padding="10dp"
             />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/btnName"
+                android:id="@+id/llAccount">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an Account? Sign Up"
+            android:text="Don't have an Account?"
             android:textSize="18sp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -169,6 +176,19 @@
             android:textColor="@color/colorBlack"
             android:layout_marginTop="30dp" />
 
+            <TextView
+                android:id="@+id/newUserTextSign"
+                android:layout_width="198dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnName"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/newUserText"
+                android:text="Sign Up"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -178,7 +198,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/singInText"
-            android:layout_below="@id/newUserText"
+            android:layout_below="@id/llAccount"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="75dp" />
 
@@ -190,6 +210,7 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <ImageView
+                android:id="@+id/googleSign"
                 android:layout_width="50dp"
                 android:background="@drawable/rounded_button"
                 android:layout_height="50dp"

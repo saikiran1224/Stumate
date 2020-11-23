@@ -4,5 +4,5 @@
     <string name="welcome_to_stumate">Stumate</string>
     <string name="here_to_get_nwelcome">Here To Get\nWelcome!</string>
     <string name="default_notification_channel_id">admin_channel</string>
-
+    <string name="dont_have_account">Don\'t have an Account?<font color="#721AFD">SignUp</font></string>
 </resources>
