@@ -1,11 +1,13 @@
 package com.umang.stumate.general
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,10 +19,12 @@ import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_student_profile.*
 
+
 class StudentProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_profile)
+
 
         AppPreferences.init(this)
 
@@ -48,8 +52,11 @@ class StudentProfileActivity : AppCompatActivity() {
         profileFAB.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))
         }
-
-
+        //this is the intent data
+        val intent = intent
+        val personalEmail = intent.getStringExtra("Email")
+        txtpersonalEmail.text=personalEmail
+        //upto here please check it
         profileBottomNav.setOnClickListener {
             val dialog= BottomSheetDialog(this, R.style.BottomSheetDialog)
             val view=layoutInflater.inflate(R.layout.bottom_home, null)
@@ -278,8 +285,21 @@ class StudentProfileActivity : AppCompatActivity() {
 
                                     AppPreferences.studentName = studentName
 
-                                   val myRef = FirebaseDatabase.getInstance().getReference("students_data").ref.child(key)
-                                    myRef.setValue(StudentData(AppPreferences.studentID, studentName.toString(),studentData.emailID.toString(), phoneNumber.toString(), studentData.collegeName.toString(),studentData.graduationYear.toString(),studentData.studentDept.toString(),studentData.studentSection.toString()))
+                                   val myRef = FirebaseDatabase.getInstance().getReference("students_data").ref.child(
+                                       key
+                                   )
+                                    myRef.setValue(
+                                        StudentData(
+                                            AppPreferences.studentID,
+                                            studentName.toString(),
+                                            studentData.emailID.toString(),
+                                            phoneNumber.toString(),
+                                            studentData.collegeName.toString(),
+                                            studentData.graduationYear.toString(),
+                                            studentData.studentDept.toString(),
+                                            studentData.studentSection.toString()
+                                        )
+                                    )
 
                                     startActivity(
                                         Intent(

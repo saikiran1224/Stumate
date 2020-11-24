@@ -2,15 +2,19 @@ package com.umang.stumate.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -19,10 +23,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.umang.stumate.general.HomeActivity
-import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.R
+import com.umang.stumate.general.HomeActivity
+import com.umang.stumate.general.StudentProfileActivity
 import com.umang.stumate.modals.StudentData
+import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_authentication.*
 import kotlinx.android.synthetic.main.progress_bar.*
@@ -40,12 +45,12 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser!=null){
-            val intent=Intent(applicationContext,StudentDetailsActivity::class.java)
+            val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
             startActivity(intent)
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
@@ -60,6 +65,14 @@ class AuthenticationActivity : AppCompatActivity() {
         editPasswordIn=findViewById(R.id.editPasswordIn)
         backButton=findViewById(R.id.welcomeBackButton)
         val email=editEmailIn.text.toString()
+        //mail data
+        val acc = GoogleSignIn.getLastSignedInAccount(this)
+        if (acc != null) {
+            val personEmail = acc.email
+            val intent = Intent(this@AuthenticationActivity, StudentProfileActivity::class.java)
+            intent.putExtra("Email", personEmail)
+            startActivity(intent)
+        }
 
         googleSign.setOnClickListener {
             signIn()
@@ -68,6 +81,13 @@ class AuthenticationActivity : AppCompatActivity() {
        backButton.setOnClickListener{
             val intent = Intent(this, GettingStartedActivity::class.java)
             startActivity(intent)
+        }
+        //This is for the google account mailId and names
+        val acct = GoogleSignIn.getLastSignedInAccount(this)
+        if (acct != null) {
+            val personName = acct.displayName
+            val personEmail = acct.email
+            val personId = acct.id
         }
         // Changing the Sign in and Sign up Text here
         llAccount.setOnClickListener{
@@ -121,7 +141,10 @@ class AuthenticationActivity : AppCompatActivity() {
                 if(btnName.text.equals("\t\t\tSign in\t\t\t")) {
 
                     //Implement Sign in code here
-                    auth.signInWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
+                    auth.signInWithEmailAndPassword(
+                        editEmailIn.text.toString(),
+                        editPasswordIn.text.toString()
+                    )
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
@@ -132,8 +155,10 @@ class AuthenticationActivity : AppCompatActivity() {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 loadingProgress.visibility = View.GONE
-                                Toast.makeText(this, "Invalid Credentials",
-                                    Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this, "Invalid Credentials",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 //updateUI(null)
                                 // ...
                             }
@@ -142,12 +167,15 @@ class AuthenticationActivity : AppCompatActivity() {
                     // Send intent to Home Activity (Bottom Navigation Activity)
                 } else {
                     // Implement Sign up code Here
-                    auth.createUserWithEmailAndPassword(editEmailIn.text.toString(), editPasswordIn.text.toString())
+                    auth.createUserWithEmailAndPassword(
+                        editEmailIn.text.toString(),
+                        editPasswordIn.text.toString()
+                    )
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
-                                val intent = Intent(this,StudentDetailsActivity::class.java)
-                                intent.putExtra("Email",editEmailIn.text.toString() )
+                                val intent = Intent(this, StudentDetailsActivity::class.java)
+                                intent.putExtra("Email", editEmailIn.text.toString())
                                 startActivity(intent)
 
 
@@ -157,8 +185,10 @@ class AuthenticationActivity : AppCompatActivity() {
                                 finish()
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 //updateUI(null)
 
                                 loadingProgress.visibility = View.GONE
@@ -192,7 +222,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this,e.message,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
                 // ...
             }
         }
@@ -205,12 +235,12 @@ class AuthenticationActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    val intent=Intent(applicationContext,StudentDetailsActivity::class.java)
+                    val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     // ...
-                    Toast.makeText(this,"Authentication Failed",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show()
                 }
                 // ...
             }
@@ -242,7 +272,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         AppPreferences.studentEmailID = studentData.emailID.toString()
 
                         // Subscribing Student to his Class Topic
-                        FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
+                        FirebaseMessaging.getInstance().subscribeToTopic("/topics/" + AppPreferences.studentID)
 
                         sendIntent()
 

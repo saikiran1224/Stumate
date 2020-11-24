@@ -333,6 +333,28 @@
                         android:layout_below="@id/txtprofileEmail"
                         android:layout_marginLeft="10dp"/>
 
+                    <TextView
+                        android:id="@+id/txtpersonalEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Email ID"
+                        android:textAlignment="center"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/personalEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="knvrssaikiran@gmail.com"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/txtprofileEmail"
+                        android:layout_marginLeft="10dp"/>
+
 
                     <TextView
                         android:id="@+id/profileDownArrow"
