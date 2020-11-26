@@ -348,7 +348,7 @@
                         android:id="@+id/personalEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="knvrssaikiran@gmail.com"
+                        android:text=""
                         android:textSize="18sp"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
