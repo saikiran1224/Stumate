@@ -14,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -41,7 +40,7 @@ class AuthenticationActivity : AppCompatActivity() {
     lateinit var editPasswordIn:TextInputEditText
     lateinit var backButton: ImageView
 
-    override fun onStart() {
+  /*  override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser!=null){
@@ -49,13 +48,20 @@ class AuthenticationActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
+*/
     @SuppressLint("SetTextI18n", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
-        createRequest()
         auth= FirebaseAuth.getInstance()
+
+      val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+          .requestIdToken(getString(R.string.default_web_client_id))
+          .requestEmail()
+          .build()
+
+      // Build a GoogleSignInClient with the options specified by gso.
+      mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         //Initialising App Preferences Activity
         AppPreferences.init(this)
@@ -64,15 +70,6 @@ class AuthenticationActivity : AppCompatActivity() {
         editEmailIn=findViewById(R.id.editEmailIn)
         editPasswordIn=findViewById(R.id.editPasswordIn)
         backButton=findViewById(R.id.welcomeBackButton)
-        val email=editEmailIn.text.toString()
-        //mail data
-        val acc = GoogleSignIn.getLastSignedInAccount(this)
-        if (acc != null) {
-            val personEmail = acc.email
-            val intent = Intent(this@AuthenticationActivity, StudentProfileActivity::class.java)
-            intent.putExtra("Email", personEmail)
-            startActivity(intent)
-        }
 
         googleSign.setOnClickListener {
             signIn()
@@ -82,15 +79,9 @@ class AuthenticationActivity : AppCompatActivity() {
             val intent = Intent(this, GettingStartedActivity::class.java)
             startActivity(intent)
         }
-        //This is for the google account mailId and names
-        val acct = GoogleSignIn.getLastSignedInAccount(this)
-        if (acct != null) {
-            val personName = acct.displayName
-            val personEmail = acct.email
-            val personId = acct.id
-        }
+
         // Changing the Sign in and Sign up Text here
-        llAccount.setOnClickListener{
+        newUserText.setOnClickListener{
             val welcomeText: TextView = findViewById(R.id.welcomeText)
             val btnSignUp: Button = findViewById(R.id.btnName)
             val userText: TextView = findViewById(R.id.newUserText)
@@ -98,31 +89,55 @@ class AuthenticationActivity : AppCompatActivity() {
             val oAuthText: TextView = findViewById(R.id.singInText)
 
             // Checking the Text
-            if(newUserText.equals("Don't have an Account?")) {
+            if(newUserText.text.equals("Don't have an Account? ")) {
 
                 // We need to change it to Sign in here since new user Text is Sign Up
-
-                welcomeText.text = "Here to Get\nWelcome"
-                btnSignUp.text = "\t\t\tSign in\t\t\t"
-                userText.text = "Don't have an Account? "
-                userTextSign.text="Sign Up"
-                oAuthText.text = "Or Sign in with"
-                /*startActivity(Intent(this,StudentDetailsActivity::class.java))
-                finish()*/
-
+                welcomeText.text = "Create a new\nAccount"
+                btnSignUp.text = "\t\t\tSign up\t\t\t"
+                userText.text = "Already have an Account! "
+                userTextSign.text = "Sign up"
+                oAuthText.text = "Or Sign up with"
 
             } else {
 
                 // We need to change it to Sign up here since new user Text is Sign in
-                welcomeText.text = "Create a new\nAccount"
-                btnSignUp.text = "\t\t\tSign up\t\t\t"
-                userText.text = "Already have an Account! "
-                userTextSign.text="Sign in"
-                oAuthText.text = "Or Sign up with"
-                /*startActivity(Intent(this,HomeActivity::class.java))
-                finish()*/
+                welcomeText.text = "Here to Get\nWelcome"
+                btnSignUp.text = "\t\t\tSign in\t\t\t"
+                userTextSign.text = "Sign in"
+                userText.text = "Don't have an Account? "
+                oAuthText.text = "Or Sign in with"
+
             }
         }
+
+      newUserTextSign.setOnClickListener {
+          val welcomeText: TextView = findViewById(R.id.welcomeText)
+          val btnSignUp: Button = findViewById(R.id.btnName)
+          val userText: TextView = findViewById(R.id.newUserText)
+          val userTextSign:TextView=findViewById(R.id.newUserTextSign)
+          val oAuthText: TextView = findViewById(R.id.singInText)
+
+          // Checking the Text
+          if(newUserText.text.equals("Don't have an Account? ")) {
+
+              // We need to change it to Sign in here since new user Text is Sign Up
+              welcomeText.text = "Create a new\nAccount"
+              btnSignUp.text = "\t\t\tSign up\t\t\t"
+              userText.text = "Already have an Account! "
+              userTextSign.text = "Sign up"
+              oAuthText.text = "Or Sign up with"
+
+          } else {
+
+              // We need to change it to Sign up here since new user Text is Sign in
+              welcomeText.text = "Here to Get\nWelcome"
+              btnSignUp.text = "\t\t\tSign in\t\t\t"
+              userTextSign.text = "Sign in"
+              userText.text = "Don't have an Account? "
+              oAuthText.text = "Or Sign in with"
+
+          }
+      }
         // When user clicks on Button, check the Text
         btnName.setOnClickListener {
             // Check Validation as written in StudentDetailsActivity.kt file from line 38
@@ -166,38 +181,68 @@ class AuthenticationActivity : AppCompatActivity() {
                         }
                     // Send intent to Home Activity (Bottom Navigation Activity)
                 } else {
-                    // Implement Sign up code Here
-                    auth.createUserWithEmailAndPassword(
-                        editEmailIn.text.toString(),
-                        editPasswordIn.text.toString()
-                    )
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                val intent = Intent(this, StudentDetailsActivity::class.java)
-                                intent.putExtra("Email", editEmailIn.text.toString())
-                                startActivity(intent)
+
+                    val myRef = FirebaseDatabase.getInstance().reference
+                    //Sending the email to Database to check whether he is already registered through Gmail
+                    val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(editEmailIn.text.toString())
+                    val studentDataListener = object :ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (ds in dataSnapshot.children) {
+                                    val studentData = ds.getValue(StudentData::class.java)
+                                    //User has already registered through normal EditText
+                                    if(studentData!!.provider.toString().equals("Google")) {
+                                        loadingProgress.visibility = View.GONE
+                                        Toast.makeText(this@AuthenticationActivity ,"You are already registered. Please sign in with your Gmail Account", Toast.LENGTH_SHORT).show()
+                                    }  else {
+                                        // User is not found in Database so allow for Google Sign in
+                                        auth.createUserWithEmailAndPassword(
+                                            editEmailIn.text.toString(),
+                                            editPasswordIn.text.toString()
+                                        )
+                                            .addOnCompleteListener(this@AuthenticationActivity) { task ->
+                                                if (task.isSuccessful) {
+                                                    // Sign in success, update UI with the signed-in user's information
+                                                    val intent = Intent(this@AuthenticationActivity, StudentDetailsActivity::class.java)
+                                                    intent.putExtra("Email", editEmailIn.text.toString())
+                                                    intent.putExtra("provider","FirebaseAuth")
+                                                    startActivity(intent)
 
 
-                                loadingProgress.visibility = View.GONE
+                                                    loadingProgress.visibility = View.GONE
 
 
-                                finish()
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(
-                                    this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                //updateUI(null)
+                                                    finish()
+                                                } else {
+                                                    // If sign in fails, display a message to the user.
+                                                    Toast.makeText(
+                                                        this@AuthenticationActivity, "You are already registered. Please log in with your Credentials...",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                    //updateUI(null)
 
-                                loadingProgress.visibility = View.GONE
+                                                    loadingProgress.visibility = View.GONE
+
+                                                }
+                                                // ...
+                                            }
+
+                                    }
+
+                                }
 
                             }
-                            // ...
                         }
-                    // Send intent to Student Details Activity to collect Dept, Section
-                    //TODO: Send EmailID though intent to StudentDetails Activity
+
+                        override fun onCancelled(error: DatabaseError) {
+                            loadingProgress.visibility = View.GONE
+
+                            Toast.makeText(this@AuthenticationActivity, "Some Error Occurred! Please try again...", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                    studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
+
 
                 }
 
@@ -207,22 +252,67 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private fun signIn() {
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+
+        loadingProgress.visibility = View.VISIBLE
+
+        if(account!=null) {
+            retrieveStudentDetails(account!!.email.toString())
+        } else {
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        loadingProgress.visibility = View.GONE
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
+
+                loadingProgress.visibility = View.VISIBLE
+
                 val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
+                val myRef = FirebaseDatabase.getInstance().reference
+                //Sending the email to Database to check whether he is already registered
+                val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(account.email.toString())
+                val studentDataListener = object :ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (ds in dataSnapshot.children) {
+                                val studentData = ds.getValue(StudentData::class.java)
+                                //User has already registered through normal EditText
+                                if(studentData!!.provider.toString().equals("FirebaseAuth")) {
+                                    loadingProgress.visibility = View.GONE
+                                    Toast.makeText(this@AuthenticationActivity ,"You are already registered. Please manually sign in with your Credentials", Toast.LENGTH_SHORT).show()
+                                }  else {
+                                    // User is not found in Database so allow for Google Sign in
+                                    firebaseAuthWithGoogle(account.idToken!!)
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        loadingProgress.visibility = View.GONE
+
+                        Toast.makeText(this@AuthenticationActivity, "Some Error Occurred! Please try again...", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+                studentDataQuery.addListenerForSingleValueEvent(studentDataListener)
+
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                loadingProgress.visibility = View.GONE
+
+
+                Toast.makeText(this, "Some Error Occurred! Please try again...", Toast.LENGTH_SHORT).show()
                 // ...
             }
         }
@@ -233,27 +323,23 @@ class AuthenticationActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    loadingProgress.visibility = View.GONE
+
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
+                    intent.putExtra("Email", user!!.email.toString())
+                    intent.putExtra("provider","Google")
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     // ...
-                    Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show()
+                    loadingProgress.visibility = View.GONE
+
+                    Toast.makeText(this, "Something went Wrong! Please try again...", Toast.LENGTH_SHORT).show()
                 }
                 // ...
             }
-    }
-
-    private fun createRequest() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
     private fun retrieveStudentDetails(emailID: String) {

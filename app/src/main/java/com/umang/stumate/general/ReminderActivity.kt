@@ -14,6 +14,9 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.FirebaseDatabase
 import com.umang.stumate.R
@@ -35,6 +38,9 @@ class ReminderActivity : AppCompatActivity() {
     private val serverKey = "key=" + AppPreferences.AUTH_KEY_FCM
     private val contentType = "application/json"
     var TOPIC: String? = null
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +48,14 @@ class ReminderActivity : AppCompatActivity() {
 
         setUpTypeList()
         AppPreferences.init(this)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         closeButton.setOnClickListener {
             startActivity(Intent(this,HomeActivity::class.java))
@@ -140,12 +154,27 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                // Logout the user from session
-                AppPreferences.isLogin = false
-                AppPreferences.studentID = ""
-                AppPreferences.studentName = ""
-                startActivity(Intent(this, AuthenticationActivity::class.java))
+                val account = GoogleSignIn.getLastSignedInAccount(this)
 
+                if(account!=null) {
+                    //Some one is already logged in
+                    // Google sign out
+                    // Google sign out
+                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                        // Logout the user from session
+                        AppPreferences.isLogin = false
+                        AppPreferences.studentID = ""
+                        AppPreferences.studentName = ""
+                        startActivity(Intent(this, AuthenticationActivity::class.java))
+                    }
+
+                } else {
+                    // Logout the user from session
+                    AppPreferences.isLogin = false
+                    AppPreferences.studentID = ""
+                    AppPreferences.studentName = ""
+                    startActivity(Intent(this, AuthenticationActivity::class.java))
+                }
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)

@@ -12,5 +12,6 @@ data class StudentData(
     var collegeName: String? = "",
     var graduationYear: String? = "",
     var studentDept: String? = "",
-    var studentSection: String? = ""
+    var studentSection: String? = "",
+    var provider: String? = ""
 )

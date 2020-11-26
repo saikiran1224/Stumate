@@ -32,7 +32,6 @@ import com.umang.stumate.utils.isTimeAutomatic
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val ADMIN_CHANNEL_ID = "admin_channel"
 

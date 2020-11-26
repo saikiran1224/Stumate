@@ -91,6 +91,7 @@ class StudentDetailsActivity : AppCompatActivity() {
                 edtSection.error = null
                 val intent=intent
                 val email=intent.getStringExtra("Email")
+                val provider = intent.getStringExtra("provider")
 
                 val collegeID: String
                 var deptID: String
@@ -143,7 +144,8 @@ class StudentDetailsActivity : AppCompatActivity() {
                    collegeName,
                    graduationYear,
                    studentDept,
-                   studentSection
+                   studentSection,
+                   provider
                )
 
             }
@@ -158,7 +160,8 @@ class StudentDetailsActivity : AppCompatActivity() {
         collegeName: Editable?,
         graduationYear: Editable?,
         studentDept: Editable?,
-        studentSection: Editable?
+        studentSection: Editable?,
+        provider: String?
     ) {
         val user = StudentData(
             userId,
@@ -168,7 +171,9 @@ class StudentDetailsActivity : AppCompatActivity() {
             collegeName.toString(),
             graduationYear.toString(),
             studentDept.toString(),
-            studentSection.toString()
+            studentSection.toString(),
+            provider.toString()
+
         )
         database.child("students_data").push().setValue(user)
 

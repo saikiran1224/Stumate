@@ -3,11 +3,12 @@ package com.umang.stumate.general
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.umang.stumate.R
@@ -25,6 +26,10 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var newsLayoutManager: LinearLayoutManager
     lateinit var bottomnav: BottomAppBar
+
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
+
     @SuppressLint("SetTextI18n", "InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +41,20 @@ class HomeActivity : AppCompatActivity() {
             studentName.text = "Hi " + AppPreferences.studentName
         }
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
         uploadFilesButton.setOnClickListener {
             startActivity(Intent(this, UploadFilesActivity::class.java))
         }
 
         notificationLayout.setOnClickListener {
-            startActivity(Intent(this,ViewNotificationsActivity::class.java))
+            startActivity(Intent(this, ViewNotificationsActivity::class.java))
         }
 
         // DashboardIconsAdapter
@@ -50,9 +63,24 @@ class HomeActivity : AppCompatActivity() {
         linearLayoutManager.reverseLayout = false
 
         val dashboardIconsList = ArrayList<DashboardIconData>()
-        dashboardIconsList.add(DashboardIconData("Class Notes", R.drawable.ic_baseline_menu_book_24))
-        dashboardIconsList.add(DashboardIconData("Class Mates", R.drawable.ic_baseline_supervisor_account_24))
-        dashboardIconsList.add(DashboardIconData("Reminders", R.drawable.ic_baseline_notifications_active_24))
+        dashboardIconsList.add(
+            DashboardIconData(
+                "Class Notes",
+                R.drawable.ic_baseline_menu_book_24
+            )
+        )
+        dashboardIconsList.add(
+            DashboardIconData(
+                "Class Mates",
+                R.drawable.ic_baseline_supervisor_account_24
+            )
+        )
+        dashboardIconsList.add(
+            DashboardIconData(
+                "Reminders",
+                R.drawable.ic_baseline_notifications_active_24
+            )
+        )
         dashboardIconsList.add(DashboardIconData("Profile", R.drawable.ic_baseline_person_24))
 
         val dashboardIconAdapter = DashboardIconsAdapter(dashboardIconsList)
@@ -60,8 +88,8 @@ class HomeActivity : AppCompatActivity() {
         dashboardRecycler.adapter = dashboardIconAdapter
 
         searchEditText.setOnClickListener {
-            val intent = Intent(this,ClassNotesActivity::class.java)
-            intent.putExtra("navigatedFrom","HomeActivity")
+            val intent = Intent(this, ClassNotesActivity::class.java)
+            intent.putExtra("navigatedFrom", "HomeActivity")
             startActivity(intent)
         }
 
@@ -89,7 +117,7 @@ class HomeActivity : AppCompatActivity() {
         newsRecycler.adapter = newsAdapter
 
         bottomnav.setOnClickListener {
-            val dialog= BottomSheetDialog(this,R.style.BottomSheetDialog)
+            val dialog= BottomSheetDialog(this, R.style.BottomSheetDialog)
             val view=layoutInflater.inflate(R.layout.bottom_items, null)
 
 
@@ -155,11 +183,29 @@ class HomeActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                // Logout the user from session
-                AppPreferences.isLogin = false
-                AppPreferences.studentID = ""
-                AppPreferences.studentName = ""
-                startActivity(Intent(this, AuthenticationActivity::class.java))
+
+                val account = GoogleSignIn.getLastSignedInAccount(this)
+
+                if(account!=null) {
+                    //Some one is already logged in
+                    // Google sign out
+                    // Google sign out
+                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                        // Logout the user from session
+                        AppPreferences.isLogin = false
+                        AppPreferences.studentID = ""
+                        AppPreferences.studentName = ""
+                        startActivity(Intent(this, AuthenticationActivity::class.java))
+                    }
+
+                } else {
+                    // Logout the user from session
+                    AppPreferences.isLogin = false
+                    AppPreferences.studentID = ""
+                    AppPreferences.studentName = ""
+                    startActivity(Intent(this, AuthenticationActivity::class.java))
+                }
+
 
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)

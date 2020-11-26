@@ -139,42 +139,36 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/edtPassword"
-            android:text="\t\t\tSign in\t\t\t"
-            android:textSize="16sp"
-            android:id="@+id/btnName"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="30dp"
-            android:padding="10dp"
-            />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/btnName"
-                android:id="@+id/llAccount">
+                android:layout_below="@id/edtPassword"
+                android:text="\t\t\tSign in\t\t\t"
+                android:textSize="16sp"
+                android:id="@+id/btnName"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:padding="10dp"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Don't have an Account?"
-            android:textSize="18sp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:textStyle="normal"
-            android:id="@+id/newUserText"
-            android:layout_below="@id/btnName"
-            android:textColor="@color/colorBlack"
-            android:layout_marginTop="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an Account?"
+                android:textSize="18sp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="false"
+                android:textStyle="normal"
+                android:id="@+id/newUserText"
+                android:layout_below="@id/btnName"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="30dp" />
 
             <TextView
                 android:id="@+id/newUserTextSign"
@@ -183,12 +177,11 @@
                 android:layout_below="@id/btnName"
                 android:layout_marginTop="30dp"
                 android:layout_toRightOf="@id/newUserText"
+                android:layout_alignParentEnd="true"
                 android:text="Sign Up"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="normal" />
-
-            </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -198,7 +191,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/singInText"
-            android:layout_below="@id/llAccount"
+            android:layout_below="@id/newUserText"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="75dp" />
 
