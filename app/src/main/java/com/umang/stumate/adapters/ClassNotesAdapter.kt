@@ -13,6 +13,7 @@ import android.webkit.WebView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,10 +26,14 @@ import com.umang.stumate.utils.AppPreferences
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>, private var studentNamePrefs: String?, private var studentID: String?):
+class ClassNotesAdapter(
+    val context: Context,
+    private var classNotesList: ArrayList<FileUploadData>,
+    private var studentNamePrefs: String?,
+    private var studentID: String?
+):
     RecyclerView.Adapter<ClassNotesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassNotesAdapter.ViewHolder {
@@ -47,15 +52,19 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
 
         holder.downloadButton.setOnClickListener {
            //downloadAndOpenPDF(holder.fileURL.text.toString())
-            val webView = WebView(context)
+           /* val webView = WebView(context)
             webView.loadUrl(holder.fileURL.text.toString())
             webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(holder.fileURL.text.toString())
-                context.startActivity(i)
-            }
+                //val i = Intent(Intent.ACTION_VIEW)
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(holder.fileURL.text.toString())))
 
-            Toast.makeText(context, "Please see Notifications for Downloaded File after clicked on the Browser", Toast.LENGTH_LONG).show()
+                //i.data = Uri.parse(holder.fileURL.text.toString())
+                //context.startActivity(i)
+            }*/
+
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(holder.fileURL.text.toString())))
+
+            //Toast.makeText(context, "Please see Notifications for Downloaded File after clicked on the Browser", Toast.LENGTH_LONG).show()
         }
 
         holder.fileShareButton.setOnClickListener {
@@ -79,7 +88,9 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
 
             deleteDialog.findViewById<Button>(R.id.btnDelete).setOnClickListener {
 
-                val myRef = FirebaseDatabase.getInstance().getReference(studentID.toString()).child("files_data")
+                val myRef = FirebaseDatabase.getInstance().getReference(studentID.toString()).child(
+                    "files_data"
+                )
                 val query = myRef.orderByChild("fileURL").equalTo(holder.fileURL.text.toString())
                 val deleteEventListener = object: ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -89,33 +100,43 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
                             ds.ref.removeValue()
                         }
 
-                        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(holder.fileURL.text.toString())
+                        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(
+                            holder.fileURL.text.toString()
+                        )
                         storageReference.delete().addOnSuccessListener {
-                            Toast.makeText(context,"File Deleted Successfully !",Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                context,
+                                "File Deleted Successfully !",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }.addOnFailureListener{
-                            Toast.makeText(context,"Some Error Occurred. Please try again!!!", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                context,
+                                "Some Error Occurred. Please try again!!!",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
 
                         classNotesList.removeAt(holder.adapterPosition)
                         notifyItemRemoved(holder.adapterPosition)
-                        notifyItemRangeChanged(holder.adapterPosition,classNotesList.size)
+                        notifyItemRangeChanged(holder.adapterPosition, classNotesList.size)
                         holder.itemView.visibility = View.GONE
                         deleteDialog.dismiss()
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(context," "+ error.message.toString(),Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, " " + error.message.toString(), Toast.LENGTH_LONG).show()
                     }
                 }
                 query.addListenerForSingleValueEvent(deleteEventListener)
 
                 if(holder.txtStudentName.equals(studentNamePrefs)) {
                    holder.txtDeleteIcon.visibility = View.VISIBLE
-                    Toast.makeText(context,"Authorized to delete",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Authorized to delete", Toast.LENGTH_LONG).show()
 
                 } else {
                     holder.txtDeleteIcon.visibility = View.GONE
-                    Toast.makeText(context,"Not authorized to delete",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Not authorized to delete", Toast.LENGTH_LONG).show()
 
                 }
                 //  holder.bindItems(classNotesList[position], studentNamePrefs)
@@ -172,7 +193,11 @@ class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayL
 
             try {
                 val date: Date = inputFormat.parse(classNotes.dateOfPublishing.toString())!!
-                val niceDateStr = DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS).toString()
+                val niceDateStr = DateUtils.getRelativeTimeSpanString(
+                    date.getTime(),
+                    Calendar.getInstance().getTimeInMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                ).toString()
                 txtStudentName.text = "Posted by " + classNotes.studentName.toString() + " " + niceDateStr.toString()
 
             } catch (e: ParseException) {

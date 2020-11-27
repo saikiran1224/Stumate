@@ -40,15 +40,6 @@ class AuthenticationActivity : AppCompatActivity() {
     lateinit var editPasswordIn:TextInputEditText
     lateinit var backButton: ImageView
 
-  /*  override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if(currentUser!=null){
-            val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
-            startActivity(intent)
-        }
-    }
-*/
     @SuppressLint("SetTextI18n", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
