@@ -84,4 +84,6 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
 }

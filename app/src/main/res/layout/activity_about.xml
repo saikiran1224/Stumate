@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorGrey"
+    android:orientation="vertical"
+    tools:context=".general.AboutActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/welcomeAppBar"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                app:elevation="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGrey">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/welcomeToolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/closeButton"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_weight="0.1"
+                            android:visibility="visible"
+                            app:tint="@color/colorPrimary"
+                            android:contentDescription="@string/backbutton"
+                            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_weight="1.9"
+                            android:gravity="center_vertical"
+                            android:paddingStart="18dp"
+                            android:paddingEnd="0dp"
+                            android:text="About Us"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/cabin"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/welcomeAppBar"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@drawable/semi_circle"
+                android:orientation="vertical">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loadingAnimationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    app:lottie_url="https://assets4.lottiefiles.com/private_files/lf30_nIhxTu.json"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlTeam">
+
+                    <TextView
+                        android:id="@+id/txtStumate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Stumate is a realm for students who are willing to store all the subject pdfs at a place.It acts like a container and one can filter notes at any time with a perfect Blend of Professionalism,we act as a catalyst to bring the required change in the society.\n  \n                 &quot; Start Succeding Stop Seeking &quot; "
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/cabin"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtFeedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Provide Your Valuable Feedback"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@id/txtStumate"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/cabin"
+                        android:textColor="@color/colorWhite"
+                        android:padding="15dp"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/blue_bg_textview"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Please give your valuable Feedback"
+                        android:layout_below="@id/txtFeedback"
+                        android:id="@+id/edtFeedback"
+                        android:background="@color/colorWhite"
+                        app:endIconTint="#000"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="15dp"
+                        android:visibility="visible"
+                        app:errorEnabled="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        app:hintTextColor="#000">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/editFeedback"
+                            android:inputType="text"
+                            android:background="@color/colorGrey"
+                            android:textColor="#000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Submit"
+                        android:layout_below="@id/edtFeedback"
+                        android:fontFamily="@font/cabin"
+                        android:id="@+id/btnSubmit"
+                        android:background="@drawable/rounded_button"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/btnSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="15dp"
+                        android:text="Our Team"
+                        android:background="@drawable/blue_bg_textview"
+                        android:fontFamily="@font/cabin"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="10dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlSaikiran"
+                    android:layout_below="@+id/rlTeam"
+                    android:layout_marginTop="20dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        app:cardElevation="10dp"
+                        android:id="@+id/imageCard"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="60dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:src="@drawable/saikiran"
+                            app:civ_border_width="1dp"
+                            app:civ_border_color="@color/colorWhite"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mr. Saikiran Kopparthi"
+                        android:layout_toEndOf="@id/imageCard"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:fontFamily="@font/cabin"
+                        android:textColor="#000"
+                        android:id="@+id/txtName"
+                        android:gravity="center_horizontal"
+                        android:textSize="16sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtName"
+                        android:layout_toEndOf="@id/imageCard"
+                        android:text="Android Developer"
+                        android:id="@+id/txtRoleName"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/blue_bg_textview"
+                        android:textColor="#fff"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:id="@+id/txtViewMore"
+                        android:text="View Profile "
+                        android:textSize="12sp"
+                        android:layout_below="@id/txtRoleName"
+                        app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_margin="8dp"
+                        android:background="#4285F4"
+                        android:layout_below="@id/txtViewMore" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlPrathyusha"
+                    android:layout_below="@id/rlSaikiran">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        app:cardElevation="10dp"
+                        android:id="@+id/imageCard2"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="60dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:src="@drawable/prathyushanew"
+                            app:civ_border_width="1dp"
+                            app:civ_border_color="@color/colorWhite"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ms. Prathyusha Kuppili"
+                        android:layout_toEndOf="@id/imageCard2"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:fontFamily="@font/cabin"
+                        android:textColor="#000"
+                        android:id="@+id/txtName2"
+                        android:gravity="center_horizontal"
+                        android:textSize="16sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtName2"
+                        android:layout_toEndOf="@id/imageCard2"
+                        android:text="Android Developer"
+                        android:id="@+id/txtRoleName2"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/blue_bg_textview"
+                        android:textColor="#fff"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:id="@+id/txtViewMore2"
+                        android:text="View Profile "
+                        android:textSize="12sp"
+                        android:layout_below="@id/txtRoleName2"
+                        app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_margin="8dp"
+                        android:background="#4285F4"
+                        android:layout_below="@id/txtViewMore2" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlFeedback"
+                    android:layout_below="@id/rlPrathyusha"
+                    android:layout_marginTop="20dp">
+
+
+                    <TextView
+                        android:id="@+id/txtFaq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="FAQ?"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/cabin"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginLeft="20dp" />
+
+                    <TextView
+                        android:fontFamily="@font/cabin"
+                        android:id="@+id/titleFaq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="20dp"
+                        android:text="What is Stumate?"
+                        android:layout_below="@id/txtFaq"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:background="@drawable/faqcard"/>
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_below="@+id/content"
+                        android:text="27 November 2020"
+                        android:fontFamily="@font/cabin"
+                        android:padding="5dp"
+                        android:textColor="#F4B400"
+                        android:layout_marginLeft="20dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/faqcard"/>
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/titleFaq"
+                        android:layout_alignStart="@+id/titleFaq"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:lineSpacingExtra="8dp"
+                        android:text="Stumate is an Application which is used mainly for students.One can send remainders for Exams,Assignments etc.. and they can upload all the content of notes pdfs to store like a container."
+                        android:textColor="#000000"
+                        android:background="@drawable/faqcard"/>
+
+                    <ImageView
+                        android:id="@+id/user"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.074"
+                        android:layout_below="@id/titleFaq"
+                        android:src="@drawable/ic_avatar"
+                        android:layout_marginTop="15dp"/>
+
+
+
+                    <TextView
+                        android:layout_below="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/blue_bg_textview"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:id="@+id/txtContact"
+                        android:text="Contact us at dsc.gmrit@gmail.com"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+              <!--  -->
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
