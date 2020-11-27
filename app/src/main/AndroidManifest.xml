@@ -16,9 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".TeamActivity"></activity>
         <activity android:name=".general.AboutActivity" />
-        <activity android:name=".auth.GoogleActivity" />
         <activity android:name=".general.ViewNotificationsActivity" />
         <activity android:name=".general.StudentProfileActivity" />
         <activity android:name=".general.FilterSubjectsActivity" />
