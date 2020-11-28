@@ -140,6 +140,8 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
 
+                startActivity(Intent(this, AboutActivity::class.java))
+
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -154,27 +156,39 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                val account = GoogleSignIn.getLastSignedInAccount(this)
+                val logoutDialog = Dialog(this)
+                logoutDialog.setContentView(R.layout.logout_dialog)
+                logoutDialog.setCancelable(false)
+                logoutDialog.setCanceledOnTouchOutside(false)
+                logoutDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-                if(account!=null) {
-                    //Some one is already logged in
-                    // Google sign out
-                    // Google sign out
-                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                logoutDialog.findViewById<Button>(R.id.btnLogout).setOnClickListener {
+                    val account = GoogleSignIn.getLastSignedInAccount(this)
+                    if (account != null) {
+                        //Some one is already logged in
+                        // Google sign out
+                        // Google sign out
+                        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                            // Logout the user from session
+                            AppPreferences.isLogin = false
+                            AppPreferences.studentID = ""
+                            AppPreferences.studentName = ""
+                            startActivity(Intent(this, AuthenticationActivity::class.java))
+                        }
+                    } else {
                         // Logout the user from session
                         AppPreferences.isLogin = false
                         AppPreferences.studentID = ""
                         AppPreferences.studentName = ""
                         startActivity(Intent(this, AuthenticationActivity::class.java))
                     }
-
-                } else {
-                    // Logout the user from session
-                    AppPreferences.isLogin = false
-                    AppPreferences.studentID = ""
-                    AppPreferences.studentName = ""
-                    startActivity(Intent(this, AuthenticationActivity::class.java))
                 }
+
+                logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                    logoutDialog.dismiss()
+                }
+
+                logoutDialog.show()
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(0)
@@ -229,6 +243,8 @@ class ReminderActivity : AppCompatActivity() {
                 edtDescription.error = "Please enter Description"
                 edtType.error = null
             } else {
+
+                btnName.isEnabled = false
 
                 edtDescription.error = null
 
@@ -320,6 +336,7 @@ class ReminderActivity : AppCompatActivity() {
                     queue.add(request)
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    btnName.isEnabled = true
                 }
 
             }

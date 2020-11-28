@@ -1,11 +1,14 @@
 package com.umang.stumate.general
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -187,6 +190,8 @@ class ClassNotesActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
 
+                startActivity(Intent(this, AboutActivity::class.java))
+
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -201,27 +206,39 @@ class ClassNotesActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                val account = GoogleSignIn.getLastSignedInAccount(this)
+                val logoutDialog = Dialog(this)
+                logoutDialog.setContentView(R.layout.logout_dialog)
+                logoutDialog.setCancelable(false)
+                logoutDialog.setCanceledOnTouchOutside(false)
+                logoutDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-                if(account!=null) {
-                    //Some one is already logged in
-                    // Google sign out
-                    // Google sign out
-                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                logoutDialog.findViewById<Button>(R.id.btnLogout).setOnClickListener {
+                    val account = GoogleSignIn.getLastSignedInAccount(this)
+                    if (account != null) {
+                        //Some one is already logged in
+                        // Google sign out
+                        // Google sign out
+                        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                            // Logout the user from session
+                            AppPreferences.isLogin = false
+                            AppPreferences.studentID = ""
+                            AppPreferences.studentName = ""
+                            startActivity(Intent(this, AuthenticationActivity::class.java))
+                        }
+                    } else {
                         // Logout the user from session
                         AppPreferences.isLogin = false
                         AppPreferences.studentID = ""
                         AppPreferences.studentName = ""
                         startActivity(Intent(this, AuthenticationActivity::class.java))
                     }
-
-                } else {
-                    // Logout the user from session
-                    AppPreferences.isLogin = false
-                    AppPreferences.studentID = ""
-                    AppPreferences.studentName = ""
-                    startActivity(Intent(this, AuthenticationActivity::class.java))
                 }
+
+                logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                    logoutDialog.dismiss()
+                }
+
+                logoutDialog.show()
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -298,11 +315,22 @@ class ClassNotesActivity : AppCompatActivity() {
 
 
                 } else {
+                    animationView.visibility = GONE
+                    prefsLayout.visibility = GONE
+                    recyclerLayout.visibility = GONE
+
+                    noDataAnimation.visibility = View.VISIBLE
                     Toast.makeText(baseContext,"No Data Found !!!",Toast.LENGTH_LONG).show()
                 }
 
 
             } override fun onCancelled(error: DatabaseError) {
+
+                animationView.visibility = GONE
+                prefsLayout.visibility = GONE
+                recyclerLayout.visibility = GONE
+
+                noDataAnimation.visibility = View.VISIBLE
                 Toast.makeText(this@ClassNotesActivity, error.message, Toast.LENGTH_LONG).show()
             }
         }

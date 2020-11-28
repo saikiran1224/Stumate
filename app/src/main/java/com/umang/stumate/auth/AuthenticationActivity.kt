@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -24,7 +26,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.umang.stumate.R
 import com.umang.stumate.general.HomeActivity
-import com.umang.stumate.general.StudentProfileActivity
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.utils.AppPreferences
@@ -86,7 +87,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 welcomeText.text = "Create a new\nAccount"
                 btnSignUp.text = "\t\t\tSign up\t\t\t"
                 userText.text = "Already have an Account!"
-                userTextSign.text = "Sign up"
+                userTextSign.text = "Sign in"
                 oAuthText.text = "Or Sign up with"
 
             } else {
@@ -94,7 +95,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 // We need to change it to Sign up here since new user Text is Sign in
                 welcomeText.text = "Here to Get\nWelcome"
                 btnSignUp.text = "\t\t\tSign in\t\t\t"
-                userTextSign.text = "Sign in"
+                userTextSign.text = "Sign up"
                 userText.text = "Don't have an Account?"
                 oAuthText.text = "Or Sign in with"
 
@@ -115,7 +116,7 @@ class AuthenticationActivity : AppCompatActivity() {
               welcomeText.text = "Create a new\nAccount"
               btnSignUp.text = "\t\t\tSign up\t\t\t"
               userText.text = "Already have an Account!"
-              userTextSign.text = "Sign up"
+              userTextSign.text = "Sign in"
               oAuthText.text = "Or Sign up with"
 
           } else {
@@ -123,7 +124,7 @@ class AuthenticationActivity : AppCompatActivity() {
               // We need to change it to Sign up here since new user Text is Sign in
               welcomeText.text = "Here to Get\nWelcome"
               btnSignUp.text = "\t\t\tSign in\t\t\t"
-              userTextSign.text = "Sign in"
+              userTextSign.text = "Sign up"
               userText.text = "Don't have an Account?"
               oAuthText.text = "Or Sign in with"
 
@@ -134,12 +135,26 @@ class AuthenticationActivity : AppCompatActivity() {
             // Check Validation as written in StudentDetailsActivity.kt file from line 38
 
 
+
             if(isNullOrEmpty(editEmailIn.text)) {
                 edtEmailID.error = "Please enter Emailid"
+            } else if(!isValidEmail(editEmailIn.text.toString())) {
+                edtEmailID.error = null
+                edtEmailID.error = "Please enter Valid Email Address"
             } else if(isNullOrEmpty(editPasswordIn.text)) {
                 edtEmailID.error = null
                 edtPassword.error = "Please enter Password"
-            } else {
+            } else if(editPasswordIn.length() < 8) {
+                edtPassword.error = null
+                edtPassword.error = "Password should be minimum of 8 Characters"
+            }else {
+
+                edtEmailID.isEnabled = false
+                edtPassword.isEnabled = false
+                btnName.isEnabled = false
+                newUserTextSign.isEnabled = false
+                newUserText.isEnabled = false
+                googleSign.isEnabled = false
 
                 edtPassword.error = null
                 loadingProgress.visibility = View.VISIBLE
@@ -159,6 +174,14 @@ class AuthenticationActivity : AppCompatActivity() {
                                 retrieveStudentDetails(editEmailIn.text.toString())
 
                             } else {
+
+                                edtEmailID.isEnabled = true
+                                edtPassword.isEnabled = true
+                                btnName.isEnabled = true
+                                newUserTextSign.isEnabled = true
+                                newUserText.isEnabled = true
+                                googleSign.isEnabled = true
+
                                 // If sign in fails, display a message to the user.
                                 loadingProgress.visibility = View.GONE
                                 Toast.makeText(
@@ -175,7 +198,9 @@ class AuthenticationActivity : AppCompatActivity() {
 
                     val myRef = FirebaseDatabase.getInstance().reference
                     //Sending the email to Database to check whether he is already registered through Gmail
-                    val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(editEmailIn.text.toString())
+                    val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(
+                        editEmailIn.text.toString()
+                    )
                     val studentDataListener = object :ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (dataSnapshot.exists()) {
@@ -184,7 +209,20 @@ class AuthenticationActivity : AppCompatActivity() {
                                     //User has already registered through normal EditText so prevent hin
                                     if(studentData!!.provider.toString().equals("Google")) {
                                         loadingProgress.visibility = View.GONE
-                                        Toast.makeText(this@AuthenticationActivity ,"You are already registered. Please sign in with your Gmail Account", Toast.LENGTH_SHORT).show()
+                                        edtEmailID.isEnabled = true
+                                        edtPassword.isEnabled = true
+                                        btnName.isEnabled = true
+                                        newUserTextSign.isEnabled = true
+                                        newUserText.isEnabled = true
+                                        googleSign.isEnabled = true
+
+
+
+                                        Toast.makeText(
+                                            this@AuthenticationActivity,
+                                            "You are already registered. Please sign in with your Gmail Account",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                 }
 
@@ -197,9 +235,12 @@ class AuthenticationActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this@AuthenticationActivity) { task ->
                                         if (task.isSuccessful) {
                                             // Sign in success, update UI with the signed-in user's information
-                                            val intent = Intent(this@AuthenticationActivity, StudentDetailsActivity::class.java)
+                                            val intent = Intent(
+                                                this@AuthenticationActivity,
+                                                StudentDetailsActivity::class.java
+                                            )
                                             intent.putExtra("Email", editEmailIn.text.toString())
-                                            intent.putExtra("provider","FirebaseAuth")
+                                            intent.putExtra("provider", "FirebaseAuth")
                                             startActivity(intent)
 
 
@@ -208,9 +249,18 @@ class AuthenticationActivity : AppCompatActivity() {
 
                                             finish()
                                         } else {
+
+                                            edtEmailID.isEnabled = true
+                                            edtPassword.isEnabled = true
+                                            btnName.isEnabled = true
+                                            newUserTextSign.isEnabled = true
+                                            newUserText.isEnabled = true
+                                            googleSign.isEnabled = true
+
                                             // If sign in fails, display a message to the user.
                                             Toast.makeText(
-                                                this@AuthenticationActivity, "You are already registered. Please log in with your Credentials...",
+                                                this@AuthenticationActivity,
+                                                "You are already registered. Please log in with your Credentials...",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                             //updateUI(null)
@@ -228,7 +278,18 @@ class AuthenticationActivity : AppCompatActivity() {
                         override fun onCancelled(error: DatabaseError) {
                             loadingProgress.visibility = View.GONE
 
-                            Toast.makeText(this@AuthenticationActivity, "Some Error Occurred! Please try again...", Toast.LENGTH_SHORT).show()
+                            edtEmailID.isEnabled = true
+                            edtPassword.isEnabled = true
+                            btnName.isEnabled = true
+                            newUserTextSign.isEnabled = true
+                            newUserText.isEnabled = true
+                            googleSign.isEnabled = true
+
+                            Toast.makeText(
+                                this@AuthenticationActivity,
+                                "Some Error Occurred! Please try again...",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                         }
                     }
@@ -263,7 +324,9 @@ class AuthenticationActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)!!
                 val myRef = FirebaseDatabase.getInstance().reference
                 //Sending the email to Database to check whether he is already registered
-                val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(account.email.toString())
+                val studentDataQuery = myRef.child("students_data").orderByChild("emailID").equalTo(
+                    account.email.toString()
+                )
                 val studentDataListener = object :ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if (dataSnapshot.exists()) {
@@ -274,7 +337,11 @@ class AuthenticationActivity : AppCompatActivity() {
                                 if(studentData!!.provider.toString().equals("FirebaseAuth")) {
                                     loadingProgress.visibility = View.GONE
                                     mGoogleSignInClient.signOut()
-                                    Toast.makeText(this@AuthenticationActivity ,"You are already registered. Please manually sign in with your Credentials", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        this@AuthenticationActivity,
+                                        "You are already registered. Please manually sign in with your Credentials",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }  else {
                                     // User is not found in Database so allow for Google Sign in
                                     firebaseAuthWithGoogle(account.idToken!!, "GoogleSignIn")
@@ -286,7 +353,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         } else {
                             // User is not registered in our Database, so pass parameter as
                             // New User with New Gmail Account
-                            firebaseAuthWithGoogle(account.idToken!!,"NewUser")
+                            firebaseAuthWithGoogle(account.idToken!!, "NewUser")
 
                         }
                     }
@@ -294,7 +361,11 @@ class AuthenticationActivity : AppCompatActivity() {
                     override fun onCancelled(error: DatabaseError) {
                         loadingProgress.visibility = View.GONE
 
-                        Toast.makeText(this@AuthenticationActivity, "Some Error Occurred! Please try again...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@AuthenticationActivity,
+                            "Some Error Occurred! Please try again...",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                 }
@@ -324,7 +395,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     if(status.equals("NewUser")) {
                         val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
                         intent.putExtra("Email", user!!.email.toString())
-                        intent.putExtra("provider","Google")
+                        intent.putExtra("provider", "Google")
                         startActivity(intent)
                     } else {
                         retrieveStudentDetails(user!!.email.toString())
@@ -336,7 +407,11 @@ class AuthenticationActivity : AppCompatActivity() {
                     // ...
                     loadingProgress.visibility = View.GONE
 
-                    Toast.makeText(this, "Something went Wrong! Please try again...", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Something went Wrong! Please try again...",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 // ...
             }
@@ -388,6 +463,10 @@ class AuthenticationActivity : AppCompatActivity() {
 
         startActivity(Intent(this, HomeActivity::class.java))
         finish()
+    }
+
+    fun isValidEmail(target: CharSequence?): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
         private fun isNullOrEmpty(str: Editable?): Boolean {

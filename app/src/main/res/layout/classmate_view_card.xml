@@ -26,39 +26,27 @@
             android:layout_alignParentTop="true"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="10dp" />
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mailID"
             android:text="knvrssaikiran@gmail.com"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_alignParentStart="true"
             android:layout_below="@id/studentName"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="3dp" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_button"
-            android:scaleType="fitCenter"
-            android:src="@drawable/logo"
-            android:layout_marginEnd="10dp"
+        <include
+            android:id="@+id/profileTextLayout"
+            layout="@layout/classmate_profile_layout"
+            android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:padding="5dp"
-            android:backgroundTint="@color/colorPrimary" />
-
-
-
-
-
-
-
-
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

@@ -1,8 +1,12 @@
 package com.umang.stumate.general
 
+import android.app.Dialog
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -135,7 +139,8 @@ class ClassMatesActivity : AppCompatActivity() {
             view.findViewById<TextView>(R.id.rateUs).setOnClickListener {
                 view.findViewById<TextView>(R.id.rateUs).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
-                //startActivity(Intent(this, StudentDetailsActivity::class.java))
+
+                startActivity(Intent(this, AboutActivity::class.java))
 
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
@@ -150,27 +155,39 @@ class ClassMatesActivity : AppCompatActivity() {
 
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
-                val account = GoogleSignIn.getLastSignedInAccount(this)
+                val logoutDialog = Dialog(this)
+                logoutDialog.setContentView(R.layout.logout_dialog)
+                logoutDialog.setCancelable(false)
+                logoutDialog.setCanceledOnTouchOutside(false)
+                logoutDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-                if(account!=null) {
-                    //Some one is already logged in
-                    // Google sign out
-                    // Google sign out
-                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                logoutDialog.findViewById<Button>(R.id.btnLogout).setOnClickListener {
+                    val account = GoogleSignIn.getLastSignedInAccount(this)
+                    if (account != null) {
+                        //Some one is already logged in
+                        // Google sign out
+                        // Google sign out
+                        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                            // Logout the user from session
+                            AppPreferences.isLogin = false
+                            AppPreferences.studentID = ""
+                            AppPreferences.studentName = ""
+                            startActivity(Intent(this, AuthenticationActivity::class.java))
+                        }
+                    } else {
                         // Logout the user from session
                         AppPreferences.isLogin = false
                         AppPreferences.studentID = ""
                         AppPreferences.studentName = ""
                         startActivity(Intent(this, AuthenticationActivity::class.java))
                     }
-
-                } else {
-                    // Logout the user from session
-                    AppPreferences.isLogin = false
-                    AppPreferences.studentID = ""
-                    AppPreferences.studentName = ""
-                    startActivity(Intent(this, AuthenticationActivity::class.java))
                 }
+
+                logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                    logoutDialog.dismiss()
+                }
+
+                logoutDialog.show()
 
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
@@ -215,20 +232,32 @@ class ClassMatesActivity : AppCompatActivity() {
 
     private fun retreiveClassNotesData() {
 
+        animationView.visibility = View.VISIBLE
+
         val myRef = FirebaseDatabase.getInstance().reference.child("students_data").orderByChild("studentID").equalTo(AppPreferences.studentID)
 
         val classMatesListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (ds in dataSnapshot.children) {
-                    val classMatesData = ds.getValue(StudentData::class.java)
-                    if (classMatesData != null) {
-                        classMatesList.add(classMatesData)
+                if(dataSnapshot.exists()) {
+
+                    animationView.visibility = View.GONE
+                    for (ds in dataSnapshot.children) {
+                        val classMatesData = ds.getValue(StudentData::class.java)
+                        if (classMatesData != null) {
+                            classMatesList.add(classMatesData)
+                        }
                     }
+                    val classMatesAdapter = ClassMatesAdapter(baseContext,classMatesList)
+                    classMatesRecycler.layoutManager = linearLayoutManager
+                    classMatesRecycler.adapter = classMatesAdapter
+
+                } else {
+                    animationView.visibility = View.GONE
+                    noDataAnimation.visibility = View.VISIBLE
                 }
-                val classMatesAdapter = ClassMatesAdapter(baseContext,classMatesList)
-                classMatesRecycler.layoutManager = linearLayoutManager
-                classMatesRecycler.adapter = classMatesAdapter
             } override fun onCancelled(error: DatabaseError) {
+                animationView.visibility = View.GONE
+                noDataAnimation.visibility = View.VISIBLE
                 Toast.makeText(baseContext,error.message, Toast.LENGTH_LONG).show()
             }
         }

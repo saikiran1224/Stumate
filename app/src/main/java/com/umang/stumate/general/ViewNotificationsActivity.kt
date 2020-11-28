@@ -71,9 +71,11 @@ class ViewNotificationsActivity : AppCompatActivity() {
 
                 } else {
                     animationView.visibility = View.GONE
-                    recyclerLayout.visibility = View.VISIBLE
+                    recyclerLayout.visibility = View.GONE
 
-                    Toast.makeText(this@ViewNotificationsActivity,"No Data Found",Toast.LENGTH_LONG).show()
+
+                    noDataAnimation.visibility = View.VISIBLE
+                   // Toast.makeText(this@ViewNotificationsActivity,"No Data Found",Toast.LENGTH_LONG).show()
                 }
             }
 

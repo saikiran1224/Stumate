@@ -1,9 +1,11 @@
 package com.umang.stumate.general
 
+import android.app.Dialog
 import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -145,6 +147,8 @@ class StudentProfileActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
 
+                startActivity(Intent(this, AboutActivity::class.java))
+
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -159,27 +163,39 @@ class StudentProfileActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.logOut).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.logOut).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                val account = GoogleSignIn.getLastSignedInAccount(this)
+                val logoutDialog = Dialog(this)
+                logoutDialog.setContentView(R.layout.logout_dialog)
+                logoutDialog.setCancelable(false)
+                logoutDialog.setCanceledOnTouchOutside(false)
+                logoutDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-                if(account!=null) {
-                    //Some one is already logged in
-                    // Google sign out
-                    // Google sign out
-                    mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                logoutDialog.findViewById<Button>(R.id.btnLogout).setOnClickListener {
+                    val account = GoogleSignIn.getLastSignedInAccount(this)
+                    if (account != null) {
+                        //Some one is already logged in
+                        // Google sign out
+                        // Google sign out
+                        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                            // Logout the user from session
+                            AppPreferences.isLogin = false
+                            AppPreferences.studentID = ""
+                            AppPreferences.studentName = ""
+                            startActivity(Intent(this, AuthenticationActivity::class.java))
+                        }
+                    } else {
                         // Logout the user from session
                         AppPreferences.isLogin = false
                         AppPreferences.studentID = ""
                         AppPreferences.studentName = ""
                         startActivity(Intent(this, AuthenticationActivity::class.java))
                     }
-
-                } else {
-                    // Logout the user from session
-                    AppPreferences.isLogin = false
-                    AppPreferences.studentID = ""
-                    AppPreferences.studentName = ""
-                    startActivity(Intent(this, AuthenticationActivity::class.java))
                 }
+
+                logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                    logoutDialog.dismiss()
+                }
+
+                logoutDialog.show()
 
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
@@ -259,7 +275,6 @@ class StudentProfileActivity : AppCompatActivity() {
                             if(count.size == 1) {
 
                                 profileTextLayout.findViewById<TextView>(R.id.profileText).text = studentName[0].toString()
-
 
                             } else {
                                 val index = studentName?.lastIndexOf(' ')

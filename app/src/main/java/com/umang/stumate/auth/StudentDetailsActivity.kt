@@ -16,6 +16,8 @@ import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.modals.StudentData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_student_details.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -29,6 +31,7 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     private var CSE_DEPT = Pair("Computer Science Engineering", "CSE")
     private var IT_DEPT = Pair("Information Technology", "IT")
+    private var ECE_DEPT = Pair("Electronics and Communication Engineering", "ECE")
 
     private var FIRST_YEAR = Pair("1st Year", "1")
     private var SECOND_YEAR = Pair("2nd Year", "2")
@@ -75,12 +78,15 @@ class StudentDetailsActivity : AppCompatActivity() {
             } else if(isNullOrEmpty(studentPhoneNumber)) {
                 edtName.error = null
                 edtPhone.error = "Please enter Phone Number"
+            } else if(editPhone.length() !=10) {
+                edtPhone.error = null
+                edtPhone.error = "Please enter Valid Phone Number "
             } else if(isNullOrEmpty(collegeName)) {
                 edtPhone.error = null
                 edtCollegeName.error = "Please choose College Name"
             } else if(isNullOrEmpty(graduationYear)) {
                 edtCollegeName.error = null
-                edtGraduationYear.error = "Please enter Graduation Year E.g 2022"
+                edtGraduationYear.error = "Please choose current Studying Year"
             } else if(isNullOrEmpty(studentDept)) {
                 edtGraduationYear.error = null
                 edtDepartment.error = "Please choose Department"
@@ -89,6 +95,9 @@ class StudentDetailsActivity : AppCompatActivity() {
                 edtSection.error = "Please choose Section"
             } else {
                 edtSection.error = null
+
+                btnSubmit.isEnabled = false
+
                 val intent=intent
                 val email=intent.getStringExtra("Email")
                 val provider = intent.getStringExtra("provider")
@@ -102,8 +111,9 @@ class StudentDetailsActivity : AppCompatActivity() {
                 if(studentDept.toString().equals("Computer Science Engineering")) {
                     deptID = "CSE"
 
-                }
-                else {
+                } else if(studentDept.toString().equals("Electronics and Communication Engineering")) {
+                    deptID = "ECE"
+                } else {
                     deptID = IT_DEPT.second
 
                 }
@@ -184,7 +194,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         AppPreferences.studentEmailID = email.toString()
 
         // subscribing the student to his class topic
-        FirebaseMessaging.getInstance().subscribeToTopic("/topics/"+AppPreferences.studentID)
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/" + AppPreferences.studentID)
 
         startActivity(Intent(this, HomeActivity::class.java))
 
@@ -228,7 +238,7 @@ class StudentDetailsActivity : AppCompatActivity() {
 
 
     private fun setUpDepartmentList() {
-        val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first)
+        val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first,ECE_DEPT.first)
         val adapter = ArrayAdapter(
             this,
             R.layout.list_item, deptNames
@@ -244,5 +254,17 @@ class StudentDetailsActivity : AppCompatActivity() {
         )
         (sectionSpinner as? AutoCompleteTextView)?.setAdapter(adapter)
     }
+
+    private fun isValidName(name: String): Boolean {
+        val NAME_PATTERN = ("/^[A-Za-z]+$/")
+        val pattern: Pattern = Pattern.compile(NAME_PATTERN)
+        val matcher: Matcher = pattern.matcher(name)
+        return matcher.matches()
+    }
+
+    private infix fun Boolean.and(length: Int): Boolean {
+        return length != 10
+    }
+
 
 }

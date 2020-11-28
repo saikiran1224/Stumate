@@ -202,10 +202,10 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/googleSign"
                 android:layout_width="150dp"
-                android:background="@drawable/rounded_button"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/google" />

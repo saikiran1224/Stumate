@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.modals.StudentData
+import kotlinx.android.synthetic.main.activity_student_profile.*
+import kotlinx.android.synthetic.main.classmate_view_card.view.*
 
 class ClassMatesAdapter(val context: Context, private val classMatesList: ArrayList<StudentData>):
     RecyclerView.Adapter<ClassMatesAdapter.ViewHolder>() {
@@ -31,13 +33,27 @@ class ClassMatesAdapter(val context: Context, private val classMatesList: ArrayL
         val txtStudentName = itemView.findViewById(R.id.studentName) as TextView
         val txtMailId  = itemView.findViewById(R.id.mailID) as TextView
 
+        val profileText = itemView.profileTextLayout.findViewById(R.id.profileText) as TextView
+
 
         fun bindItems(classMates: StudentData) {
 
             txtStudentName.text = classMates.studentName
             txtMailId.text = classMates.emailID
 
+            val studentName = classMates.studentName
+            val count = classMates.studentName?.split(" ")!!.toTypedArray()
+
+            if(count.size == 1) {
+                profileText.text = studentName!![0].toString()
+            } else {
+                val index = studentName?.lastIndexOf(' ')
+                val firstName = index?.let { it1 -> studentName?.substring(0, it1) }
+                val lastName = index?.plus(1)?.let { it1 -> studentName?.substring(it1) }
+                profileText.text = firstName?.toString()!![0] + lastName!![0]?.toString()
+            }
         }
+
     }
 
 }
