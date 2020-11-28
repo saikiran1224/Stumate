@@ -147,6 +147,7 @@
                 android:textSize="16sp"
                 android:id="@+id/btnName"
                 android:textAllCaps="false"
+                android:layout_toEndOf="@id/forgotPassword"
                 android:background="@drawable/rounded_button"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
@@ -156,6 +157,17 @@
                 android:padding="10dp"
                 />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:layout_marginTop="42dp"
+                android:layout_below="@id/edtPassword"
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp"
+                android:id="@+id/forgotPassword"
+                android:layout_alignParentStart="false"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,6 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btnName"
                 android:layout_marginTop="30dp"
+                android:layout_marginStart="5dp"
                 android:layout_toRightOf="@id/newUserText"
                 android:layout_alignParentEnd="true"
                 android:text="Sign Up"
@@ -191,7 +204,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/singInText"
-            android:layout_below="@id/newUserText"
+            android:layout_below="@id/newUserTextSign"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="75dp" />
 

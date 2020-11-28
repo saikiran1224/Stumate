@@ -282,6 +282,7 @@ class UploadFilesActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
+            finish()
             
         }
 
@@ -393,6 +394,7 @@ class UploadFilesActivity : AppCompatActivity() {
                     val intent = Intent(this, HomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
+                    finish()
                     
                 }
                 dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
@@ -406,6 +408,7 @@ class UploadFilesActivity : AppCompatActivity() {
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
+                finish()
                 
             }
         }

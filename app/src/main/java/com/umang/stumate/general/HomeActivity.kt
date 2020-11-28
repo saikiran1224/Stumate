@@ -225,6 +225,7 @@ class HomeActivity : AppCompatActivity() {
                             val intent = Intent(this, AuthenticationActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                             startActivity(intent)
+                            finish()
                                                     }
                     } else {
                         // Logout the user from session
@@ -234,6 +235,7 @@ class HomeActivity : AppCompatActivity() {
                         val intent = Intent(this, AuthenticationActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                         startActivity(intent)
+                        finish()
                                             }
                 }
 

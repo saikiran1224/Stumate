@@ -1,16 +1,14 @@
 package com.umang.stumate.auth
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,6 +28,7 @@ import com.umang.stumate.modals.StudentData
 import com.umang.stumate.onboarding.GettingStartedActivity
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_authentication.*
+import kotlinx.android.synthetic.main.forgot_password_dialog.*
 import kotlinx.android.synthetic.main.progress_bar.*
 
 
@@ -70,6 +69,7 @@ class AuthenticationActivity : AppCompatActivity() {
        backButton.setOnClickListener{
             val intent = Intent(this, GettingStartedActivity::class.java)
             startActivity(intent)
+           finish()
         }
 
         // Changing the Sign in and Sign up Text here
@@ -83,6 +83,7 @@ class AuthenticationActivity : AppCompatActivity() {
             // Checking the Text
             if(newUserText.text.equals("Don't have an Account?")) {
 
+                forgotPassword.visibility  = View.GONE
                 // We need to change it to Sign in here since new user Text is Sign Up
                 welcomeText.text = "Create a new\nAccount"
                 btnSignUp.text = "\t\t\tSign up\t\t\t"
@@ -92,6 +93,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
             } else {
 
+                forgotPassword.visibility = View.VISIBLE
                 // We need to change it to Sign up here since new user Text is Sign in
                 welcomeText.text = "Here to Get\nWelcome"
                 btnSignUp.text = "\t\t\tSign in\t\t\t"
@@ -100,6 +102,43 @@ class AuthenticationActivity : AppCompatActivity() {
                 oAuthText.text = "Or Sign in with"
 
             }
+        }
+
+        forgotPassword.setOnClickListener{
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.forgot_password_dialog)
+            dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+            dialog.findViewById<Button>(R.id.btnSubmit).setOnClickListener{
+
+                val email = dialog.findViewById<EditText>(R.id.editResEmail).text.toString()
+
+
+                if(email.isEmpty()) {
+                    dialog.findViewById<EditText>(R.id.editResEmail).error = "Please enter Emailid"
+                } else if(!isValidEmail(email.toString())) {
+                    dialog.findViewById<EditText>(R.id.editResEmail).error = null
+                    dialog.findViewById<EditText>(R.id.editResEmail).error = "Please enter Valid Email Address"
+                } else {
+
+                    val firebaseAuth = FirebaseAuth.getInstance()
+                    firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this,"Password Reset mail sent successfully to your Mail ID",Toast.LENGTH_SHORT).show()
+                            dialog.dismiss()
+                        } else {
+                            val error = task.exception!!.message
+                            Toast.makeText(this, error, Toast.LENGTH_SHORT)
+                                .show()
+                            dialog.dismiss()
+                        }
+                    }
+                }
+
+            }
+
+
+            dialog.show()
+
         }
 
       newUserTextSign.setOnClickListener {
@@ -112,6 +151,7 @@ class AuthenticationActivity : AppCompatActivity() {
           // Checking the Text
           if(newUserText.text.equals("Don't have an Account?")) {
 
+              forgotPassword.visibility = View.GONE
               // We need to change it to Sign in here since new user Text is Sign Up
               welcomeText.text = "Create a new\nAccount"
               btnSignUp.text = "\t\t\tSign up\t\t\t"
@@ -121,6 +161,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
           } else {
 
+              forgotPassword.visibility = View.VISIBLE
               // We need to change it to Sign up here since new user Text is Sign in
               welcomeText.text = "Here to Get\nWelcome"
               btnSignUp.text = "\t\t\tSign in\t\t\t"
@@ -146,7 +187,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 edtPassword.error = "Please enter Password"
             } else if(editPasswordIn.length() < 8) {
                 edtPassword.error = null
-                edtPassword.error = "Password should be minimum of 8 Characters"
+                Toast.makeText(this, "Password should be minimum 8 characters!", Toast.LENGTH_LONG).show()
             }else {
 
                 edtEmailID.isEnabled = false
@@ -235,7 +276,10 @@ class AuthenticationActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this@AuthenticationActivity) { task ->
                                         if (task.isSuccessful) {
                                             // Sign in success, update UI with the signed-in user's information
-                                            val intent = Intent(this@AuthenticationActivity, StudentDetailsActivity::class.java)
+                                            val intent = Intent(
+                                                this@AuthenticationActivity,
+                                                StudentDetailsActivity::class.java
+                                            )
                                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                                             intent.putExtra("Email", editEmailIn.text.toString())
                                             intent.putExtra("provider", "FirebaseAuth")
@@ -254,7 +298,11 @@ class AuthenticationActivity : AppCompatActivity() {
                                             googleSign.isEnabled = true
 
                                             // If sign in fails, display a message to the user.
-                                            Toast.makeText(this@AuthenticationActivity, "You are already registered. Please log in with your Credentials...", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                this@AuthenticationActivity,
+                                                "You are already registered. Please log in with your Credentials...",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                             //updateUI(null)
                                             loadingProgress.visibility = View.GONE
 
@@ -389,6 +437,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         intent.putExtra("Email", user!!.email.toString())
                         intent.putExtra("provider", "Google")
                         startActivity(intent)
+                        finish()
                     } else {
                         retrieveStudentDetails(user!!.email.toString())
                     }

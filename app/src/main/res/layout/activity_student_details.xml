@@ -152,7 +152,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Graduation Year"
+                android:hint="Year of Study"
                 android:layout_below="@id/edtCollegeName"
                 android:layout_marginTop="25dp"
                 android:id="@+id/edtGraduationYear"

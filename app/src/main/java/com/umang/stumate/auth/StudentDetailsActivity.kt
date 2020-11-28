@@ -32,6 +32,10 @@ class StudentDetailsActivity : AppCompatActivity() {
     private var CSE_DEPT = Pair("Computer Science Engineering", "CSE")
     private var IT_DEPT = Pair("Information Technology", "IT")
     private var ECE_DEPT = Pair("Electronics and Communication Engineering", "ECE")
+    private var EEE_DEPT = Pair("Electrical and Electronics Engineering","EEE")
+    private var CIV_DEPT = Pair("Civil Engineering","CIV")
+    private var MECH_DEPT = Pair("Mechanical Engineering","MECH")
+    private var CHEM_DEPT = Pair("Chemical Engineering","CHEM")
 
     private var FIRST_YEAR = Pair("1st Year", "1")
     private var SECOND_YEAR = Pair("2nd Year", "2")
@@ -108,10 +112,18 @@ class StudentDetailsActivity : AppCompatActivity() {
 
                 if(studentDept.toString().equals("Computer Science Engineering")) {
                     deptID = "CSE"
-
                 } else if(studentDept.toString().equals("Electronics and Communication Engineering")) {
                     deptID = "ECE"
-                } else {
+                } else if(studentDept.toString().equals("Electrical and Electronics Engineering")) {
+                    deptID = "EEE"
+                }  else if(studentDept.toString().equals("Civil Engineering")) {
+                    deptID = "CIV"
+                }  else if(studentDept.toString().equals("Mechanical Engineering")) {
+                    deptID = "MECH"
+                }  else if(studentDept.toString().equals("Chemical Engineering")) {
+                    deptID = "CHEM"
+                }
+                else {
                     deptID = IT_DEPT.second
 
                 }
@@ -199,6 +211,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
+        finish()
 
 
     }
@@ -240,7 +253,7 @@ class StudentDetailsActivity : AppCompatActivity() {
 
 
     private fun setUpDepartmentList() {
-        val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first,ECE_DEPT.first)
+        val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first,ECE_DEPT.first,EEE_DEPT.first,CIV_DEPT.first,MECH_DEPT.first,CHEM_DEPT.first)
         val adapter = ArrayAdapter(
             this,
             R.layout.list_item, deptNames

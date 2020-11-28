@@ -457,16 +457,29 @@
                     android:layout_below="@id/feedbackDivider"
                     android:text="We will hear your Feedback and Suggestions and try to add new features based on your request. Thanks for using Stumate!" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="knvrssaikiran@gmail.com"
+                    android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+                    android:layout_below="@id/txtFeedDesc"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/emailID"
+                    android:layout_alignParentStart="true"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawablePadding="10dp" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Please give your valuable Feedback"
-                    android:layout_below="@id/txtFeedDesc"
+                    android:layout_below="@id/emailID"
                     android:id="@+id/edtFeedback"
                     android:background="@color/colorWhite"
                     app:endIconTint="#000"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"
                     android:visibility="visible"
                     app:errorEnabled="true"
