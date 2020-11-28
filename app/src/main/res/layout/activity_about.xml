@@ -57,7 +57,7 @@
                             android:gravity="center_vertical"
                             android:paddingStart="18dp"
                             android:paddingEnd="0dp"
-                            android:text="About Us"
+                            android:text="@string/about_us"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
                             android:fontFamily="@font/cabin"
@@ -103,15 +103,16 @@
                         android:layout_marginTop="15dp"
                         android:id="@+id/stumateWideBanner"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_centerHorizontal="true"
                         android:scaleType="centerInside"
-                        android:src="@drawable/stumate_wide" />
+                        android:src="@drawable/stumate_wide"
+                        android:contentDescription="@string/app_name" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Version 1.0.0"
+                        android:text="@string/version_1_0_0"
                         android:textSize="13sp"
 
                         android:id="@+id/versionNumber"
@@ -136,7 +137,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="10dp"
                             android:layout_centerHorizontal="false"
-                            android:text="About Stumate"
+                            android:text="@string/about_stumate"
                             android:layout_below="@id/versionNumber"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold"
@@ -158,9 +159,9 @@
                         android:layout_below="@id/aboutDivider"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Stumate is a realm for students who are willing to store all the Subject Files at a place. It acts like a Container and one can Filter Notes at any time with a Perfect Blend of Professionalism, We act as a Catalyst to bring the required change in the Society. "
+                        android:text="@string/stumate_is_a_realm_for_students_who_are_willing_to_store_all_the_subject_files_at_a_place_it_acts_like_a_container_and_one_can_filter_notes_at_any_time_with_a_perfect_blend_of_professionalism_we_act_as_a_catalyst_to_bring_the_required_change_in_the_society"
                         android:layout_marginRight="10dp"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp"
@@ -169,8 +170,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="&quot; Start Succeding Stop Seeking &quot;"
-                        android:textStyle="italic|bold"
+                        android:text="@string/quot_start_succeding_stop_seeking_quot"
+                        android:textStyle="bold"
                         android:textSize="16sp"
                         android:id="@+id/quote"
                         android:textColor="@color/colorPrimary"
@@ -191,7 +192,7 @@
                         android:id="@+id/txtDeveloped"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Developed by"
+                        android:text="@string/developed_by"
                         android:textStyle="bold"
                         android:layout_below="@id/divider"
                         android:layout_alignParentStart="true"
@@ -199,7 +200,7 @@
                         android:fontFamily="@font/cabin"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
-                        android:layout_marginLeft="10dp" />
+                        android:layout_marginStart="10dp" />
 
                     <View
                         android:layout_width="130dp"
@@ -240,7 +241,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mr. Saikiran Kopparthi"
+                            android:text="@string/mr_saikiran_kopparthi"
                             android:layout_toEndOf="@id/imageCard"
                             android:layout_marginTop="15dp"
                             android:layout_marginStart="25dp"
@@ -258,7 +259,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtName"
                             android:layout_toEndOf="@id/imageCard"
-                            android:text="\t3rd Year IT\t"
+                            android:text="@string/t3rd_year_it_t"
                             android:id="@+id/txtDept"
                             android:background="@drawable/blue_bg_textview"
                             android:textColor="@color/colorPrimary"
@@ -274,7 +275,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtName"
                             android:layout_toEndOf="@id/txtDept"
-                            android:text="Android Developer"
+                            android:text="@string/android_developer"
                             android:layout_alignParentEnd="true"
                             android:id="@+id/txtRole"
                             android:layout_marginTop="10dp"
@@ -326,7 +327,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Ms. Prathyusha Kuppili"
+                            android:text="@string/ms_prathyusha_kuppili"
                             android:layout_toEndOf="@id/imageCard2"
                             android:layout_marginTop="15dp"
                             android:layout_marginStart="25dp"
@@ -344,7 +345,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtName2"
                             android:layout_toEndOf="@id/imageCard2"
-                            android:text="\t3rd Year IT\t"
+                            android:text="@string/t3rd_year_it_t2"
                             android:id="@+id/txtDept2"
                             android:background="@drawable/blue_bg_textview"
                             android:textColor="@color/colorPrimary"
@@ -360,7 +361,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtName2"
                             android:layout_toEndOf="@id/txtDept2"
-                            android:text="Android Developer"
+                            android:text="@string/android_developer"
                             android:layout_alignParentEnd="true"
                             android:id="@+id/txtRole2"
                             android:layout_marginTop="10dp"
@@ -376,41 +377,6 @@
                     </RelativeLayout>
 
 
-
-
-
-
-                    <!--
-
-                    -->
-
-<!--
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Submit"
-                        android:layout_below="@id/edtFeedback"
-                        android:fontFamily="@font/cabin"
-                        android:id="@+id/btnSubmit"
-                        android:background="@drawable/rounded_button"
-                        android:layout_centerInParent="true"/>
--->
-
-<!--
-                    <TextView
-                        android:layout_marginTop="15dp"
-                        android:layout_below="@id/btnSubmit"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:padding="15dp"
-                        android:text="Our Team"
-                        android:background="@drawable/blue_bg_textview"
-                        android:fontFamily="@font/cabin"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorWhite"
-                        android:layout_marginLeft="10dp"/>
--->
-
                 </RelativeLayout>
 
                 <View
@@ -425,7 +391,7 @@
                     android:id="@+id/txtFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Submit Feedback"
+                    android:text="@string/submit_feedback"
                     android:textStyle="bold"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="15dp"
@@ -433,7 +399,7 @@
                     android:fontFamily="@font/cabin"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginStart="10dp" />
 
                 <View
                     android:layout_width="130dp"
@@ -455,32 +421,32 @@
                     android:layout_marginEnd="15dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/feedbackDivider"
-                    android:text="We will hear your Feedback and Suggestions and try to add new features based on your request. Thanks for using Stumate!" />
+                    android:text="@string/we_will_hear_your_feedback_and_suggestions_and_try_to_add_new_features_based_on_your_request_thanks_for_using_stumate" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="knvrssaikiran@gmail.com"
-                    android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+                    android:text="@string/knvrssaikiran_gmail_com"
                     android:layout_below="@id/txtFeedDesc"
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="10dp"
                     android:id="@+id/emailID"
                     android:layout_alignParentStart="true"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="10dp"
+                    app:drawableStartCompat="@drawable/ic_baseline_mail_outline_24"
+                    app:drawableTint="@color/colorPrimary" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please give your valuable Feedback"
+                    android:hint="@string/please_give_your_valuable_feedback"
                     android:layout_below="@id/emailID"
                     android:id="@+id/edtFeedback"
                     android:background="@color/colorWhite"
                     app:endIconTint="#000"
                     android:layout_marginTop="15dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:visibility="visible"
                     app:errorEnabled="true"
                     android:layout_marginEnd="15dp"
@@ -501,8 +467,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="Submit Feedback"
+                    android:text="@string/submit_feedback"
                     android:textAllCaps="false"
                     android:layout_alignParentStart="true"
                     android:id="@id/btnSubmit"

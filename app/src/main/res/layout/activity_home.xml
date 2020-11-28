@@ -32,9 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="25dp"
-                    android:text="Hi Saikiran Kopparthi"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -46,7 +45,7 @@
                     android:layout_below="@id/studentName"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Happy to help you!"
+                    android:text="@string/happy_to_help_you"
                     android:textSize="14sp" />
 
                 <include
@@ -65,7 +64,7 @@
                     android:layout_height="55dp"
                     android:layout_below="@id/happyText"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:focusableInTouchMode="false"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
@@ -74,7 +73,7 @@
                     android:backgroundTint="@android:color/background_light"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:drawablePadding="10dp"
-                    android:hint="Search Class Notes here..."
+                    android:hint="@string/search_class_notes_here"
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp" />
             </RelativeLayout>
@@ -94,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stumate News"
+                android:text="@string/stumate_news"
                 android:textStyle="bold"
                 android:id="@+id/stumateNews"
                 android:layout_below="@id/dashboardRecycler"

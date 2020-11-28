@@ -25,47 +25,47 @@
             android:id="@+id/classNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Class Notes"
+            android:text="@string/class_notes"
             android:textSize="18sp"
             android:padding="15dp"
             android:layout_marginTop="10dp"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/cabin"
-            android:drawableStart="@drawable/ic_baseline_menu_book_24"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:drawableTint="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_menu_book_24" />
 
         <TextView
             android:id="@+id/collegeMates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Class Mates"
+            android:text="@string/class_mates"
             android:layout_marginTop="5dp"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:textSize="18sp"
-            android:drawableStart="@drawable/ic_baseline_supervisor_account_24"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:drawableTint="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_supervisor_account_24" />
 
 
         <TextView
             android:id="@+id/remainders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reminders"
+            android:text="@string/reminders"
             android:layout_marginTop="5dp"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:textSize="18sp"
-            android:drawableStart="@drawable/ic_baseline_notifications_active_24"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:drawableTint="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_notifications_active_24" />
 
 
 
@@ -73,46 +73,46 @@
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile"
-            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:text="@string/profile"
             android:textSize="18sp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:padding="15dp"
-            android:drawableTint="@color/colorPrimary"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_person_24"
+            app:drawableTint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/logOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textSize="18sp"
-            android:drawableStart="@drawable/ic_baseline_login_24"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_login_24"
+            app:drawableTint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/rateUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="About Us"
+            android:text="@string/about_us"
             android:textSize="18sp"
             android:layout_marginTop="5dp"
-            android:drawableStart="@drawable/ic_baseline_rate_review_24"
-            android:drawableTint="@color/colorPrimary"
             android:layout_marginBottom="15dp"
             android:padding="15dp"
             android:fontFamily="@font/cabin"
             android:drawablePadding="15dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:drawableStartCompat="@drawable/ic_baseline_rate_review_24"
+            app:drawableTint="@color/colorPrimary" />
 
 
     </LinearLayout>

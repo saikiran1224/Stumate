@@ -29,13 +29,14 @@
             android:backgroundTint="@color/colorLightPrimary"
             android:padding="10dp"
             android:src="@drawable/ic_baseline_menu_book_24"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/colorPrimary"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Class Notes"
+            android:text="@string/class_notes"
             android:id="@+id/actionName"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"

@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saikiran Kopparthi"
+            android:text="@string/saikiran_kopparthi"
             android:textSize="20sp"
             android:layout_alignParentStart="true"
             android:id="@+id/studentName"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mailID"
-            android:text="knvrssaikiran@gmail.com"
+            android:text="@string/knvrssaikiran_gmail_com"
             android:textSize="16sp"
             android:layout_alignParentStart="true"
             android:layout_below="@id/studentName"

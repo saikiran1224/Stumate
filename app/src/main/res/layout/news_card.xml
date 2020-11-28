@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Version is Live!"
+                android:text="@string/new_version_is_live"
                 android:textColor="@color/colorPrimary"
                 android:id="@+id/news_title"
                 android:textSize="16sp"
@@ -52,7 +52,7 @@
                 android:textSize="12sp"
                 android:id="@+id/news_description"
                 android:layout_marginTop="10dp"
-                android:text="New UI and added facility to set Timely Reminders for Assignments" />
+                android:text="@string/new_ui_and_added_facility_to_set_timely_reminders_for_assignments" />
         </LinearLayout>
 
 

@@ -19,11 +19,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sampling Distribution Notes"
+            android:text="@string/sampling_distribution_notes"
             android:textStyle="bold"
             android:layout_marginStart="5dp"
             android:id="@+id/fileTitle"
-            android:layout_toLeftOf="@id/btnDownload"
+            android:layout_toStartOf="@id/btnDownload"
             android:minLines="2"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -42,12 +42,12 @@
             android:textColor="@color/colorPrimary"
             android:background="@drawable/rounded_button"
             android:layout_height="wrap_content"
-            android:text="\tProbability and Statistics\t" />
+            android:text="@string/tprobability_and_statistics_t" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_below="@id/fileTitle"
-            android:layout_toRightOf="@id/subjectName"
+            android:layout_toEndOf="@id/subjectName"
             android:padding="5dp"
             android:id="@+id/unitNumber"
             android:layout_marginTop="10dp"
@@ -58,12 +58,11 @@
             android:textColor="@color/colorPrimary"
             android:background="@drawable/rounded_button"
             android:layout_height="wrap_content"
-            android:text="\tUnit-1\t\t" />
+            android:text="@string/tunit_1_t_t" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTint="@color/colorWhite"
             android:padding="8dp"
             android:id="@+id/btnDownload"
             android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -73,16 +72,16 @@
             android:background="@drawable/rounded_button"
             android:drawablePadding="3dp"
             android:layout_centerHorizontal="true"
-            android:drawableStart="@drawable/ic_baseline_arrow_downward_24"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@id/btnShare"
-            android:layout_alignParentEnd="false" />
+            android:layout_toStartOf="@id/btnShare"
+            android:layout_alignParentEnd="false"
+            app:drawableTint="@color/colorWhite"
+            app:drawableStartCompat="@drawable/ic_baseline_arrow_downward_24" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:drawableTint="@color/colorWhite"
             android:padding="8dp"
             android:id="@+id/btnShare"
             android:textSize="16sp"
@@ -95,9 +94,10 @@
             android:background="@drawable/rounded_button"
             android:drawablePadding="3dp"
             android:layout_centerHorizontal="true"
-            android:drawableStart="@drawable/ic_baseline_share_24"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            app:drawableTint="@color/colorWhite"
+            app:drawableStartCompat="@drawable/ic_baseline_share_24" />
 
 
         <View
@@ -111,11 +111,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Posted by Saikiran Kopparthi 5 minutes ago"
+            android:text="@string/posted_by_saikiran_kopparthi_5_minutes_ago"
             android:layout_margin="10dp"
             android:textSize="13sp"
             android:id="@+id/studentName"
-            android:layout_toLeftOf="@id/deleteIcon"
+            android:layout_toStartOf="@id/deleteIcon"
             android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/horizontalDivider" />
@@ -123,11 +123,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete File"
+            android:text="@string/delete_file"
             android:gravity="center"
             android:textColor="@android:color/holo_red_dark"
-            android:drawableTint="@android:color/holo_red_dark"
-            android:drawableStart="@drawable/ic_baseline_delete_forever_24"
             android:id="@+id/deleteIcon"
             android:layout_margin="10dp"
             android:textSize="13sp"
@@ -137,7 +135,9 @@
             android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/horizontalDivider" />
+            android:layout_below="@id/horizontalDivider"
+            app:drawableTint="@android:color/holo_red_dark"
+            app:drawableStartCompat="@drawable/ic_baseline_delete_forever_24" />
 
         <TextView
             android:layout_width="wrap_content"

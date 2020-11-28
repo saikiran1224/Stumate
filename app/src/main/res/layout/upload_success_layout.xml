@@ -20,10 +20,7 @@
             android:id="@+id/animationView"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:layout_centerInParent="true"
             android:visibility="visible"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             app:lottie_url="https://assets10.lottiefiles.com/datafiles/OhIfcxnkLsj1Jxj/data.json"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"/>
@@ -35,7 +32,7 @@
             android:id="@+id/dialogText"
             android:gravity="center"
             android:textColor="@color/colorPrimaryDark"
-            android:text="File Published Successfully to your Class Group !"
+            android:text="@string/file_published_successfully_to_your_class_group"
             android:textSize="17sp"
             android:layout_margin="15dp" />
 

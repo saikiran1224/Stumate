@@ -14,11 +14,8 @@
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
         android:padding="50dp"
         app:lottie_rawRes="@raw/loading_anim"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
 

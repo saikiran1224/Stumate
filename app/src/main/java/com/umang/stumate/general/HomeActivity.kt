@@ -114,7 +114,7 @@ class HomeActivity : AppCompatActivity() {
             NewsData(
                 R.drawable.student,
                 "New Version is Live!",
-                "New UI and added facility to set Timely Reminders for Assignments"
+                "New UI and added facility to send Reminders for Assignments,Exams,etc."
             )
         )
         newsList.add(

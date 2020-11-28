@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:clickable="true"
     android:focusable="true"
@@ -23,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term Paper Review Scheduled"
+        android:text="@string/term_paper_review_scheduled"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textColor="@color/colorPrimary"
@@ -42,22 +43,22 @@
         android:autoLink="web"
         android:layout_below="@id/notificationTitle"
         android:layout_margin="5dp"
-        android:text="Hello Everyone, We have scheduled Term Paper review on Monday Morining at 9.00AM. Be ready Everyone!" />
+        android:text="@string/hello_everyone_we_have_scheduled_term_paper_review_on_monday_morining_at_9_00am_be_ready_everyone" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:textSize="12sp"
-        android:drawableStart="@drawable/ic_baseline_send_24"
-        android:text="Saikiran Kopparthi"
+        android:text="@string/saikiran_kopparthi"
         android:textStyle="italic"
         android:id="@+id/studentName"
         android:drawablePadding="3dp"
         android:gravity="center"
         android:layout_marginTop="4dp"
-        android:drawableTint="@color/colorPrimary"
-        android:layout_below="@id/notificationDescription" />
+        android:layout_below="@id/notificationDescription"
+        app:drawableStartCompat="@drawable/ic_baseline_send_24"
+        app:drawableTint="@color/colorPrimary" />
     </RelativeLayout>
 
     <View

@@ -139,9 +139,9 @@
                         android:id="@+id/txtProfileName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:visibility="visible"
-                        android:text="Name of Student"
+                        android:text="@string/name_of_student"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -151,19 +151,19 @@
                         android:id="@+id/profileName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Saikiran Kopparthi"
+                        android:text="@string/saikiran_kopparthi"
                         android:textSize="18sp"
                         android:visibility="visible"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtProfileName"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Name of Student"
+                        android:hint="@string/name_of_student"
                         android:id="@+id/edtStudentName"
                         android:background="@color/colorWhite"
                         app:endIconTint="#000"
@@ -192,11 +192,10 @@
                         android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content"
                         android:visibility="visible"
-                    android:layout_marginRight="5dp"
-                    android:layout_alignParentRight="true"
-                        android:drawableTint="@color/colorPrimary"
-                    android:drawableRight="@drawable/ic_baseline_person_24"
-                    android:padding="10dp" />
+                    android:layout_marginEnd="5dp"
+                        android:drawableEnd="@drawable/ic_baseline_person_24"
+                    android:padding="10dp"
+                        app:drawableTint="@color/colorPrimary" />
 
 
 
@@ -227,9 +226,9 @@
                         android:id="@+id/txtprofilePhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:visibility="visible"
-                        android:text="Phone Number"
+                        android:text="@string/phone_number"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -239,13 +238,13 @@
                         android:id="@+id/profilePhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+91 9381384234"
+                        android:text="@string/_91_9381384234"
                         android:visibility="visible"
                         android:textSize="18sp"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtprofilePhone"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
 
 
@@ -255,17 +254,16 @@
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
                         android:visibility="visible"
-                        android:layout_marginRight="5dp"
-                        android:layout_alignParentRight="true"
-                        android:drawableTint="@color/colorPrimary"
-                        android:drawableRight="@drawable/ic_baseline_local_phone_24"
+                        android:layout_marginEnd="5dp"
+                        app:drawableTint="@color/colorPrimary"
+                        android:drawableEnd="@drawable/ic_baseline_local_phone_24"
                         android:padding="10dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"
+                        android:hint="@string/phone_number"
                         android:id="@+id/edtPhoneNumber"
                         android:background="@color/colorWhite"
                         app:endIconTint="#000"
@@ -315,8 +313,8 @@
                         android:id="@+id/txtprofileEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Email ID"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/email_id"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -326,19 +324,19 @@
                         android:id="@+id/profileEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="knvrssaikiran@gmail.com"
+                        android:text="@string/knvrssaikiran_gmail_com"
                         android:textSize="18sp"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtprofileEmail"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
                     <TextView
                         android:id="@+id/txtpersonalEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Email ID"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/email_id"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -353,7 +351,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtprofileEmail"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
 
                     <TextView
@@ -361,10 +359,9 @@
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:drawableTint="@color/colorPrimary"
-                        android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_baseline_mark_email_read_24"
+                        android:layout_marginEnd="5dp"
+                        app:drawableTint="@color/colorPrimary"
+                        android:drawableEnd="@drawable/ic_baseline_mark_email_read_24"
                         android:padding="10dp" />
 
 
@@ -372,8 +369,8 @@
                         android:id="@+id/profileDownClose"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/profileDownArrow"
-                        android:drawableLeft="@drawable/ic_close"
+                        android:layout_toStartOf="@id/profileDownArrow"
+                        android:drawableStart="@drawable/ic_close"
                         android:padding="10dp"
                         android:visibility="gone"/>
 
@@ -401,8 +398,8 @@
                         android:id="@+id/txtprofileCollege"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Name of College"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/name_of_college"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -412,12 +409,12 @@
                         android:id="@+id/profileCollege"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GMR Institute of Technology"
+                        android:text="@string/gmr_institute_of_technology"
                         android:textSize="18sp"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtprofileCollege"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
 
 
@@ -426,19 +423,18 @@
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:drawableTint="@color/colorPrimary"
-                        android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_baseline_account_balance_24"
-                        android:padding="10dp" />
+                        android:layout_marginEnd="5dp"
+                        android:drawableEnd="@drawable/ic_baseline_account_balance_24"
+                        android:padding="10dp"
+                        app:drawableTint="@color/colorPrimary" />
 
 
                     <TextView
                         android:id="@+id/collegeProfileDownClose"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/collegeProfileDownArrow"
-                        android:drawableLeft="@drawable/ic_close"
+                        android:layout_toStartOf="@id/collegeProfileDownArrow"
+                        android:drawableStart="@drawable/ic_close"
                         android:padding="10dp"
                         android:visibility="gone"/>
 
@@ -465,8 +461,8 @@
                         android:id="@+id/txtprofileDeptSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Current Year and Department"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/current_year_and_department"
                         android:textAlignment="center"
                         android:layout_alignParentStart="true"
                         android:textColor="#000"
@@ -476,12 +472,12 @@
                         android:id="@+id/profileDeptSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3rd Year and Information Technology"
+                        android:text="@string/_3rd_year_and_information_technology"
                         android:textSize="18sp"
                         android:layout_marginTop="5dp"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/txtprofileDeptSection"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
 
 
 
@@ -490,19 +486,18 @@
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"
-                        android:drawableTint="@color/colorPrimary"
-                        android:layout_marginRight="5dp"
-                        android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_baseline_bookmark_24"
-                        android:padding="10dp" />
+                        android:layout_marginEnd="5dp"
+                        android:padding="10dp"
+                        app:drawableTint="@color/colorPrimary"
+                        app:drawableEndCompat="@drawable/ic_baseline_bookmark_24" />
 
 
                     <TextView
                         android:id="@+id/deptProfileDownClose"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/deptProfileDownArrow"
-                        android:drawableLeft="@drawable/ic_close"
+                        android:layout_toStartOf="@id/deptProfileDownArrow"
+                        android:drawableStart="@drawable/ic_close"
                         android:padding="10dp"
                         android:visibility="gone"/>
 
