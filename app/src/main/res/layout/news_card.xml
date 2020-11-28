@@ -43,13 +43,13 @@
                 android:text="New Version is Live!"
                 android:textColor="@color/colorPrimary"
                 android:id="@+id/news_title"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:id="@+id/news_description"
                 android:layout_marginTop="10dp"
                 android:text="New UI and added facility to set Timely Reminders for Assignments" />

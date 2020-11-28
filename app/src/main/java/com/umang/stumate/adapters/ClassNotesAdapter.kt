@@ -130,7 +130,7 @@ class ClassNotesAdapter(
                 }
                 query.addListenerForSingleValueEvent(deleteEventListener)
 
-                if(holder.txtStudentName.equals(studentNamePrefs)) {
+              /*  if(holder.txtStudentName.equals(studentNamePrefs)) {
                    holder.txtDeleteIcon.visibility = View.VISIBLE
                     Toast.makeText(context, "Authorized to delete", Toast.LENGTH_LONG).show()
 
@@ -138,7 +138,7 @@ class ClassNotesAdapter(
                     holder.txtDeleteIcon.visibility = View.GONE
                     Toast.makeText(context, "Not authorized to delete", Toast.LENGTH_LONG).show()
 
-                }
+                }*/
                 //  holder.bindItems(classNotesList[position], studentNamePrefs)
 
                 //Toast.makeText(context,""+classNotesList.size.toString(),Toast.LENGTH_LONG).show()
@@ -148,16 +148,8 @@ class ClassNotesAdapter(
                 deleteDialog.dismiss()
             }
 
-
             deleteDialog.show()
-
-
         }
-
-
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -181,8 +173,6 @@ class ClassNotesAdapter(
         fun bindItems(classNotes: FileUploadData, studentNamePrefs: String?) {
 
             @SuppressLint("SimpleDateFormat") val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-
-
 
             if(classNotes.studentName.toString().equals(studentNamePrefs.toString())) {
                 txtDeleteIcon.visibility= View.VISIBLE

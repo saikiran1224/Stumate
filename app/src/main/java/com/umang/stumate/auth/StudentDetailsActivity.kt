@@ -57,10 +57,10 @@ class StudentDetailsActivity : AppCompatActivity() {
         setUpDepartmentList()
         setUpSectionList()
         setUpYearList()
+
         database = Firebase.database.reference
 
         AppPreferences.init(this)
-
 
         btnSubmit.setOnClickListener {
             val studentName = editName.text
@@ -70,9 +70,7 @@ class StudentDetailsActivity : AppCompatActivity() {
             val studentDept = deptSpinner.text
             val studentSection = sectionSpinner.text
 
-
             //TODO: Phone Number (Only 10 Digits length!=10) and Name (only Characters allowed) Validation
-
             if(isNullOrEmpty(studentName)) {
                 edtName.error = "Please enter Name"
             } else if(isNullOrEmpty(studentPhoneNumber)) {
@@ -185,8 +183,8 @@ class StudentDetailsActivity : AppCompatActivity() {
             provider.toString()
 
         )
-        database.child("students_data").push().setValue(user)
 
+        database.child("students_data").push().setValue(user)
 
         AppPreferences.isLogin = true
         AppPreferences.studentName = name.toString()
@@ -196,9 +194,13 @@ class StudentDetailsActivity : AppCompatActivity() {
         // subscribing the student to his class topic
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/" + AppPreferences.studentID)
 
-        startActivity(Intent(this, HomeActivity::class.java))
-
         showToast("Details Submitted Successfully !")
+
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+
+
     }
 
 

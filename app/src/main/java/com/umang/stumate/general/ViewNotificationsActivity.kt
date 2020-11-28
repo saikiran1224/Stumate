@@ -38,7 +38,9 @@ class ViewNotificationsActivity : AppCompatActivity() {
         recyclerLayout.visibility = View.GONE
 
         closeButton.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
         }
 
 

@@ -279,7 +279,10 @@ class UploadFilesActivity : AppCompatActivity() {
 
         closeButton = findViewById(R.id.closeButton)
         closeButton.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            
         }
 
         deleteIcon.setOnClickListener {
@@ -387,8 +390,10 @@ class UploadFilesActivity : AppCompatActivity() {
                 dialog.setCancelable(false)
                 dialog.findViewById<MaterialButton>(R.id.back_to_home).setOnClickListener {
                     dialog.dismiss()
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    finish()
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
+                    
                 }
                 dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
@@ -397,9 +402,11 @@ class UploadFilesActivity : AppCompatActivity() {
                 // Handle failures
                 // ...
                 Toast.makeText(this, "Something Error Occurred !", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
 
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
             }
         }
 

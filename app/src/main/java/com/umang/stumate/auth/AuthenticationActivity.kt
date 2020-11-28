@@ -208,6 +208,7 @@ class AuthenticationActivity : AppCompatActivity() {
                                     val studentData = ds.getValue(StudentData::class.java)
                                     //User has already registered through normal EditText so prevent hin
                                     if(studentData!!.provider.toString().equals("Google")) {
+
                                         loadingProgress.visibility = View.GONE
                                         edtEmailID.isEnabled = true
                                         edtPassword.isEnabled = true
@@ -215,7 +216,6 @@ class AuthenticationActivity : AppCompatActivity() {
                                         newUserTextSign.isEnabled = true
                                         newUserText.isEnabled = true
                                         googleSign.isEnabled = true
-
 
 
                                         Toast.makeText(
@@ -235,17 +235,13 @@ class AuthenticationActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this@AuthenticationActivity) { task ->
                                         if (task.isSuccessful) {
                                             // Sign in success, update UI with the signed-in user's information
-                                            val intent = Intent(
-                                                this@AuthenticationActivity,
-                                                StudentDetailsActivity::class.java
-                                            )
+                                            val intent = Intent(this@AuthenticationActivity, StudentDetailsActivity::class.java)
+                                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                                             intent.putExtra("Email", editEmailIn.text.toString())
                                             intent.putExtra("provider", "FirebaseAuth")
                                             startActivity(intent)
 
-
                                             loadingProgress.visibility = View.GONE
-
 
                                             finish()
                                         } else {
@@ -258,13 +254,8 @@ class AuthenticationActivity : AppCompatActivity() {
                                             googleSign.isEnabled = true
 
                                             // If sign in fails, display a message to the user.
-                                            Toast.makeText(
-                                                this@AuthenticationActivity,
-                                                "You are already registered. Please log in with your Credentials...",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            Toast.makeText(this@AuthenticationActivity, "You are already registered. Please log in with your Credentials...", Toast.LENGTH_SHORT).show()
                                             //updateUI(null)
-
                                             loadingProgress.visibility = View.GONE
 
                                         }
@@ -394,6 +385,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     if(status.equals("NewUser")) {
                         val intent=Intent(applicationContext, StudentDetailsActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                         intent.putExtra("Email", user!!.email.toString())
                         intent.putExtra("provider", "Google")
                         startActivity(intent)
@@ -461,7 +453,9 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private fun sendIntent() {
 
-        startActivity(Intent(this, HomeActivity::class.java))
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
         finish()
     }
 

@@ -58,13 +58,17 @@ class ReminderActivity : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         closeButton.setOnClickListener {
-            startActivity(Intent(this,HomeActivity::class.java))
-        }
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+                    }
 
 
         remainderFAB.setOnClickListener {
-            startActivity(Intent(this, UploadFilesActivity::class.java))
-        }
+            val intent = Intent(this, UploadFilesActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+                    }
 
         remainderBottomNav.setOnClickListener {
             val dialog= BottomSheetDialog(this, R.style.BottomSheetDialog)
@@ -74,8 +78,10 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.homePage).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                startActivity(Intent(this, HomeActivity::class.java))
-
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -91,8 +97,10 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.classNotes).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                startActivity(Intent(this, ClassNotesActivity::class.java))
-
+                val intent = Intent(this, ClassNotesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -107,8 +115,10 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.remainders).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                startActivity(Intent(this, ReminderActivity::class.java))
-
+                val intent = Intent(this, ReminderActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -122,7 +132,10 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.profile).setTextColor(resources.getColor(R.color.colorPrimary))
 
-                startActivity(Intent(this, StudentProfileActivity::class.java))
+                val intent = Intent(this, StudentProfileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
 
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
@@ -140,8 +153,10 @@ class ReminderActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.rateUs).setTextColor(resources.getColor(R.color.colorPrimary))
                 //startActivity(Intent(this, StudentDetailsActivity::class.java))
 
-                startActivity(Intent(this, AboutActivity::class.java))
-
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
                 view.findViewById<TextView>(R.id.homePage).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
@@ -173,15 +188,19 @@ class ReminderActivity : AppCompatActivity() {
                             AppPreferences.isLogin = false
                             AppPreferences.studentID = ""
                             AppPreferences.studentName = ""
-                            startActivity(Intent(this, AuthenticationActivity::class.java))
-                        }
+                            val intent = Intent(this, AuthenticationActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            startActivity(intent)
+                                                    }
                     } else {
                         // Logout the user from session
                         AppPreferences.isLogin = false
                         AppPreferences.studentID = ""
                         AppPreferences.studentName = ""
-                        startActivity(Intent(this, AuthenticationActivity::class.java))
-                    }
+                        val intent = Intent(this, AuthenticationActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        startActivity(intent)
+                                            }
                 }
 
                 logoutDialog.findViewById<Button>(R.id.btnCancel).setOnClickListener {
@@ -200,8 +219,10 @@ class ReminderActivity : AppCompatActivity() {
             view.findViewById<TextView>(R.id.collegeMates).setOnClickListener {
                 view.findViewById<TextView>(R.id.collegeMates).setBackgroundResource(R.drawable.bottom_sheet_dialog_button)
                 view.findViewById<TextView>(R.id.collegeMates).setTextColor(resources.getColor(R.color.colorPrimary))
-                startActivity(Intent(this, ClassMatesActivity::class.java))
-
+                val intent = Intent(this, ClassMatesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                
                 view.findViewById<TextView>(R.id.classNotes).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.profile).setBackgroundResource(0)
                 view.findViewById<TextView>(R.id.remainders).setBackgroundResource(0)

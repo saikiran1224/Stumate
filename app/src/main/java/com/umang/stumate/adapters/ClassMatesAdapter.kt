@@ -35,7 +35,6 @@ class ClassMatesAdapter(val context: Context, private val classMatesList: ArrayL
 
         val profileText = itemView.profileTextLayout.findViewById(R.id.profileText) as TextView
 
-
         fun bindItems(classMates: StudentData) {
 
             txtStudentName.text = classMates.studentName

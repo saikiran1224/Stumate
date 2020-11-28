@@ -26,6 +26,8 @@ import com.umang.stumate.BuildConfig
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.firebase.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.umang.stumate.firebase.ScheduledWorker.Companion.NOTIFICATION_TITLE
+import com.umang.stumate.general.HomeActivity
+import com.umang.stumate.general.ViewNotificationsActivity
 import com.umang.stumate.utils.AppPreferences
 import com.umang.stumate.utils.NotificationUtil
 import com.umang.stumate.utils.isTimeAutomatic
@@ -48,7 +50,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 */
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        val intent = Intent(this, AuthenticationActivity::class.java)
+        val intent = Intent(this, ViewNotificationsActivity::class.java)
+        //startActivity(intent)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random().nextInt(3000)
 
@@ -63,7 +66,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
       */if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupChannels(notificationManager)
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.stumate)

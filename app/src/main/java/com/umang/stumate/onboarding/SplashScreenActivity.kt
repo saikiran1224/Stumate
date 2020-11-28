@@ -32,8 +32,8 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun launchMainActivity() {
-        var intent = Intent(this, GettingStartedActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        val intent = Intent(this, GettingStartedActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         this.finish()
         mDelayHandler!!.removeCallbacks(mRunnable)
@@ -63,7 +63,10 @@ class SplashScreenActivity : AppCompatActivity() {
 
             if(AppPreferences.isLogin) {
                 // user is logged in
-                startActivity(Intent(this,HomeActivity::class.java))
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                finish()
             } else {
                 launchMainActivity()
 

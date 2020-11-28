@@ -14,10 +14,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.umang.stumate.R
-import com.umang.stumate.general.ClassMatesActivity
-import com.umang.stumate.general.ClassNotesActivity
-import com.umang.stumate.general.ReminderActivity
-import com.umang.stumate.general.StudentProfileActivity
+import com.umang.stumate.general.*
 import com.umang.stumate.modals.DashboardIconData
 import java.io.File
 import java.io.FileOutputStream
@@ -44,39 +41,27 @@ class DashboardIconsAdapter(private val iconsList: ArrayList<DashboardIconData>)
 
         holder.dashboardCard.setOnClickListener{
             if(holder.textActionName.text.equals("Class Notes")) {
-                holder.textActionName.context.startActivity(
-                    Intent(
-                        holder.textActionName.context,
-                        ClassNotesActivity::class.java
-                    )
-                )
+                val intent = Intent(holder.textActionName.context, ClassNotesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                holder.textActionName.context.startActivity(intent)
             }
 
             if(holder.textActionName.text.equals("Class Mates")) {
-                holder.textActionName.context.startActivity(
-                    Intent(
-                        holder.textActionName.context,
-                        ClassMatesActivity::class.java
-                    )
-                )
+                val intent = Intent(holder.textActionName.context, ClassMatesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                holder.textActionName.context.startActivity(intent)
             }
 
             if(holder.textActionName.text.equals("Reminders")) {
-                holder.textActionName.context.startActivity(
-                    Intent(
-                        holder.textActionName.context,
-                        ReminderActivity::class.java
-                    )
-                )
+                val intent = Intent(holder.textActionName.context, ReminderActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                holder.textActionName.context.startActivity(intent)
             }
 
             if(holder.textActionName.text.equals("Profile")) {
-                holder.textActionName.context.startActivity(
-                    Intent(
-                        holder.textActionName.context,
-                        StudentProfileActivity::class.java
-                    )
-                )
+                val intent = Intent(holder.textActionName.context, StudentProfileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                holder.textActionName.context.startActivity(intent)
             }
 
         }
