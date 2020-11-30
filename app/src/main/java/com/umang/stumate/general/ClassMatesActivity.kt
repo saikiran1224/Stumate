@@ -271,7 +271,10 @@ class ClassMatesActivity : AppCompatActivity() {
                         }
                     }
                     val classMatesAdapter = ClassMatesAdapter(baseContext,classMatesList)
+                    linearLayoutManager.reverseLayout = true
+                    linearLayoutManager.stackFromEnd = true
                     classMatesRecycler.layoutManager = linearLayoutManager
+                    classMatesRecycler.setHasFixedSize(true)
                     classMatesRecycler.adapter = classMatesAdapter
 
                 } else {

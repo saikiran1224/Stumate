@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,6 +30,9 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_about)
 
         AppPreferences.init(this)
+
+        Glide.with(this).load(R.drawable.saikiran).into(imageView)
+        Glide.with(this).load(R.drawable.prathyushanew).into(imageView2)
 
         closeButton.setOnClickListener{
             val intent = Intent(this,HomeActivity::class.java)
