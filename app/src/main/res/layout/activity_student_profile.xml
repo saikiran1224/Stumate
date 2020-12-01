@@ -179,7 +179,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/editStudentName"
-                            android:inputType="text"
+                            android:inputType="textPersonName"
                             android:background="@color/colorGrey"
                             android:textColor="#000" />
 
