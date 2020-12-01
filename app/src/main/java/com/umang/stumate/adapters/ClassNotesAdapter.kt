@@ -2,6 +2,7 @@ package com.umang.stumate.adapters
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +10,6 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -62,9 +62,24 @@ class ClassNotesAdapter(
                 //context.startActivity(i)
             }*/
 
+
+
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(holder.fileURL.text.toString())))
 
             //Toast.makeText(context, "Please see Notifications for Downloaded File after clicked on the Browser", Toast.LENGTH_LONG).show()
+        }
+
+        holder.viewPdfButton.setOnClickListener {
+              val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(Uri.parse(holder.fileURL.text.toString()), "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            val newIntent = Intent.createChooser(intent, "Open File")
+            try {
+                context.startActivity(newIntent)
+            } catch (e: ActivityNotFoundException) {
+                // Instruct the user to install a PDF reader here, or something
+                Toast.makeText(context,"Your phone has not installed PDF Viewer. Please download the File.",Toast.LENGTH_LONG).show()
+            }
         }
 
         holder.fileShareButton.setOnClickListener {
@@ -165,6 +180,7 @@ class ClassNotesAdapter(
         val txtDeleteIcon  = itemView.findViewById(R.id.deleteIcon) as TextView
         val downloadButton = itemView.findViewById(R.id.btnDownload) as TextView
         val fileShareButton = itemView.findViewById(R.id.btnShare) as TextView
+        val viewPdfButton = itemView.findViewById(R.id.btnView) as TextView
 
         // Invisible Text View holding file Download URL
         val fileURL = itemView.findViewById(R.id.txtInvisibleURL) as TextView
