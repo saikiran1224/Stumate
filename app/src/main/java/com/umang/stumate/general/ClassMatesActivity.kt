@@ -271,11 +271,15 @@ class ClassMatesActivity : AppCompatActivity() {
                         }
                     }
                     val classMatesAdapter = ClassMatesAdapter(baseContext,classMatesList)
+
+                    linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
                     linearLayoutManager.reverseLayout = true
                     linearLayoutManager.stackFromEnd = true
                     classMatesRecycler.layoutManager = linearLayoutManager
+
                     classMatesRecycler.setHasFixedSize(true)
                     classMatesRecycler.adapter = classMatesAdapter
+                    classMatesAdapter.notifyDataSetChanged()
 
                 } else {
                     animationView.visibility = View.GONE

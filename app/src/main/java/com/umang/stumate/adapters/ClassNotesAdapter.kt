@@ -7,19 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
 import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
@@ -64,22 +67,62 @@ class ClassNotesAdapter(
 
 
 
-            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(holder.fileURL.text.toString())))
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(holder.fileURL.text.toString())
+                )
+            )
 
             //Toast.makeText(context, "Please see Notifications for Downloaded File after clicked on the Browser", Toast.LENGTH_LONG).show()
         }
 
         holder.viewPdfButton.setOnClickListener {
-              val intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(Uri.parse(holder.fileURL.text.toString()), "application/pdf")
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            val newIntent = Intent.createChooser(intent, "Open File")
-            try {
-                context.startActivity(newIntent)
-            } catch (e: ActivityNotFoundException) {
-                // Instruct the user to install a PDF reader here, or something
-                Toast.makeText(context,"Your phone has not installed PDF Viewer. Please download the File.",Toast.LENGTH_LONG).show()
-            }
+
+            // creating an Reference of the Object in Storage
+            val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(holder.fileURL.text.toString())
+
+            storageReference.getMetadata()
+                .addOnSuccessListener(OnSuccessListener<StorageMetadata> { storageMetadata -> //here, storageMetadata contains all details about your file stored on FirebaseStorage
+                    Log.i("tag", "name of file: " + storageMetadata.name)
+                    Log.i("tag", "size of file in bytes: " + storageMetadata.sizeBytes)
+                    Log.i("tag", "content type of file: " + storageMetadata.contentType)
+
+                    // Creating a chooser for User
+                    val intent = Intent(Intent.ACTION_VIEW)
+
+                    // Checking the file type to filter the options in Chooser
+                    if (storageMetadata.contentType?.startsWith("image") == true) {
+                        intent.setDataAndType(Uri.parse(holder.fileURL.text.toString()), "image/*")
+                    } else if(storageMetadata.contentType?.startsWith("application") == true) {
+                        intent.setDataAndType(Uri.parse(holder.fileURL.text.toString()), "application/*")
+                    } else {
+                        Toast.makeText(context, "Sorry Your Phone has not Supported application to open this File", Toast.LENGTH_LONG).show()
+                    }
+
+
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+                    // Creating an Intent
+                    val newIntent = Intent.createChooser(intent, "Open File")
+                    try {
+                        context.startActivity(newIntent)
+                    } catch (e: ActivityNotFoundException) {
+                        // Instruct the user to install a PDF reader here, or something
+                        Toast.makeText(
+                            context,
+                            "Your phone has not Supported Applications",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+
+                })
+                .addOnFailureListener(OnFailureListener { exception -> // Uh-oh, an error occurred!
+                    Toast.makeText(context,exception.localizedMessage.toString(),Toast.LENGTH_LONG).show()
+                })
+
+
         }
 
         holder.fileShareButton.setOnClickListener {
@@ -190,7 +233,7 @@ class ClassNotesAdapter(
 
             @SuppressLint("SimpleDateFormat") val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 
-            if(classNotes.studentName.toString().equals(studentNamePrefs.toString())) {
+            if(classNotes.toString().equals(studentNamePrefs.toString())) {
                 txtDeleteIcon.visibility= View.VISIBLE
             } else {
                 txtDeleteIcon.visibility = View.GONE
@@ -213,7 +256,11 @@ class ClassNotesAdapter(
 
             txtFileName.text = classNotes.fileName
             txtSubjectName.text = classNotes.subjectName
-            txtUnitName.text = "Unit-" + classNotes.unitNumber.toString()
+            if(classNotes.unitNumber.toString().equals("Other Files")) {
+                txtUnitName.text = "Other Files"
+            } else {
+                txtUnitName.text = "Unit-" + classNotes.unitNumber.toString()
+            }
             fileURL.text = classNotes.fileURL
         }
     }

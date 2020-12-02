@@ -2,7 +2,6 @@ package com.umang.stumate.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -67,17 +66,20 @@ class StudentDetailsActivity : AppCompatActivity() {
         AppPreferences.init(this)
 
         btnSubmit.setOnClickListener {
-            val studentName = editName.text
-            val studentPhoneNumber = editPhone.text
-            val collegeName = collegeList.text
-            val graduationYear = yearsList.text
-            val studentDept = deptSpinner.text
-            val studentSection = sectionSpinner.text
+            val studentName = editName.text.toString().trim()
+            val studentPhoneNumber = editPhone.text.toString().trim()
+            val collegeName = collegeList.text.toString().trim()
+            val graduationYear = yearsList.text.toString().trim()
+            val studentDept = deptSpinner.text.toString().trim()
+            val studentSection = sectionSpinner.text.toString().trim()
 
             //TODO: Phone Number (Only 10 Digits length!=10) and Name (only Characters allowed) Validation
             if(isNullOrEmpty(studentName)) {
                 edtName.error = "Please enter Name"
-            } else if(isNullOrEmpty(studentPhoneNumber)) {
+            } else if(!isValidName(studentName.toString())) {
+                edtName.error = null
+                edtName.error = "Name should be only Alphabets"
+            }else if(isNullOrEmpty(studentPhoneNumber)) {
                 edtName.error = null
                 edtPhone.error = "Please enter Phone Number"
             } else if(editPhone.length() !=10) {
@@ -97,7 +99,6 @@ class StudentDetailsActivity : AppCompatActivity() {
                 edtSection.error = "Please choose Section"
             } else {
                 edtSection.error = null
-
                 btnSubmit.isEnabled = false
 
                 val intent=intent
@@ -105,10 +106,9 @@ class StudentDetailsActivity : AppCompatActivity() {
                 val provider = intent.getStringExtra("provider")
 
                 val collegeID: String
-                var deptID: String
-                var yearID: String
-                var sectionID: String
-
+                val deptID: String
+                val yearID: String
+                val sectionID: String
 
                 if(studentDept.toString().equals("Computer Science Engineering")) {
                     deptID = "CSE"
@@ -174,28 +174,16 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     private fun writeNewUser(
         userId: String,
-        name: Editable?,
+        name: String,
         email: String?,
-        phone: Editable?,
-        collegeName: Editable?,
-        graduationYear: Editable?,
-        studentDept: Editable?,
-        studentSection: Editable?,
+        phone: String,
+        collegeName: String,
+        graduationYear: String,
+        studentDept: String,
+        studentSection: String,
         provider: String?
     ) {
-        val user = StudentData(
-            userId,
-            name.toString(),
-            email.toString(),
-            phone.toString(),
-            collegeName.toString(),
-            graduationYear.toString(),
-            studentDept.toString(),
-            studentSection.toString(),
-            provider.toString()
-
-        )
-
+        val user = StudentData(userId, name.toString(), email.toString(), phone.toString(), collegeName.toString(), graduationYear.toString(), studentDept.toString(), studentSection.toString(), provider.toString())
         database.child("students_data").push().setValue(user)
 
         AppPreferences.isLogin = true
@@ -216,9 +204,7 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     }
 
-
-
-    private fun isNullOrEmpty(str: Editable?): Boolean {
+    private fun isNullOrEmpty(str: String): Boolean {
         if (str != null && !str.trim().isEmpty())
             return false
         return true
@@ -251,7 +237,6 @@ class StudentDetailsActivity : AppCompatActivity() {
         (yearsList as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
-
     private fun setUpDepartmentList() {
         val deptNames = listOf(CSE_DEPT.first, IT_DEPT.first,ECE_DEPT.first,EEE_DEPT.first,CIV_DEPT.first,MECH_DEPT.first,CHEM_DEPT.first)
         val adapter = ArrayAdapter(
@@ -271,7 +256,7 @@ class StudentDetailsActivity : AppCompatActivity() {
     }
 
     private fun isValidName(name: String): Boolean {
-        val NAME_PATTERN = ("/^[A-Za-z]+$/")
+        val NAME_PATTERN = ("^[A-Z a-z]+$")
         val pattern: Pattern = Pattern.compile(NAME_PATTERN)
         val matcher: Matcher = pattern.matcher(name)
         return matcher.matches()

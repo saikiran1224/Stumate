@@ -231,9 +231,10 @@
 
                              <ImageView
                                  android:layout_width="90dp"
-                                 android:scaleType="center"
                                  android:layout_height="90dp"
                                  android:id="@+id/imageView"
+                                 android:src="@drawable/saikiran"
+                                 android:scaleType="centerCrop"
                                  android:contentDescription="@string/app_name" />
                         </androidx.cardview.widget.CardView>
 
@@ -316,9 +317,10 @@
 
                             <ImageView
                                 android:layout_width="90dp"
-                                android:scaleType="center"
+                                android:src="@drawable/prathyushanew"
                                 android:contentDescription="@string/app_name"
                                 android:layout_height="90dp"
+                                android:scaleType="centerCrop"
                                 android:id="@+id/imageView2" />
 
                         </androidx.cardview.widget.CardView>

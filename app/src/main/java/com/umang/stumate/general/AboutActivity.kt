@@ -31,8 +31,8 @@ class AboutActivity : AppCompatActivity() {
 
         AppPreferences.init(this)
 
-        Glide.with(this).load(R.drawable.saikiran).into(imageView)
-        Glide.with(this).load(R.drawable.prathyushanew).into(imageView2)
+       /* Glide.with(this).load(R.drawable.saikiran).into(imageView)
+        Glide.with(this).load(R.drawable.prathyushanew).into(imageView2)*/
 
         closeButton.setOnClickListener{
             val intent = Intent(this,HomeActivity::class.java)

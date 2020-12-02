@@ -329,7 +329,7 @@ class StudentProfileActivity : AppCompatActivity() {
                                 profileIcon.visibility = View.GONE
 
                                 edtStudentName.visibility = View.VISIBLE
-                                editStudentName.setText(studentName.toString())
+                                editStudentName.setText(studentData.studentName.toString())
 
                                 txtprofilePhone.visibility = View.GONE
                                 profilePhone.visibility = View.GONE
@@ -346,7 +346,7 @@ class StudentProfileActivity : AppCompatActivity() {
 
 
                                 val studentName = editStudentName.text!!.trim().toString()
-                                val phoneNumber = editPhoneNumber.text!!
+                                val phoneNumber = editPhoneNumber.text!!.trim().toString()
 
                                 if(studentName.isEmpty()) {
                                     edtStudentName.error = "Please enter Student Name"
@@ -370,9 +370,30 @@ class StudentProfileActivity : AppCompatActivity() {
                                             studentData.collegeName.toString(),
                                             studentData.graduationYear.toString(),
                                             studentData.studentDept.toString(),
-                                            studentData.studentSection.toString()
+                                            studentData.studentSection.toString(),
+                                            studentData.provider.toString()
                                         )
                                     )
+
+                                    profileTextLayout.findViewById<TextView>(R.id.editProfile).visibility = View.VISIBLE
+
+                                    saveProfile.visibility = View.GONE
+
+                                    profileName.visibility = View.VISIBLE
+                                    txtProfileName.visibility = View.VISIBLE
+                                    profileName.text = studentName
+                                    profileIcon.visibility = View.VISIBLE
+
+                                    edtStudentName.visibility = View.GONE
+
+                                    txtprofilePhone.visibility = View.VISIBLE
+                                    profilePhone.text = phoneNumber.toString().trim()
+                                    profilePhone.visibility = View.VISIBLE
+                                    profilePhoneIcon.visibility = View.VISIBLE
+
+                                    edtPhoneNumber.visibility = View.GONE
+
+
 
                                     startActivity(
                                         Intent(
@@ -380,6 +401,8 @@ class StudentProfileActivity : AppCompatActivity() {
                                             HomeActivity::class.java
                                         )
                                     )
+
+
 
 
                                     Toast.makeText(
