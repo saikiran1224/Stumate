@@ -233,7 +233,7 @@ class ClassNotesAdapter(
 
             @SuppressLint("SimpleDateFormat") val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 
-            if(classNotes.toString().equals(studentNamePrefs.toString())) {
+            if(classNotes.studentName.toString().equals(studentNamePrefs.toString())) {
                 txtDeleteIcon.visibility= View.VISIBLE
             } else {
                 txtDeleteIcon.visibility = View.GONE
