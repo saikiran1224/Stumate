@@ -6,6 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.modals.StudentData
@@ -22,6 +28,7 @@ class ClassMatesAdapter(val context: Context, private val classMatesList: ArrayL
 
     override fun onBindViewHolder(holder: ClassMatesAdapter.ViewHolder, position: Int) {
         holder.bindItems(classMatesList[position])
+
     }
 
     override fun getItemCount(): Int {

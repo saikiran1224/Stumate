@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Stumate</string>
+
+
+
     <string name="backbutton">BackButton</string>
     <string name="here_to_get_nwelcome">Here To Get\nWelcome!</string>
     <string name="default_notification_channel_id">admin_channel</string>
@@ -96,4 +99,15 @@
     <string name="new_version_is_live">New Version is Live!</string>
     <string name="new_ui_and_added_facility_to_set_timely_reminders_for_assignments">New UI and added facility to set Timely Reminders for Assignments</string>
     <string name="file_published_successfully_to_your_class_group">File Published Successfully to your Class Group !</string>
+
+    <string name="admob_app_id">ca-app-pub-2425059000755769~9451688304</string>
+    <string name="admob_banner_id">ca-app-pub-2425059000755769/4087680989</string>
+    <string name="admob_large_banner">ca-app-pub-2425059000755769/5578718442</string>
+
+    <!--Testing IDs-->
+    <!--<string name="admob_test_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_test_banner">ca-app-pub-3940256099942544/6300978111</string>
+-->
+
+
 </resources>

@@ -247,7 +247,7 @@ class ClassNotesAdapter(
                     Calendar.getInstance().getTimeInMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 ).toString()
-                txtStudentName.text = "Posted by " + classNotes.studentName.toString() + " " + niceDateStr.toString()
+                txtStudentName.text = "Posted by " + classNotes.studentName.toString() + " | " + niceDateStr.toString()
 
             } catch (e: ParseException) {
                 e.printStackTrace()

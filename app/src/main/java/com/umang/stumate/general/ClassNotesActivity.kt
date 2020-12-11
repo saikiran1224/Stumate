@@ -13,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -26,7 +28,11 @@ import com.umang.stumate.adapters.ClassNotesAdapter
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.modals.FileUploadData
 import com.umang.stumate.utils.AppPreferences
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_class_notes.*
+import kotlinx.android.synthetic.main.activity_class_notes.adView
+import kotlinx.android.synthetic.main.activity_class_notes.closeButton
+import kotlinx.android.synthetic.main.activity_class_notes.divider
 import kotlinx.android.synthetic.main.activity_class_notes.searchEditText
 
 
@@ -54,6 +60,12 @@ class ClassNotesActivity : AppCompatActivity() {
 
         AppPreferences.init(this)
 
+        // Google AdMob
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+
         closeButton.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -66,11 +78,11 @@ class ClassNotesActivity : AppCompatActivity() {
         // ClassNotesAdapter Layout Manager
         linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        linearLayoutManager.reverseLayout = false
+        linearLayoutManager.reverseLayout = true
 
 
         sortbyDate.setOnClickListener {
-            linearLayoutManager.reverseLayout = true
+            Toast.makeText(this, "Already Sorted by Date!", Toast.LENGTH_LONG).show()
         }
 
         val  intent = intent
@@ -323,7 +335,7 @@ class ClassNotesActivity : AppCompatActivity() {
                             classNotesAdapter = ClassNotesAdapter(this@ClassNotesActivity, classNotesList, AppPreferences.studentName.toString(), AppPreferences.studentID.toString())
 
                             classNotesRecycler.setHasFixedSize(true)
-                            linearLayoutManager.reverseLayout = false
+                            linearLayoutManager.reverseLayout = true
                             linearLayoutManager.stackFromEnd = true
                             linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
 

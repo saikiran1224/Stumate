@@ -53,6 +53,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    // Google Ads
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+
+
 
 
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
