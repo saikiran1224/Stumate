@@ -5,10 +5,17 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View.*
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,8 +24,10 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.umang.stumate.R
 import com.umang.stumate.modals.FileUploadData
+import com.umang.stumate.modals.NotificationData
 import com.umang.stumate.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_upload_files.*
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +42,13 @@ class UploadFilesActivity : AppCompatActivity() {
 
     private  var unitNumber: String? = ""
     private  var fileType: String? = ""
+
+    private val TAG = "TOKENS_DATA"
+    private val FCM_API = "https://fcm.googleapis.com/fcm/send"
+    private val serverKey = "key=" + AppPreferences.AUTH_KEY_FCM
+    private val contentType = "application/json"
+    var TOPIC: String? = null
+
 
     lateinit var uri : Uri
     lateinit var mStorage : StorageReference
@@ -385,20 +401,73 @@ class UploadFilesActivity : AppCompatActivity() {
                     fileData
                 )
 
-                var dialog = Dialog(this)
-                dialog.setContentView(R.layout.upload_success_layout)
-                dialog.setCanceledOnTouchOutside(false)
-                dialog.setCancelable(false)
-                dialog.findViewById<MaterialButton>(R.id.back_to_home).setOnClickListener {
-                    dialog.dismiss()
-                    val intent = Intent(this, HomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    startActivity(intent)
-                    finish()
-                    
+
+
+                try {
+                    val queue = Volley.newRequestQueue(this)
+                    val url = "https://fcm.googleapis.com/fcm/send"
+
+
+                    TOPIC = "/topics/"+AppPreferences.studentID
+
+                    val data = JSONObject()
+                    data.put("title",  AppPreferences.studentName + " Uploaded a File!" )
+                    data.put("message", fileName + " of " + subjectName + " Uploaded into Stumate" + "\nPlease tap here to open the Class Notes Page")
+
+                    Log.e(TAG, "" + data)
+
+                    val notification_data = JSONObject()
+                    notification_data.put("data", data)
+                    notification_data.put("to", TOPIC)
+
+                    Log.e(TAG, "" + notification_data)
+                    val request: JsonObjectRequest = object :
+                        JsonObjectRequest(url, notification_data, object :
+                            Response.Listener<JSONObject?> {
+                            override fun onResponse(response: JSONObject?) {
+
+                                var dialog = Dialog(this@UploadFilesActivity)
+                                dialog.setContentView(R.layout.upload_success_layout)
+                                dialog.setCanceledOnTouchOutside(false)
+                                dialog.setCancelable(false)
+                                dialog.findViewById<MaterialButton>(R.id.back_to_home).setOnClickListener {
+                                    dialog.dismiss()
+                                    val intent = Intent(this@UploadFilesActivity, HomeActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                                    startActivity(intent)
+                                    finish()
+
+                                }
+                                dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+                                dialog.show()
+
+
+                                // Toast.makeText(baseContext, "Notification sent Successfully to all the Class Mates!", Toast.LENGTH_LONG).show()
+                            }
+                        }, object : Response.ErrorListener {
+                            override fun onErrorResponse(error: VolleyError?) {
+                                Toast.makeText(
+                                    baseContext,
+                                    "Error:   " + error.toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                        }) {
+                        override fun getHeaders(): Map<String, String> {
+                            val params: MutableMap<String, String> = HashMap()
+                            params["Authorization"] = serverKey
+                            params["Content-Type"] = contentType
+                            return params
+                        }
+                    }
+                    queue.add(request)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-                dialog.show()
+
+
 
             } else {
                 // Handle failures

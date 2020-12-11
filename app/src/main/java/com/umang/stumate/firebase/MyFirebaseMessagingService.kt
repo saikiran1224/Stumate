@@ -16,6 +16,7 @@ import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -26,6 +27,7 @@ import com.umang.stumate.BuildConfig
 import com.umang.stumate.auth.AuthenticationActivity
 import com.umang.stumate.firebase.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.umang.stumate.firebase.ScheduledWorker.Companion.NOTIFICATION_TITLE
+import com.umang.stumate.general.ClassNotesActivity
 import com.umang.stumate.general.HomeActivity
 import com.umang.stumate.general.ViewNotificationsActivity
 import com.umang.stumate.utils.AppPreferences
@@ -50,7 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 */
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        val intent = Intent(this, ViewNotificationsActivity::class.java)
+
         //startActivity(intent)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random().nextInt(3000)
@@ -60,12 +62,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val message = remoteMessage.data["message"]
 
 
+
+        var intent: Intent? = null
+
+        if(title!!.contains("Uploaded a File!")) {
+           intent = Intent(this, ClassNotesActivity::class.java)
+        } else {
+           intent = Intent(this, ViewNotificationsActivity::class.java)
+
+        }
+
+
         /*
         Apps targeting SDK 26 or above (Android O) must implement notification channels and add its notifications
         to at least one of them. Therefore, confirm if version is Oreo or higher, then setup notification channel
       */if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupChannels(notificationManager)
         }
+
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.stumate)
