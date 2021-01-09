@@ -30,7 +30,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class ClassNotesAdapter(
     val context: Context,
     private var classNotesList: ArrayList<FileUploadData>,

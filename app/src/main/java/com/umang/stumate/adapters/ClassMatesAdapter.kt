@@ -28,7 +28,6 @@ class ClassMatesAdapter(val context: Context, private val classMatesList: ArrayL
 
     override fun onBindViewHolder(holder: ClassMatesAdapter.ViewHolder, position: Int) {
         holder.bindItems(classMatesList[position])
-
     }
 
     override fun getItemCount(): Int {
