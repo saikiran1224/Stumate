@@ -15,7 +15,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/saikiran1224/Stumate?color=red&logo=github&style=for-the-badge) &nbsp;
 ![GitHub forks](https://img.shields.io/github/forks/saikiran1224/Stumate?color=red&logo=github&style=for-the-badge) 
 <br/><br/>
-<a href='https://play.google.com/store/apps/details?id=com.umang.stumate&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="35%" ></a>
+<center><a href='https://play.google.com/store/apps/details?id=com.umang.stumate&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="35%"></a></center>
 
 </center>
 
@@ -28,7 +28,7 @@
 
 <br/>
 
->  <h3>This app got featured in the <a href="">Google's Official Android Developers Blog</a>  🎉 and 
+>  <h3>This app got featured in the <a href="https://android-developers.googleblog.com/2021/04/google-developer-student-clubs-in-india.html">Google's Official Android Developers Blog</a>  🎉 and 
 > got selected among 297 Campuses across India under Android Study Jams by GDSC GMR Institute of Technology</h3>
 
 <br />
@@ -111,6 +111,7 @@ This project is open for contributors and feel free to `fork` and make a `Pull R
   
 </table>
 
+<br/>
 
 ## Show your support 
 
