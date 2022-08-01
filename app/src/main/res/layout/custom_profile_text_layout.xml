@@ -13,14 +13,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_textview"
         android:gravity="center"
-        android:textStyle="bold"
         android:text=""
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
-
-
-
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/editProfile"

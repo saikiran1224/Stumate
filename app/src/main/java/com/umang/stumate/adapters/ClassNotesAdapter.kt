@@ -30,12 +30,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ClassNotesAdapter(
-    val context: Context,
-    private var classNotesList: ArrayList<FileUploadData>,
-    private var studentNamePrefs: String?,
-    private var studentID: String?
-):
+class ClassNotesAdapter(val context: Context, private var classNotesList: ArrayList<FileUploadData>, private var studentNamePrefs: String?, private var studentID: String?):
     RecyclerView.Adapter<ClassNotesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassNotesAdapter.ViewHolder {
@@ -145,9 +140,7 @@ class ClassNotesAdapter(
 
             deleteDialog.findViewById<Button>(R.id.btnDelete).setOnClickListener {
 
-                val myRef = FirebaseDatabase.getInstance().getReference(studentID.toString()).child(
-                    "files_data"
-                )
+                val myRef = FirebaseDatabase.getInstance().getReference(studentID.toString()).child("files_data")
                 val query = myRef.orderByChild("fileURL").equalTo(holder.fileURL.text.toString())
                 val deleteEventListener = object: ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {

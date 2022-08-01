@@ -99,8 +99,8 @@
                     android:id="@+id/profileTextLayout"
                     layout="@layout/custom_profile_text_layout"
                     android:layout_width="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp" />
 
                 <Button

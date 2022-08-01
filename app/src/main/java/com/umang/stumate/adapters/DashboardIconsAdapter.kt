@@ -37,6 +37,7 @@ class DashboardIconsAdapter(private val iconsList: ArrayList<DashboardIconData>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.bindItems(iconsList[position])
 
         holder.dashboardCard.setOnClickListener{
