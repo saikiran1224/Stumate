@@ -15,9 +15,12 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/saikiran1224/Stumate?color=red&logo=github&style=for-the-badge) &nbsp;
 ![GitHub forks](https://img.shields.io/github/forks/saikiran1224/Stumate?color=red&logo=github&style=for-the-badge) 
 <br/><br/>
-<center><a href='https://play.google.com/store/apps/details?id=com.umang.stumate&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="35%"></a></center>
-
 </center>
+
+
+<center>
+<a href='https://play.google.com/store/apps/details?id=com.umang.stumate&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="35%"></a></center>
+
 
 <h3 align="center">
     🔹
